@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/TowerDefense/TowerDefense.csproj": {}
+    "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/TowerDefense.csproj": {}
   },
   "projects": {
-    "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/TowerDefense/TowerDefense.csproj": {
+    "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/TowerDefense.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/TowerDefense/TowerDefense.csproj",
+        "projectUniqueName": "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/TowerDefense.csproj",
         "projectName": "TowerDefense",
-        "projectPath": "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/TowerDefense/TowerDefense.csproj",
+        "projectPath": "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/TowerDefense.csproj",
         "packagesPath": "/Users/sonorousduck/.nuget/packages/",
-        "outputPath": "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/TowerDefense/obj/",
+        "outputPath": "/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/sonorousduck/.config/NuGet/NuGet.Config"
@@ -45,6 +45,10 @@
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
               "version": "[3.8.0.1641, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [

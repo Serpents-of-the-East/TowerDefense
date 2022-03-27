@@ -1,0 +1,3 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/Content/crow.png","/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/Content/bin/DesktopGL/Content/crow.xnb","TextureProcessor","Texture2DContent",318,4181,0.561651
+"/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/Content/fire.png","/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/Content/bin/DesktopGL/Content/fire.xnb","TextureProcessor","Texture2DContent",345,4181,0.009136

@@ -1,0 +1,5 @@
+/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/obj/Debug/netcoreapp3.1/TowerDefense.csproj.AssemblyReference.cache
+/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/obj/Debug/netcoreapp3.1/TowerDefense.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/obj/Debug/netcoreapp3.1/TowerDefense.AssemblyInfoInputs.cache
+/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/obj/Debug/netcoreapp3.1/TowerDefense.AssemblyInfo.cs
+/Users/sonorousduck/Desktop/TowerDefense/TowerDefense/obj/Debug/netcoreapp3.1/TowerDefense.csproj.CoreCompileInputs.cache

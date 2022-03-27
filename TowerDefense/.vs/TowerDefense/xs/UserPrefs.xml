@@ -1,25 +1,18 @@
 ﻿<Properties StartupConfiguration="{7BAF0D6B-7FD7-488E-A5A6-2896D8AC7893}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="TowerDefense/CrowEngineBase/General/InputPersistence.cs">
-    <Files>
-      <File FileName="TowerDefense/CrowEngineBase/General/InputPersistence.cs" Line="5" Column="7" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TowerDefense" expanded="True">
             <Node name="TowerDefense" expanded="True">
-              <Node name="CrowEngineBase" expanded="True">
-                <Node name="General" expanded="True">
-                  <Node name="InputPersistence.cs" selected="True" />
-                </Node>
-              </Node>
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.TowerDefense PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.TowerDefense FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
