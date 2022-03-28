@@ -37,7 +37,7 @@ namespace CrowEngineBase
                 component = GetInheritedComponent<TComponent>();
             }
 
-            return (TComponent) component;
+            return (TComponent)component;
         }
 
         /// <summary>
@@ -84,6 +84,12 @@ namespace CrowEngineBase
         public bool ContainsComponent(Type type)
         {
             return components.ContainsKey(type) && components[type] != null;
+        }
+
+        public bool ContainsComponentOfParentType<TComponent>()
+            where TComponent : Component
+        {
+            return ContainsComponentOfParentType(typeof(TComponent));
         }
 
         /// <summary>
@@ -149,7 +155,7 @@ namespace CrowEngineBase
         /// <param name="removedComponents">The list of components to remove</param>
         public void Remove(params Component[] removedComponents)
         {
-            foreach(Component component in removedComponents)
+            foreach (Component component in removedComponents)
             {
                 components.Remove(component.GetType());
             }
