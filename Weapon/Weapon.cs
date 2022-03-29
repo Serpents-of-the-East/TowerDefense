@@ -7,5 +7,6 @@ namespace TowerDefense
     public abstract class Weapon : Component
     {
         public TimeSpan maxLifetime;
+        public float damage;
     }
 }

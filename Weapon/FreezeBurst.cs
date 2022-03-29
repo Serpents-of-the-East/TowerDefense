@@ -15,6 +15,7 @@ namespace TowerDefense
             maxLength = 5.0f;
             speed = 1.0f;
             slowSpeed = 1.0f;
+            damage = 0.5f;
         }
     }
 }
