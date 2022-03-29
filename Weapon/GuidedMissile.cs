@@ -7,12 +7,14 @@ namespace TowerDefense
     {
         public float speed { get; set; }
         public float radius { get; set; }
+        public Target target { get; set; }
 
         public GuidedMissile()
         {
             speed = 2.0f;
             maxLifetime = TimeSpan.FromSeconds(5);
             radius = 1.5f;
+            damage = 1f;
         }
 
     }

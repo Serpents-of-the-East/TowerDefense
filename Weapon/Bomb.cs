@@ -12,8 +12,9 @@ namespace TowerDefense
         public Bomb()
         {
             speed = 1.0f;
-            maxLifetime = new TimeSpan(0, 0, 5);
+            maxLifetime = new TimeSpan(0, 0, 8);
             radius = 3.0f;
+            damage = 1.0f;
         }
 
     }
