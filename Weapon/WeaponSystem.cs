@@ -6,7 +6,7 @@ namespace TowerDefense
 {
     public class WeaponSystem : CrowEngineBase.System
     {
-        public WeaponSystem(SystemManager systemManager) : base(systemManager, typeof(Weapon))
+        public WeaponSystem(SystemManager systemManager) : base(systemManager, typeof(Weapon), typeof(Rigidbody), typeof(Transform), typeof(Collider))
         {
         }
 
@@ -16,16 +16,29 @@ namespace TowerDefense
             {
                 Weapon weapon = m_gameObjects[id].GetComponent<Weapon>();
 
-                if (weapon.cooldownTimer <= 0f)
+                weapon.maxLifetime -= gameTime.ElapsedGameTime;
+
+                if (weapon.maxLifetime <= TimeSpan.Zero)
+                {
+                    systemManager.Remove(id);
+                }
+
+                if (weapon.GetType() == typeof(Bullet))
+                {
+                    
+                }
+                else if (weapon.GetType() == typeof(Bomb))
+                {
+                    
+                }
+                else if (weapon.GetType() == typeof(GuidedMissile))
+                {
+                    
+                }
+                else if (weapon.GetType() == typeof(FreezeBurst))
                 {
 
                 }
-                else
-                {
-                    weapon.cooldownTimer -= gameTime.ElapsedGameTime.Milliseconds / 1000f;
-                }
-
-
             }
         }
     }
