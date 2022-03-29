@@ -44,12 +44,12 @@ namespace CrowEngineBase
                 transform.position += rb.velocity * ((float)gameTime.ElapsedGameTime.Milliseconds / 1000f);
             }
 
-            foreach((uint id, GameObject gameObject) in m_gameObjects)
+            foreach ((uint id, GameObject gameObject) in m_gameObjects)
             {
                 quadtree.Insert(gameObject);
             }
 
-            foreach(uint id in m_gameObjects.Keys)
+            foreach (uint id in m_gameObjects.Keys)
             {
                 Rigidbody rb = m_gameObjects[id].GetComponent<Rigidbody>(); // No need for null check here, by nature of being in physics engine, there is one
                 List<GameObject> possibleCollisions = quadtree.GetPossibleCollisions(m_gameObjects[id]);
@@ -61,13 +61,13 @@ namespace CrowEngineBase
                         currentCollisions.Add(gameObject.id);
                         if (!rb.currentCollidedGameObjects.Contains(gameObject.id)) // First frame of colliding
                         {
-                            if (m_gameObjects[id].ContainsComponent<ScriptBase>())
+                            if (m_gameObjects[id].ContainsComponentOfParentType<ScriptBase>())
                             {
                                 m_gameObjects[id].GetComponent<ScriptBase>().OnCollisionStart(gameObject);
                             }
 
                         }
-                        if (m_gameObjects[id].ContainsComponent<ScriptBase>())
+                        if (m_gameObjects[id].ContainsComponentOfParentType<ScriptBase>())
                         {
                             m_gameObjects[id].GetComponent<ScriptBase>().OnCollision(gameObject);
                         }
@@ -76,7 +76,7 @@ namespace CrowEngineBase
                     {
                         if (rb.currentCollidedGameObjects.Contains(gameObject.id)) // We used to be colliding with this
                         {
-                            if (m_gameObjects[id].ContainsComponent<ScriptBase>())
+                            if (m_gameObjects[id].ContainsComponentOfParentType<ScriptBase>())
                             {
                                 m_gameObjects[id].GetComponent<ScriptBase>().OnCollisionEnd(gameObject);
                             }
@@ -89,6 +89,10 @@ namespace CrowEngineBase
 
         private bool HasCollision(GameObject one, GameObject two)
         {
+            if (one == two)
+            {
+                return false;
+            }
             if (one.ContainsComponent<CircleCollider>())
             {
                 if (two.ContainsComponent<CircleCollider>())
@@ -123,7 +127,7 @@ namespace CrowEngineBase
         // Used http://jeffreythompson.org/collision-detection/circle-rect.php
         private bool CircleOnSquare(GameObject circle, GameObject square)
         {
-            
+
 
             Transform squareTransform = square.GetComponent<Transform>();
             Transform circleTransform = circle.GetComponent<Transform>();
