@@ -6,6 +6,6 @@ namespace TowerDefense
 {
     public abstract class Weapon : Component
     {
-        public abstract float cooldownTimer { get; set; }
+        public TimeSpan maxLifetime;
     }
 }
