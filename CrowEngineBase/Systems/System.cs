@@ -21,7 +21,7 @@ namespace CrowEngineBase
         /// </summary>
         private Type[] ComponentTypes { get; set; }
 
-        private SystemManager systemManager;
+        protected SystemManager systemManager;
 
         public System(SystemManager systemManager, params Type[] componentTypes)
         {
