@@ -20,6 +20,9 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Tower\" />
     <None Remove="Tower\TowerPrefabs\" />
+
+    <None Remove="Health\" />
+
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -42,5 +45,7 @@
     <Folder Include="CrowEngineBase\Utilities\" />
     <Folder Include="Tower\" />
     <Folder Include="Tower\TowerPrefabs\" />
+    <Folder Include="Health\" />
+
   </ItemGroup>
 </Project>

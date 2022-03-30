@@ -15,6 +15,9 @@ namespace TowerDefense
             foreach (uint id in m_gameObjects.Keys)
             {
                 Weapon weapon = m_gameObjects[id].GetComponent<Weapon>();
+                Rigidbody weaponRigidbody = m_gameObjects[id].GetComponent<Rigidbody>();
+                Transform weaponTransform = m_gameObjects[id].GetComponent<Transform>();
+
 
                 weapon.maxLifetime -= gameTime.ElapsedGameTime;
 
@@ -23,7 +26,7 @@ namespace TowerDefense
                     systemManager.Remove(id);
                 }
 
-                if (weapon.GetType() == typeof(Bullet))
+                else if (weapon.GetType() == typeof(Bullet))
                 {
                     
                 }
@@ -33,7 +36,12 @@ namespace TowerDefense
                 }
                 else if (weapon.GetType() == typeof(GuidedMissile))
                 {
-                    
+                    if (((GuidedMissile)weapon).target != null)
+                    {
+                        weaponRigidbody.velocity = (((GuidedMissile)weapon).target.target.position - weaponTransform.position);
+                        weaponRigidbody.velocity.Normalize();
+                        weaponRigidbody.velocity *= ((GuidedMissile)weapon).speed;
+                    }
                 }
                 else if (weapon.GetType() == typeof(FreezeBurst))
                 {

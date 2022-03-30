@@ -12,7 +12,7 @@ namespace TowerDefense
         {
             speed = 1.0f;
             maxLifetime = new TimeSpan(0, 0, 5);
-
+            damage = 1.3f;
         }
 
     }
