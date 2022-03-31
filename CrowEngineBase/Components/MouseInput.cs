@@ -34,5 +34,18 @@ namespace CrowEngineBase
             actionStatePairs = new Dictionary<string, bool>();
             previousActionStatePairs = new Dictionary<string, bool>();
         }
+
+        /// <summary>
+        /// Performs the conversion between the mouse's pixel position to the world's physics coordinates
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 GetCurrentPhysicsPosition()
+        {
+            Vector2 distanceFromCenterPixels = position - Renderer.m_centerOfScreen;
+            Vector2 physicsDistanceFromCenter = distanceFromCenterPixels / Renderer.m_scalingRatio;
+            Vector2 truePosition = physicsDistanceFromCenter + new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2;
+
+            return truePosition;
+        }
     }
 }
