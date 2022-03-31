@@ -21,10 +21,10 @@ namespace TowerDefense
                 {
                     PointsComponent enemyPointsWorth = m_gameObjects[id].GetComponent<PointsComponent>();
                     // TODO: Add amount of money its worth when it dies
+                    PointsManager.AddPlayerPoints(enemyPointsWorth.points);
 
                     if (enemyHealth.instantiateOnDeathObject != null)
                     {
-                        PointsManager.AddPlayerPoints(enemyPointsWorth.points);
 
                         foreach (var deathGameObject in enemyHealth.instantiateOnDeathObject)
                         {
