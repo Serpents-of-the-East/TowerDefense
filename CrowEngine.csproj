@@ -26,6 +26,8 @@
     <None Remove="Prefabs\TowerPrefabs\" />
     <None Remove="Managers\" />
     <None Remove="Prefabs\EnemyPrefabs\" />
+    <None Remove="Prefabs\MainMenuPrefabs\" />
+    <None Remove="Screens\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -54,5 +56,7 @@
     <Folder Include="Prefabs\TowerPrefabs\" />
     <Folder Include="Managers\" />
     <Folder Include="Prefabs\EnemyPrefabs\" />
+    <Folder Include="Prefabs\MainMenuPrefabs\" />
+    <Folder Include="Screens\" />
   </ItemGroup>
 </Project>

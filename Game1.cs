@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using TowerDefense;
 
 using CrowEngineBase;
 
@@ -35,7 +36,11 @@ namespace CrowEngine
                         _graphics.ApplyChanges();*/
 
             screens.Add(ScreenEnum.Default, new DefaultScreen(ScreenEnum.Default));
-            currentScreen = screens[ScreenEnum.Default];
+            screens.Add(ScreenEnum.MainMenu, new MainMenuScreen(ScreenEnum.MainMenu));
+            currentScreen = screens[ScreenEnum.MainMenu];
+
+
+            ResourceManager.RegisterFont("Fonts/DefaultFont", "default");
 
             base.Initialize();
         }

@@ -57,22 +57,34 @@ namespace CrowEngineBase
 
         public static void RegisterFont(string pathToFont, string fontName)
         {
-            fonts.Add(fontName, manager.Load<SpriteFont>(pathToFont));
+            if (!fonts.ContainsKey(fontName))
+            {
+                fonts.Add(fontName, manager.Load<SpriteFont>(pathToFont));
+            }
         }
 
         public static void RegisterTexture(string pathToTexture, string textureName)
         {
-            textures.Add(textureName, manager.Load<Texture2D>(pathToTexture));
+            if (!textures.ContainsKey(textureName))
+            {
+                textures.Add(textureName, manager.Load<Texture2D>(pathToTexture));
+            }
         }
 
         public static void RegisterSoundEffect(string soundEffect, string pathToSoundEffect)
         {
-            soundEffects.Add(soundEffect, manager.Load<SoundEffect>(pathToSoundEffect));
+            if (!soundEffects.ContainsKey(soundEffect))
+            {
+                soundEffects.Add(soundEffect, manager.Load<SoundEffect>(pathToSoundEffect));
+            }
         }
 
         public static void RegisterSong(string song, string pathToSong)
         {
-            music.Add(song, manager.Load<Song>(pathToSong));
+            if (!music.ContainsKey(song))
+            {
+                music.Add(song, manager.Load<Song>(pathToSong));
+            }
         }
 
     }

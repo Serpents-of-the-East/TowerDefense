@@ -11,6 +11,11 @@ namespace CrowEngineBase
     public enum ScreenEnum
     {
         Default,
+        MainMenu,
+        Controls,
+        Credits,
+        PauseScreen,
+        Quit
     }
 
     /// <summary>

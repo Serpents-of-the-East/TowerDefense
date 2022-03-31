@@ -20,7 +20,6 @@ namespace TowerDefense
                 if (enemyHealth.health <= 0.0f)
                 {
                     PointsComponent enemyPointsWorth = m_gameObjects[id].GetComponent<PointsComponent>();
-                    // TODO: Add amount of money its worth when it dies
                     PointsManager.AddPlayerPoints(enemyPointsWorth.points);
 
                     if (enemyHealth.instantiateOnDeathObject != null)
