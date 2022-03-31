@@ -15,6 +15,8 @@ namespace TowerDefense
             gameObject.Add(new CircleCollider(2));
             gameObject.Add(new EnemyTag(EnemyType.GROUND));
             gameObject.Add(new Sprite(ResourceManager.GetTexture("crow"), Color.White, 0));
+            gameObject.Add(new EnemyHealth() { health = 10f });
+            gameObject.Add(new PointsComponent() { points = 5 });
 
             // Should have a health component as well... This must be created.
 
