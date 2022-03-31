@@ -21,14 +21,16 @@ namespace CrowEngineBase.Utilities
             return Vector2.DistanceSquared(current, target) < tolerance * tolerance;
         }
 
-        public static float Angle(Vector2 current, Vector2 target)
+        public static float AngleBetweenVectors(Vector2 current, Vector2 target)
         {
-            return MathF.Acos(Vector2.Dot(Vector2.Normalize(current), Vector2.Normalize(target)));
+            var distanceBetween = Vector2.Subtract(current, target);
+            return MathF.Atan(distanceBetween.Y/distanceBetween.X);
         }
 
-        public static float AngleDegrees(Vector2 current, Vector2 target)
+        public static float AngleBetweenVectorsDegrees(Vector2 current, Vector2 target)
         {
-            return (180 / MathF.PI) * MathF.Acos(Vector2.Dot(Vector2.Normalize(current), Vector2.Normalize(target)));
+            var distanceBetween = Vector2.Subtract(current, target);
+            return (180 / MathF.PI) * MathF.Atan(distanceBetween.Y / distanceBetween.X);
         }
 
     }
