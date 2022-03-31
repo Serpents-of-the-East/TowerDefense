@@ -18,12 +18,14 @@
     <None Remove="CrowEngineBase\General\" />
     <None Remove="CrowEngineBase\Utilities\" />
     <None Remove="Newtonsoft.Json" />
-    <None Remove="Tower\" />
-    <None Remove="Tower\TowerPrefabs\" />
-    <None Remove="Health\" />
-    <None Remove="Enemy\EnemyPrefabs\" />
-    <None Remove="Pathfinding\" />
-    <None Remove="Points\" />
+    <None Remove="Components\" />
+    <None Remove="Systems\" />
+    <None Remove="Prefabs\" />
+    <None Remove="Prefabs\WeaponPrefabs\" />
+    <None Remove="Components\WeaponComponents\" />
+    <None Remove="Prefabs\TowerPrefabs\" />
+    <None Remove="Managers\" />
+    <None Remove="Prefabs\EnemyPrefabs\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -44,11 +46,13 @@
     <Folder Include="CrowEngineBase\Entities\" />
     <Folder Include="CrowEngineBase\General\" />
     <Folder Include="CrowEngineBase\Utilities\" />
-    <Folder Include="Tower\" />
-    <Folder Include="Tower\TowerPrefabs\" />
-    <Folder Include="Health\" />
-    <Folder Include="Enemy\EnemyPrefabs\" />
-    <Folder Include="Pathfinding\" />
-    <Folder Include="Points\" />
+    <Folder Include="Components\" />
+    <Folder Include="Systems\" />
+    <Folder Include="Prefabs\" />
+    <Folder Include="Prefabs\WeaponPrefabs\" />
+    <Folder Include="Components\WeaponComponents\" />
+    <Folder Include="Prefabs\TowerPrefabs\" />
+    <Folder Include="Managers\" />
+    <Folder Include="Prefabs\EnemyPrefabs\" />
   </ItemGroup>
 </Project>
