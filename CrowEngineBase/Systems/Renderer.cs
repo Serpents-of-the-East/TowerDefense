@@ -8,8 +8,8 @@ namespace CrowEngineBase
         // Used for moving the camera
         private GameObject m_camera;
 
-        private float m_scalingRatio;
-        private Vector2 m_centerOfScreen;
+        public static float m_scalingRatio;
+        public static Vector2 m_centerOfScreen;
 
         public bool debugMode = true;
 
@@ -23,7 +23,7 @@ namespace CrowEngineBase
         {
             m_scalingRatio = clientBoundsHeight / PhysicsEngine.PHYSICS_DIMENSION_HEIGHT;
             this.m_camera = camera;
-            this.m_centerOfScreen = screenSize / 2;
+            m_centerOfScreen = screenSize / 2;
             systemManager.UpdateSystem -= Update; // remove the automatically added update
 
             ResourceManager.RegisterTexture("circle", "circle");
