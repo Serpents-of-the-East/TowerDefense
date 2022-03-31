@@ -20,8 +20,8 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Tower\" />
     <None Remove="Tower\TowerPrefabs\" />
-
     <None Remove="Health\" />
+    <None Remove="Enemy\EnemyPrefabs\" />
 
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +46,6 @@
     <Folder Include="Tower\" />
     <Folder Include="Tower\TowerPrefabs\" />
     <Folder Include="Health\" />
-
+    <Folder Include="Enemy\EnemyPrefabs\" />
   </ItemGroup>
 </Project>
