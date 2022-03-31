@@ -18,6 +18,7 @@ namespace TowerDefense
         private ScriptSystem scriptSystem;
         private LightRenderer lightRenderer;
         private RenderTarget2D renderTarget;
+        private FontRenderer fontRenderer;
 
 
         private GameObject camera;
@@ -39,21 +40,22 @@ namespace TowerDefense
             particleSystem = new ParticleSystem(systemManager);
 
 
-
             systemManager.Add(camera);
         }
 
 
         public override void Draw(GameTime gameTime)
         {
-            m_graphicsDevice.SetRenderTarget(renderTarget);
 
             m_spriteBatch.Begin(SpriteSortMode.BackToFront, samplerState: SamplerState.PointClamp);
 
+            fontRenderer.Draw(gameTime, m_spriteBatch);
             renderSystem.Draw(gameTime, m_spriteBatch);
             particleRenderer.Draw(gameTime, m_spriteBatch);
 
             m_spriteBatch.End();
+
+
         }
 
         public override void LoadContent()
@@ -61,9 +63,11 @@ namespace TowerDefense
             
 
             renderSystem = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
+            renderSystem.debugMode = true;
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
             lightRenderer = new LightRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), m_graphicsDevice);
             lightRenderer.globalLightLevel = 0f;
+            fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
 
             renderTarget = new RenderTarget2D(m_graphicsDevice, m_graphicsDevice.PresentationParameters.BackBufferWidth, m_graphicsDevice.PresentationParameters.BackBufferHeight, false, m_graphicsDevice.PresentationParameters.BackBufferFormat, DepthFormat.Depth24);
         }
@@ -80,9 +84,9 @@ namespace TowerDefense
 
         public override void SetupGameObjects()
         {
-            Controls.CreateControls();
-            PlayGame.CreatePlayGame();
-            Credits.CreateCredits();
+            systemManager.Add(Controls.CreateControls(m_window.ClientBounds.Width));
+            systemManager.Add(PlayGame.CreatePlayGame(m_window.ClientBounds.Width));
+            systemManager.Add(Credits.CreateCredits(m_window.ClientBounds.Width));
         }
     }
 }
