@@ -22,7 +22,7 @@
     <None Remove="Tower\TowerPrefabs\" />
     <None Remove="Health\" />
     <None Remove="Enemy\EnemyPrefabs\" />
-
+    <None Remove="Pathfinding\" />
     <None Remove="Points\" />
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +48,7 @@
     <Folder Include="Tower\TowerPrefabs\" />
     <Folder Include="Health\" />
     <Folder Include="Enemy\EnemyPrefabs\" />
+    <Folder Include="Pathfinding\" />
     <Folder Include="Points\" />
   </ItemGroup>
 </Project>
