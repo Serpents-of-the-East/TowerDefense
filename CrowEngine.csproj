@@ -19,6 +19,7 @@
     <None Remove="CrowEngineBase\Utilities\" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Health\" />
+    <None Remove="Enemy\EnemyPrefabs\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -40,5 +41,6 @@
     <Folder Include="CrowEngineBase\General\" />
     <Folder Include="CrowEngineBase\Utilities\" />
     <Folder Include="Health\" />
+    <Folder Include="Enemy\EnemyPrefabs\" />
   </ItemGroup>
 </Project>
