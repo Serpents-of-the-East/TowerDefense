@@ -23,6 +23,7 @@
     <None Remove="Health\" />
     <None Remove="Enemy\EnemyPrefabs\" />
 
+    <None Remove="Pathfinding\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -47,5 +48,6 @@
     <Folder Include="Tower\TowerPrefabs\" />
     <Folder Include="Health\" />
     <Folder Include="Enemy\EnemyPrefabs\" />
+    <Folder Include="Pathfinding\" />
   </ItemGroup>
 </Project>
