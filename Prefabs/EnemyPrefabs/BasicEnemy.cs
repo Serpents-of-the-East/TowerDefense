@@ -11,7 +11,7 @@ namespace TowerDefense
 
         public static GameObject CreateBasicEnemy()
         {
-            GameObject gameObject = new();
+            GameObject gameObject = new GameObject();
             gameObject.Add(new Enemy());
             gameObject.Add(new Rigidbody());
             gameObject.Add(new CircleCollider(5));

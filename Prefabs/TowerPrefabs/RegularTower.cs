@@ -8,7 +8,7 @@ namespace TowerDefense
     {
         public static GameObject Create()
         {
-            GameObject gameObject = new();
+            GameObject gameObject = new GameObject();
 
             gameObject.Add(new Bullet());
             gameObject.Add(new TowerComponent());
