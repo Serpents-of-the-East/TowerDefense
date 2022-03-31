@@ -18,8 +18,11 @@
     <None Remove="CrowEngineBase\General\" />
     <None Remove="CrowEngineBase\Utilities\" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Tower\" />
+    <None Remove="Tower\TowerPrefabs\" />
     <None Remove="Health\" />
     <None Remove="Enemy\EnemyPrefabs\" />
+
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -40,6 +43,8 @@
     <Folder Include="CrowEngineBase\Entities\" />
     <Folder Include="CrowEngineBase\General\" />
     <Folder Include="CrowEngineBase\Utilities\" />
+    <Folder Include="Tower\" />
+    <Folder Include="Tower\TowerPrefabs\" />
     <Folder Include="Health\" />
     <Folder Include="Enemy\EnemyPrefabs\" />
   </ItemGroup>
