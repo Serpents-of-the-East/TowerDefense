@@ -8,7 +8,7 @@ namespace TowerDefense
     {
         public static GameObject CreateMinionEnemy()
         {
-            GameObject gameObject = new();
+            GameObject gameObject = new GameObject();
 
             gameObject.Add(new Enemy() { speed = 5.0f });
             gameObject.Add(new Rigidbody());

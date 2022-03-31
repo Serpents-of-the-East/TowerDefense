@@ -8,7 +8,7 @@ namespace TowerDefense
     {
         public static GameObject CreateTankyEnemy()
         {
-            GameObject gameObject = new();
+            GameObject gameObject = new GameObject();
             gameObject.Add(new Enemy() { speed = 0.5f } );
             gameObject.Add(new Rigidbody());
             gameObject.Add(new CircleCollider(5));
