@@ -35,8 +35,9 @@ namespace CrowEngineBase
         {
             foreach (uint id in m_gameObjects.Keys)
             {
-
-                Vector2 distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
+                // This is the old version using the center of the screen, the new uses the camera position
+                Vector2 distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - m_camera.GetComponent<Transform>().position;
+                //Vector2 distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
                 Vector2 renderDistanceFromCenter = distanceFromCenter * m_scalingRatio;
                 Vector2 trueRenderPosition = renderDistanceFromCenter + m_centerOfScreen;
 
@@ -60,6 +61,13 @@ namespace CrowEngineBase
                 {
                     CircleCollider circleCollider = m_gameObjects[id].GetComponent<CircleCollider>();
                     RectangleCollider rectangleCollider = m_gameObjects[id].GetComponent<RectangleCollider>();
+
+                    if (m_gameObjects[id].ContainsComponent<Text>()) // adjust the drawing area to fit where it really should be
+                    {
+                        distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
+                        renderDistanceFromCenter = distanceFromCenter * m_scalingRatio;
+                        trueRenderPosition = renderDistanceFromCenter + m_centerOfScreen;
+                    }
 
                     if (circleCollider != null)
                     {

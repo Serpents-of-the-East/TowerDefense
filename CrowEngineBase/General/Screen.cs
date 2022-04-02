@@ -15,7 +15,8 @@ namespace CrowEngineBase
         Controls,
         Credits,
         PauseScreen,
-        Quit
+        Quit,
+        CameraTest,
     }
 
     /// <summary>
