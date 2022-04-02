@@ -87,6 +87,7 @@ namespace TowerDefense
             systemManager.Add(Controls.CreateControls(m_window.ClientBounds.Width));
             systemManager.Add(PlayGame.CreatePlayGame(m_window.ClientBounds.Width));
             systemManager.Add(Credits.CreateCredits(m_window.ClientBounds.Width));
+            systemManager.Add(Exit.CreateCredits(m_window.ClientBounds.Width));
         }
     }
 }
