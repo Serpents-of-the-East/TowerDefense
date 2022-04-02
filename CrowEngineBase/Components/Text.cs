@@ -14,10 +14,11 @@ namespace CrowEngineBase
         public SpriteEffects spriteEffect { get; set; }
         public float layerDepth { get; set; }
         public bool renderOutline { get; set; }
+        public bool usesCameraPosition { get; set; }
 
 
 
-        public Text(string text, SpriteFont font, Color color, Color outlineColor, bool drawOutline = false, float layerDepth = 0f)
+        public Text(string text, SpriteFont font, Color color, Color outlineColor, bool drawOutline = false, float layerDepth = 0f, bool usesCameraPosition = false)
         {
             this.text = text;
             this.color = color;
@@ -27,6 +28,7 @@ namespace CrowEngineBase
             this.spriteEffect = SpriteEffects.None;
             this.layerDepth = layerDepth;
             this.renderOutline = drawOutline;
+            this.usesCameraPosition = usesCameraPosition;
         }
 
 

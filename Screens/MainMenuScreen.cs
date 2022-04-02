@@ -36,7 +36,7 @@ namespace TowerDefense
             inputSystem = new InputSystem(systemManager);
             scriptSystem = new ScriptSystem(systemManager);
             camera = new GameObject();
-            camera.Add(new Transform(Vector2.Zero, 0, Vector2.One));
+            camera.Add(new Transform(new Vector2(500, 500), 0, Vector2.One));
             particleSystem = new ParticleSystem(systemManager);
 
 
@@ -67,7 +67,7 @@ namespace TowerDefense
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
             lightRenderer = new LightRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), m_graphicsDevice);
             lightRenderer.globalLightLevel = 0f;
-            fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
+            fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
 
             renderTarget = new RenderTarget2D(m_graphicsDevice, m_graphicsDevice.PresentationParameters.BackBufferWidth, m_graphicsDevice.PresentationParameters.BackBufferHeight, false, m_graphicsDevice.PresentationParameters.BackBufferFormat, DepthFormat.Depth24);
         }

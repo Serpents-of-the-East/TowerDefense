@@ -26,6 +26,8 @@ namespace CrowEngineBase
 
         private float lightScaleFactor;
 
+        private GameObject m_camera;
+
         public float globalLightLevel { get; set; }
 
         public static BlendState multiplyBlend = new BlendState
@@ -52,6 +54,7 @@ namespace CrowEngineBase
 
 
             lightScaleFactor = 2f / lightTexture.Width;
+            m_camera = camera;
         }
         protected override void Update(GameTime gameTime)
         {
@@ -73,7 +76,10 @@ namespace CrowEngineBase
             {
                 Light light = m_gameObjects[id].GetComponent<Light>();
 
-                Vector2 distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
+                Vector2 distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - m_camera.GetComponent<Transform>().position;
+
+                // This is the old way, not based on the camera
+                //Vector2 distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
                 Vector2 renderDistanceFromCenter = distanceFromCenter * m_scalingRatio;
                 Vector2 trueRenderPosition = renderDistanceFromCenter + m_centerOfScreen;
 

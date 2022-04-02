@@ -27,7 +27,9 @@ namespace CrowEngineBase
                 Particle particle = m_gameObjects[id].GetComponent<Particle>();
                 foreach (SingleParticle singleParticle in particle.particles)
                 {
-                    Vector2 distanceFromCenter = singleParticle.position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
+                    Vector2 distanceFromCenter = singleParticle.position - m_camera.GetComponent<Transform>().position;
+                    // This is the old version that does not use the camera
+                    //Vector2 distanceFromCenter = singleParticle.position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
                     Vector2 renderDistanceFromCenter = distanceFromCenter * m_scalingRatio;
                     Vector2 trueRenderPosition = renderDistanceFromCenter + m_centerOfScreen;
                     spriteBatch.Draw(particle.texture, trueRenderPosition, null,

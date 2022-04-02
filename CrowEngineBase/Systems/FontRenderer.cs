@@ -8,10 +8,10 @@ namespace CrowEngineBase
     {
         private Vector2 m_centerOfScreen;
         private float m_scalingRatio;
+        private GameObject m_camera;
 
 
-
-        public FontRenderer(SystemManager systemManager, float clientBoundsHeight, Vector2 screenSize) : base(systemManager, typeof(Text), typeof(Transform))
+        public FontRenderer(SystemManager systemManager, float clientBoundsHeight, Vector2 screenSize, GameObject m_camera) : base(systemManager, typeof(Text), typeof(Transform))
         {
             m_scalingRatio = clientBoundsHeight / PhysicsEngine.PHYSICS_DIMENSION_HEIGHT;
             this.m_centerOfScreen = screenSize / 2;
@@ -37,8 +37,16 @@ namespace CrowEngineBase
             {
                 Text text = m_gameObjects[id].GetComponent<Text>();
                 Transform transform = m_gameObjects[id].GetComponent<Transform>();
+                Vector2 distanceFromCenter;
+                if (text.usesCameraPosition)
+                {
+                    distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - m_camera.GetComponent<Transform>().position;
+                }
+                else
+                {
+                    distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
+                }
 
-                Vector2 distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
                 Vector2 renderDistanceFromCenter = distanceFromCenter * m_scalingRatio;
                 Vector2 trueRenderPosition = renderDistanceFromCenter + m_centerOfScreen;
 
