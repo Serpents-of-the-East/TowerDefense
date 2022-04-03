@@ -44,8 +44,8 @@ namespace CrowEngineBase
                 {
                     MouseState mouseState = Mouse.GetState();
                     MouseInput mouseInput = m_gameObjects[id].GetComponent<MouseInput>();
-                    mouseInput.previousPosition = mouseInput.position;
-                    mouseInput.previousActionStatePairs = mouseInput.actionStatePairs;
+                    mouseInput.previousPosition = new Vector2(mouseInput.position.X, mouseInput.position.Y);
+                    mouseInput.previousActionStatePairs = new Dictionary<string, bool>(mouseInput.actionStatePairs);
 
                     mouseInput.position = new Vector2(mouseState.X, mouseState.Y);
 
@@ -82,7 +82,7 @@ namespace CrowEngineBase
                     ControllerInput controllerInput = m_gameObjects[id].GetComponent<ControllerInput>();
                     GamePadState gamePadState = GamePad.GetState(controllerInput.controllerOwner);
 
-                    controllerInput.previousActionStatePairs = controllerInput.actionStatePairs;
+                    controllerInput.previousActionStatePairs = new Dictionary<string, float>(controllerInput.actionStatePairs);
 
                     foreach (string action in controllerInput.actionButtonPairs.Keys)
                     {
