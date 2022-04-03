@@ -17,6 +17,7 @@ namespace TowerDefense
             gameObject.Add(new Sprite(ResourceManager.GetTexture("crow"), Color.White, 0));
             gameObject.Add(new CircleCollider(20));
             gameObject.Add(new Rigidbody());
+            gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One));
 
             return gameObject;
 

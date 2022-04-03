@@ -67,6 +67,31 @@ namespace TowerDefense
             SetTowerTexture();
         }
 
+        public void OnPlaceTower(float input)
+        {
+            if (input > 0.5f)
+            {
+                switch (currentSelected)
+                {
+                    case (1):
+                        GameObject bombTower = BombTower.Create();
+                        bombTower.GetComponent<Transform>().position = transform.position;
+                        systemManager.Add(bombTower);
+                        break;
+                    case (2):
+                        GameObject guidedTower = GuidedMissileTower.Create();
+                        guidedTower.GetComponent<Transform>().position = transform.position;
+                        systemManager.Add(guidedTower);
+                        break;
+                    case (3):
+                        GameObject regularTower = RegularTower.Create();
+                        regularTower.GetComponent<Transform>().position = transform.position;
+                        systemManager.Add(regularTower);
+                        break;
+                }
+            }
+        }
+
         private void SetTowerTexture()
         {
             switch (currentSelected)

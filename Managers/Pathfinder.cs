@@ -8,6 +8,7 @@ namespace TowerDefense
     public static class Pathfinder
     {
         public static int SIZE_PER_TOWER = 50; // The number of physics units each tower should take up
+
         public static bool[,] gameMap = new bool[SIZE_PER_TOWER, SIZE_PER_TOWER];
         public static List<Vector2> leftRightPath { get; private set; }
         public static List<Vector2> upDownPath { get; private set; }
@@ -58,7 +59,7 @@ namespace TowerDefense
         /// <returns></returns>
         public static Vector2 Gridify(Vector2 originalPosition)
         {
-            Vector2 result = new Vector2((int)originalPosition.X / SIZE_PER_TOWER, (int)originalPosition.Y / SIZE_PER_TOWER);
+            Vector2 result = new Vector2((int)((originalPosition.X + SIZE_PER_TOWER / 2) / SIZE_PER_TOWER), (int)((originalPosition.Y + SIZE_PER_TOWER / 2) / SIZE_PER_TOWER));
             result *= SIZE_PER_TOWER;
             return result;
         }

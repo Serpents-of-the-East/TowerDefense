@@ -37,7 +37,7 @@ namespace TowerDefense
 
         public override void Draw(GameTime gameTime)
         {
-            m_spriteBatch.Begin();
+            m_spriteBatch.Begin(samplerState:SamplerState.PointClamp);
             renderer.Draw(gameTime, m_spriteBatch);
             m_spriteBatch.End();
         }

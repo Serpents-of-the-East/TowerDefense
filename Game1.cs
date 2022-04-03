@@ -31,9 +31,9 @@ namespace CrowEngine
         {
             // TODO: Add your initialization logic here
 
-            /*            _graphics.PreferredBackBufferWidth = 1920;
-                        _graphics.PreferredBackBufferHeight = 1080;
-                        _graphics.ApplyChanges();*/
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.ApplyChanges();
 
             screens.Add(ScreenEnum.Default, new DefaultScreen(ScreenEnum.Default));
             screens.Add(ScreenEnum.MainMenu, new MainMenuScreen(ScreenEnum.MainMenu));
