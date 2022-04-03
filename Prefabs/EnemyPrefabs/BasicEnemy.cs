@@ -9,11 +9,12 @@ namespace TowerDefense
     {
         
 
-        public static GameObject CreateBasicEnemy()
+        public static GameObject CreateBasicEnemy(Vector2 position)
         {
             GameObject gameObject = new GameObject();
             gameObject.Add(new Enemy());
             gameObject.Add(new Rigidbody());
+            gameObject.Add(new Transform(position, 0, Vector2.One));
             gameObject.Add(new CircleCollider(5));
             gameObject.Add(new EnemyTag(EnemyType.GROUND));
             gameObject.Add(new Sprite(ResourceManager.GetTexture("crow"), Color.White, 0));

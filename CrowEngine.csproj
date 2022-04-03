@@ -29,6 +29,7 @@
     <None Remove="Prefabs\MainMenuPrefabs\" />
     <None Remove="Screens\" />
     <None Remove="Scripts\" />
+    <None Remove="Prefabs\GeneralPrefabs\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -60,5 +61,6 @@
     <Folder Include="Prefabs\MenuPrefabs\" />
     <Folder Include="Screens\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Prefabs\GeneralPrefabs\" />
   </ItemGroup>
 </Project>

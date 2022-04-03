@@ -7,8 +7,8 @@ namespace TowerDefense
 {
     public static class Pathfinder
     {
-        public static int PLAY_AREA_SIZE = 25; // This is a square
-        public static bool[,] gameMap = new bool[PLAY_AREA_SIZE, PLAY_AREA_SIZE];
+        public static int SIZE_PER_TOWER = 50; // The number of physics units each tower should take up
+        public static bool[,] gameMap = new bool[SIZE_PER_TOWER, SIZE_PER_TOWER];
         public static List<Vector2> leftRightPath { get; private set; }
         public static List<Vector2> upDownPath { get; private set; }
 
@@ -24,9 +24,9 @@ namespace TowerDefense
         /// <returns></returns>
         public static bool UpdatePaths(Vector2 addedTowerPosition)
         {
-            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / PLAY_AREA_SIZE; // how to change the position from game coordinates to grid
+            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / SIZE_PER_TOWER; // how to change the position from game coordinates to grid
 
-            bool[,] oldMap = new bool[PLAY_AREA_SIZE,PLAY_AREA_SIZE];
+            bool[,] oldMap = new bool[SIZE_PER_TOWER,SIZE_PER_TOWER];
 
             Array.Copy(gameMap, oldMap, gameMap.Length);
 
@@ -50,6 +50,19 @@ namespace TowerDefense
             return (solvedVertical != null && solvedHorizontal != null);
         }
 
+
+        /// <summary>
+        /// Takes a position and aligns it with the grid
+        /// </summary>
+        /// <param name="originalPosition"></param>
+        /// <returns></returns>
+        public static Vector2 Gridify(Vector2 originalPosition)
+        {
+            Vector2 result = new Vector2((int)originalPosition.X / SIZE_PER_TOWER, (int)originalPosition.Y / SIZE_PER_TOWER);
+            result *= SIZE_PER_TOWER;
+            return result;
+        }
+
         /// <summary>
         /// Returns the solved list, or null if unsolvable
         /// </summary>
@@ -60,7 +73,7 @@ namespace TowerDefense
         {
             // Horizontal Solving
             List<(Vector2 position, List<Vector2> history)> queue = new List<(Vector2, List<Vector2>)>();
-            bool[,] visited = new bool[PLAY_AREA_SIZE, PLAY_AREA_SIZE];
+            bool[,] visited = new bool[SIZE_PER_TOWER, SIZE_PER_TOWER];
             queue.Add((start, new List<Vector2>()));
             while (queue.Count > 0)
             {
@@ -84,9 +97,9 @@ namespace TowerDefense
                     for (int vertical = -1; vertical < 2; vertical++)
                     {
                         if (currentX + horizontal >= 0 &&
-                            currentX + horizontal < PLAY_AREA_SIZE &&
+                            currentX + horizontal < SIZE_PER_TOWER &&
                             currentY + vertical >= 0 &&
-                            currentY + vertical < PLAY_AREA_SIZE &&
+                            currentY + vertical < SIZE_PER_TOWER &&
                             !visited[currentX + horizontal, currentY + vertical]
                             && !gameMap[currentX + horizontal, currentY + vertical])
                         {
@@ -108,20 +121,20 @@ namespace TowerDefense
         /// <returns></returns>
         public static Vector2 GetNextRightTarget(Vector2 currentPosition)
         {
-            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / PLAY_AREA_SIZE; // how to change the position to the vector
+            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / SIZE_PER_TOWER; // how to change the position to the vector
 
             Vector2 gridPosition = currentPosition / conversionFactor;
 
             gridPosition = new Vector2((int)gridPosition.X, (int)gridPosition.Y);
 
             int currentIndex = leftRightPath.IndexOf(gridPosition);
-            if (currentIndex + 1 < PLAY_AREA_SIZE)
+            if (currentIndex + 1 < SIZE_PER_TOWER)
             {
                 return leftRightPath[currentIndex + 1];
             }
             else
             {
-                return leftRightPath[PLAY_AREA_SIZE-1];
+                return leftRightPath[SIZE_PER_TOWER-1];
             }
         }
 
@@ -132,7 +145,7 @@ namespace TowerDefense
         /// <returns></returns>
         public static Vector2 GetNextLeftTarget(Vector2 currentPosition)
         {
-            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / PLAY_AREA_SIZE; // how to change the position to the vector
+            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / SIZE_PER_TOWER; // how to change the position to the vector
 
             Vector2 gridPosition = currentPosition / conversionFactor;
 
@@ -156,7 +169,7 @@ namespace TowerDefense
         /// <returns></returns>
         public static Vector2 GetNextUpTarget(Vector2 currentPosition)
         {
-            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / PLAY_AREA_SIZE; // how to change the position to the vector
+            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / SIZE_PER_TOWER; // how to change the position to the vector
 
             Vector2 gridPosition = currentPosition / conversionFactor;
 
@@ -180,20 +193,20 @@ namespace TowerDefense
         /// <returns></returns>
         public static Vector2 GetNextDownTarget(Vector2 currentPosition)
         {
-            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / PLAY_AREA_SIZE; // how to change the position to the vector
+            float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / SIZE_PER_TOWER; // how to change the position to the vector
 
             Vector2 gridPosition = currentPosition / conversionFactor;
 
             gridPosition = new Vector2((int)gridPosition.X, (int)gridPosition.Y);
 
             int currentIndex = upDownPath.IndexOf(gridPosition);
-            if (currentIndex + 1 < PLAY_AREA_SIZE)
+            if (currentIndex + 1 < SIZE_PER_TOWER)
             {
                 return upDownPath[currentIndex + 1];
             }
             else
             {
-                return upDownPath[PLAY_AREA_SIZE - 1];
+                return upDownPath[SIZE_PER_TOWER - 1];
             }
         }
     }

@@ -47,5 +47,19 @@ namespace CrowEngineBase
 
             return truePosition;
         }
+
+        /// <summary>
+        /// Gets the location of the cursor relative to the camera's position
+        /// </summary>
+        /// <param name="cameraLocation"></param>
+        /// <returns></returns>
+        public Vector2 PhysicsPositionCamera(Transform cameraLocation)
+        {
+            Vector2 distanceFromCenterPixels = position - Renderer.m_centerOfScreen;
+            Vector2 physicsDistanceFromCenter = distanceFromCenterPixels / Renderer.m_scalingRatio;
+            Vector2 truePosition = physicsDistanceFromCenter + cameraLocation.position;
+
+            return truePosition;
+        }
     }
 }

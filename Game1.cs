@@ -39,7 +39,8 @@ namespace CrowEngine
             screens.Add(ScreenEnum.MainMenu, new MainMenuScreen(ScreenEnum.MainMenu));
             screens.Add(ScreenEnum.CameraTest, new CameraTestScreen(ScreenEnum.CameraTest));
             screens.Add(ScreenEnum.PauseScreen, new PauseMenu(ScreenEnum.PauseScreen));
-            currentScreen = screens[ScreenEnum.MainMenu];
+            screens.Add(ScreenEnum.Game, new GameplayScreen(ScreenEnum.Game));
+            currentScreen = screens[ScreenEnum.Game];
 
 
             ResourceManager.RegisterFont("Fonts/DefaultFont", "default");
