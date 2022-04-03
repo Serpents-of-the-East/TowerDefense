@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using CrowEngine;
 using CrowEngineBase;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace TowerDefense
 {
-    public class MainMenuScreen : Screen
+    public class PauseMenu : Screen
     {
-
         private Renderer renderSystem;
         private PhysicsEngine physicsEngine;
         private ParticleRenderer particleRenderer;
@@ -19,13 +17,15 @@ namespace TowerDefense
         private LightRenderer lightRenderer;
         private RenderTarget2D renderTarget;
         private FontRenderer fontRenderer;
+
+
         private GameObject camera;
 
 
-        public MainMenuScreen(ScreenEnum screenEnum) : base(screenEnum)
+        public PauseMenu(ScreenEnum screenEnum) : base(screenEnum)
         {
-        }
 
+        }
         public override void Initialize(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics, GameWindow window)
         {
             base.Initialize(graphicsDevice, graphics, window);
@@ -40,11 +40,9 @@ namespace TowerDefense
 
             systemManager.Add(camera);
         }
-        
 
         public override void Draw(GameTime gameTime)
         {
-
             m_spriteBatch.Begin(SpriteSortMode.BackToFront, samplerState: SamplerState.PointClamp);
 
             fontRenderer.Draw(gameTime, m_spriteBatch);
@@ -52,8 +50,6 @@ namespace TowerDefense
             particleRenderer.Draw(gameTime, m_spriteBatch);
 
             m_spriteBatch.End();
-
-
         }
 
         public override void LoadContent()
@@ -64,31 +60,25 @@ namespace TowerDefense
             lightRenderer = new LightRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), m_graphicsDevice);
             lightRenderer.globalLightLevel = 0f;
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
+
             renderTarget = new RenderTarget2D(m_graphicsDevice, m_graphicsDevice.PresentationParameters.BackBufferWidth, m_graphicsDevice.PresentationParameters.BackBufferHeight, false, m_graphicsDevice.PresentationParameters.BackBufferFormat, DepthFormat.Depth24);
         }
 
         public override void OnScreenDefocus()
         {
-            Debug.WriteLine("Main Menu Screen was unloaded");
+            Debug.WriteLine("Default Screen was unloaded");
         }
 
         public override void OnScreenFocus()
         {
-            Debug.WriteLine("Main Menu Screen was loaded");
+            Debug.WriteLine("Default Screen was loaded");
         }
 
         public override void SetupGameObjects()
         {
-            systemManager.Add(Controls.CreateControls(m_window.ClientBounds.Width));
-            systemManager.Add(PlayGame.CreatePlayGame(m_window.ClientBounds.Width));
-            systemManager.Add(Credits.CreateCredits(m_window.ClientBounds.Width));
+            systemManager.Add(PauseTitle.CreatePauseTitle(m_window.ClientBounds.Width));
+            systemManager.Add(Resume.CreateResumeItem(m_window.ClientBounds.Width));
             systemManager.Add(Exit.CreateCredits(m_window.ClientBounds.Width));
-            systemManager.Add(Cursor.CreateCursor(SetCurrentScreen));
         }
-
-
-
-
-
     }
 }

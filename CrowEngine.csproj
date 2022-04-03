@@ -57,7 +57,7 @@
     <Folder Include="Prefabs\TowerPrefabs\" />
     <Folder Include="Managers\" />
     <Folder Include="Prefabs\EnemyPrefabs\" />
-    <Folder Include="Prefabs\MainMenuPrefabs\" />
+    <Folder Include="Prefabs\MenuPrefabs\" />
     <Folder Include="Screens\" />
     <Folder Include="Scripts\" />
   </ItemGroup>

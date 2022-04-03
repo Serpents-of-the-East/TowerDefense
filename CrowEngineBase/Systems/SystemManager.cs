@@ -21,7 +21,6 @@ namespace CrowEngineBase
         /// <param name="gameObject"></param>
         public void Add(GameObject gameObject)
         {
-            Console.WriteLine("Adding gameObjects to all systems");
             AddGameObject?.Invoke(gameObject);
         }
 

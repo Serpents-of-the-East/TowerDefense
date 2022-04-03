@@ -11,6 +11,7 @@ namespace CrowEngineBase
     public enum ScreenEnum
     {
         Default,
+        Game,
         MainMenu,
         Controls,
         Credits,
@@ -90,5 +91,14 @@ namespace CrowEngineBase
         /// </summary>
         public abstract void SetupGameObjects();
 
+
+
+        protected void SetCurrentScreen(ScreenEnum screenEnum)
+        {
+           screenName = screenEnum;
+        }
+
+
+        public delegate void SetCurrentScreenDelegate(ScreenEnum screenEnum);
     }
 }
