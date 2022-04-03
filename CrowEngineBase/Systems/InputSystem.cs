@@ -55,6 +55,10 @@ namespace CrowEngineBase
                         {
                             mouseInput.actionStatePairs.Add(action, false);
                         }
+                        if (!mouseInput.previousActionStatePairs.ContainsKey(action))
+                        {
+                            mouseInput.previousActionStatePairs.Add(action, false);
+                        }
                         switch (mouseInput.actionButtonPairs[action])
                         {
                             case (MouseButton.LeftButton):
