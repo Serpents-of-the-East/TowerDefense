@@ -23,11 +23,16 @@ namespace TowerDefense
             cursor.Add(new Transform(Vector2.Zero, 0, Vector2.One));
             cursor.Add(new Rigidbody());
             cursor.Add(new CircleCollider(1));
-            cursor.Add(new MouseInput());
+
+            MouseInput mouseInput = new MouseInput();
+            mouseInput.actionButtonPairs.Add("PlaceTower", MouseButton.LeftButton);
+            cursor.Add(mouseInput);
 
             KeyboardInput keyboardInput = new KeyboardInput();
             keyboardInput.actionKeyPairs.Add("SwitchUpTower", Keys.OemPeriod);
             keyboardInput.actionKeyPairs.Add("SwitchDownTower", Keys.OemComma);
+
+            keyboardInput.actionKeyPairs.Add("ShakeScreen", Keys.Space);
 
             cursor.Add(keyboardInput);
 
