@@ -55,6 +55,7 @@ namespace TowerDefense
             Console.WriteLine("OnSelect Called");
             if (buttonState > 0.5f && currentlyCollidingWith != null)
             {
+                Console.WriteLine("It at least got called here");
                 this.setCurrentScreenDelegate.Invoke(currentlyCollidingWith.GetComponent<MenuItem>().screenEnum);
             }
 

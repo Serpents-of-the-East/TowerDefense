@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework;
 
 namespace TowerDefense
 {
-    public class ControlScreen : Screen
+    public class GameScreen : Screen
     {
-        public ControlScreen(ScreenEnum screen) : base(screen)
+        public GameScreen(ScreenEnum screen) : base(screen)
         {
         }
 

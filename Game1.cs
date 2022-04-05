@@ -37,8 +37,12 @@ namespace CrowEngine
 
             screens.Add(ScreenEnum.Default, new DefaultScreen(ScreenEnum.Default));
             screens.Add(ScreenEnum.MainMenu, new MainMenuScreen(ScreenEnum.MainMenu));
+            screens.Add(ScreenEnum.Controls, new ControlScreen(ScreenEnum.Controls));
+            screens.Add(ScreenEnum.Credits, new CreditScreen(ScreenEnum.Credits));
+            screens.Add(ScreenEnum.Game, new GameScreen(ScreenEnum.Game));
             screens.Add(ScreenEnum.CameraTest, new CameraTestScreen(ScreenEnum.CameraTest));
             screens.Add(ScreenEnum.PauseScreen, new PauseMenu(ScreenEnum.PauseScreen));
+            screens.Add(ScreenEnum.Quit, new Quit(ScreenEnum.Quit));
             currentScreen = screens[ScreenEnum.MainMenu];
 
 
@@ -66,7 +70,7 @@ namespace CrowEngine
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || nextScreen == ScreenEnum.Quit)
                 Exit();
 
             if (newScreenFocused)
@@ -77,7 +81,7 @@ namespace CrowEngine
 
             nextScreen = currentScreen.Update(gameTime);
 
-            if (screens[nextScreen] != currentScreen)
+            if (nextScreen != ScreenEnum.Quit && screens[nextScreen] != currentScreen)
             {
                 currentScreen.OnScreenDefocus();
                 newScreenFocused = true;

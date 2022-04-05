@@ -4,9 +4,10 @@ using Microsoft.Xna.Framework;
 
 namespace TowerDefense
 {
-    public class ControlScreen : Screen
+
+    public class Quit : Screen
     {
-        public ControlScreen(ScreenEnum screen) : base(screen)
+        public Quit(ScreenEnum screen) : base(screen)
         {
         }
 
