@@ -11,6 +11,11 @@ namespace CrowEngineBase.Utilities
             return start + (end - start) * step;
         }
 
+        public static double Lerp(double start, double end, double step)
+        {
+            return start + (end - start) * step;
+        }
+
         public static bool Tolerance(float current, float target, float tolerance)
         {
             return MathF.Abs(current - target) < tolerance;

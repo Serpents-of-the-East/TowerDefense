@@ -14,9 +14,10 @@ namespace TowerDefense
 
             gameObject.Add(new Bomb());
             gameObject.Add(new TowerComponent());
-            gameObject.Add(new Sprite(ResourceManager.GetTexture("crow"), Color.White, 0));
-            gameObject.Add(new CircleCollider(20));
+            gameObject.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White, 0));
+            gameObject.Add(new CircleCollider(Pathfinder.SIZE_PER_TOWER/2));
             gameObject.Add(new Rigidbody());
+            gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One));
 
             return gameObject;
 
