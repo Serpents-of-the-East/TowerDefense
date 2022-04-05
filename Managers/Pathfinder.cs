@@ -5,6 +5,14 @@ using CrowEngineBase;
 
 namespace TowerDefense
 {
+    public enum PathGoal
+    {
+        Left,
+        Up,
+        Right,
+        Down
+    }
+
     public static class Pathfinder
     {
         public static int MAP_SIZE_IN_TOWERS = 25; // The number of towers you can play in width or height
@@ -21,6 +29,8 @@ namespace TowerDefense
         public static Vector2 rightEntrance = new Vector2(MAP_SIZE_IN_TOWERS - 1, MathF.Floor(MAP_SIZE_IN_TOWERS / 2));
         public static Vector2 topEntrance = new Vector2(MathF.Floor(MAP_SIZE_IN_TOWERS / 2), 0);
         public static Vector2 bottomEntrance = new Vector2(MathF.Floor(MAP_SIZE_IN_TOWERS / 2), MAP_SIZE_IN_TOWERS - 1);
+
+        public static Action UpdatePathsAction;
 
         /// <summary>
         /// Updates the path and returns if the current map is valid.
@@ -71,6 +81,8 @@ namespace TowerDefense
                 gameMap = oldMap;
             }
 
+            UpdatePathsAction.Invoke();
+
             return (solvedVertical != null && solvedHorizontal != null);
         }
 
@@ -87,6 +99,8 @@ namespace TowerDefense
             result *= conversionFactor;
             return result;
         }
+
+
 
         /// <summary>
         /// Returns the solved list, or null if unsolvable
@@ -187,6 +201,41 @@ namespace TowerDefense
             }
 
             return closestPath;
+        }
+
+        public static Vector2 GridToTrueCoordinate(Vector2 coordinate)
+        {
+            Vector2 result = new Vector2(coordinate.X, coordinate.Y);
+            result -= Vector2.One * MAP_SIZE_IN_TOWERS / 2;
+
+            result = Vector2.Ceiling(result);
+
+            result *= SIZE_PER_TOWER;
+
+            return result;
+        }
+
+        public static List<Vector2> GetSolvedMazePath(Vector2 currentPos, PathGoal goal)
+        {
+            Vector2 gridPosition = Gridify(currentPos);
+            gridPosition /= (conversionFactor);
+            gridPosition += Vector2.One * MAP_SIZE_IN_TOWERS / 2;
+
+            gridPosition = Vector2.Floor(gridPosition);
+
+            switch (goal)
+            {
+                case (PathGoal.Down):
+                    return SolveMaze(gridPosition, bottomEntrance);
+                case (PathGoal.Up):
+                    return SolveMaze(gridPosition, topEntrance);
+                case (PathGoal.Left):
+                    return SolveMaze(gridPosition, leftEntrance);
+                case (PathGoal.Right):
+                    return SolveMaze(gridPosition, rightEntrance);
+            }
+
+            return null; // if they gave an invalid goal
         }
 
         /// <summary>

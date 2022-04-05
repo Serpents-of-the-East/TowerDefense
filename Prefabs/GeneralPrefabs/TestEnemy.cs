@@ -15,6 +15,7 @@ namespace TowerDefense
             gameObject.Add(new CircleCollider(20));
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White));
+            gameObject.Add(new Path() { goal = PathGoal.Right });
             gameObject.Add(new BasicEnemyTestScript(gameObject));
 
             return gameObject;

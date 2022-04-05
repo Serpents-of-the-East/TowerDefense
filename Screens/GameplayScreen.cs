@@ -18,6 +18,7 @@ namespace TowerDefense
         private ParticleSystem particleSystem;
         private ParticleRenderer particleRenderer;
         private AudioSystem audioSystem;
+        private PathSystem pathSystem;
 
         private GameObject camera;
 
@@ -32,6 +33,7 @@ namespace TowerDefense
             physics = new PhysicsEngine(systemManager);
             scriptSystem = new ScriptSystem(systemManager);
             inputSystem = new InputSystem(systemManager);
+            pathSystem = new PathSystem(systemManager);
             Pathfinder.SolvePaths();
         }
 
@@ -73,6 +75,8 @@ namespace TowerDefense
             /*GameObject mouseDebug = new GameObject();
             mouseDebug.Add(new MouseInput());
             mouseDebug.Add(new Text("Position", ResourceManager.GetFont("default"), Color.White, Color.Black));*/
+
+            Pathfinder.UpdatePathsAction.Invoke();
         }
     }
 }
