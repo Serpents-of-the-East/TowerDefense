@@ -9,7 +9,9 @@ namespace TowerDefense
     {
         public static int SIZE_PER_TOWER = 50; // The number of physics units each tower should take up
 
-        public static bool[,] gameMap = new bool[SIZE_PER_TOWER, SIZE_PER_TOWER];
+        public static int MAP_SIZE_IN_TOWERS = 25; // The number of towers you can play in width or height
+
+        public static bool[,] gameMap = new bool[MAP_SIZE_IN_TOWERS, MAP_SIZE_IN_TOWERS];
         public static List<Vector2> leftRightPath { get; private set; }
         public static List<Vector2> upDownPath { get; private set; }
 
@@ -27,11 +29,13 @@ namespace TowerDefense
         {
             float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_WIDTH / SIZE_PER_TOWER; // how to change the position from game coordinates to grid
 
-            bool[,] oldMap = new bool[SIZE_PER_TOWER,SIZE_PER_TOWER];
+            bool[,] oldMap = new bool[MAP_SIZE_IN_TOWERS, MAP_SIZE_IN_TOWERS];
 
             Array.Copy(gameMap, oldMap, gameMap.Length);
 
             Vector2 translatedPosition = addedTowerPosition / conversionFactor;
+
+            translatedPosition += new Vector2(MAP_SIZE_IN_TOWERS, MAP_SIZE_IN_TOWERS) / 2; // Normalize, so 0,0 is actually the center of the grid, so we avoid negatives
 
             gameMap[(int)translatedPosition.X, (int)translatedPosition.Y] = true;
 

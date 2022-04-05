@@ -71,23 +71,26 @@ namespace TowerDefense
         {
             if (input > 0.5f)
             {
-                switch (currentSelected)
+                if (Pathfinder.UpdatePaths(transform.position))
                 {
-                    case (1):
-                        GameObject bombTower = BombTower.Create();
-                        bombTower.GetComponent<Transform>().position = transform.position;
-                        systemManager.Add(bombTower);
-                        break;
-                    case (2):
-                        GameObject guidedTower = GuidedMissileTower.Create();
-                        guidedTower.GetComponent<Transform>().position = transform.position;
-                        systemManager.Add(guidedTower);
-                        break;
-                    case (3):
-                        GameObject regularTower = RegularTower.Create();
-                        regularTower.GetComponent<Transform>().position = transform.position;
-                        systemManager.Add(regularTower);
-                        break;
+                    switch (currentSelected)
+                    {
+                        case (1):
+                            GameObject bombTower = BombTower.Create();
+                            bombTower.GetComponent<Transform>().position = transform.position;
+                            systemManager.Add(bombTower);
+                            break;
+                        case (2):
+                            GameObject guidedTower = GuidedMissileTower.Create();
+                            guidedTower.GetComponent<Transform>().position = transform.position;
+                            systemManager.Add(guidedTower);
+                            break;
+                        case (3):
+                            GameObject regularTower = RegularTower.Create();
+                            regularTower.GetComponent<Transform>().position = transform.position;
+                            systemManager.Add(regularTower);
+                            break;
+                    }
                 }
             }
         }
