@@ -96,7 +96,6 @@ namespace CrowEngineBase
         protected void SetCurrentScreen(ScreenEnum screenEnum)
         {
             currentScreen = screenEnum;
-            
         }
 
 
