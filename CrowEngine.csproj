@@ -52,7 +52,6 @@
     <Folder Include="CrowEngineBase\Utilities\" />
     <Folder Include="Components\" />
     <Folder Include="Systems\" />
-    <Folder Include="Prefabs\" />
     <Folder Include="Prefabs\WeaponPrefabs\" />
     <Folder Include="Components\WeaponComponents\" />
     <Folder Include="Prefabs\TowerPrefabs\" />
@@ -60,7 +59,5 @@
     <Folder Include="Prefabs\EnemyPrefabs\" />
     <Folder Include="Prefabs\MenuPrefabs\" />
     <Folder Include="Screens\" />
-    <Folder Include="Scripts\" />
-    <Folder Include="Prefabs\GeneralPrefabs\" />
   </ItemGroup>
 </Project>

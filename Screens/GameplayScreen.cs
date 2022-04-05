@@ -32,7 +32,7 @@ namespace TowerDefense
             physics = new PhysicsEngine(systemManager);
             scriptSystem = new ScriptSystem(systemManager);
             inputSystem = new InputSystem(systemManager);
-
+            Pathfinder.SolvePaths();
         }
 
         public override void Draw(GameTime gameTime)
@@ -50,6 +50,7 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("crow", "regularTower");
 
             camera = CameraPrefab.Create();
+            camera.GetComponent<Transform>().position = Vector2.Zero;
             renderer = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
 
@@ -68,6 +69,10 @@ namespace TowerDefense
         {
             systemManager.Add(BasicEnemy.CreateBasicEnemy(Vector2.Zero));
             systemManager.Add(PlacementCursor.Create(systemManager, camera));
+            systemManager.Add(TestEnemy.Create(Vector2.Zero));
+            /*GameObject mouseDebug = new GameObject();
+            mouseDebug.Add(new MouseInput());
+            mouseDebug.Add(new Text("Position", ResourceManager.GetFont("default"), Color.White, Color.Black));*/
         }
     }
 }

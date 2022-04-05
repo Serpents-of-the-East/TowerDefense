@@ -11,11 +11,11 @@ namespace TowerDefense
         private MouseInput mouse;
         private Rigidbody rb;
 
-        private static int maxDistanceFromCursor = 400;
+        private static int maxDistanceFromCursor = 450;
 
         private Vector2 currentDirection = new Vector2();
 
-        private float cameraSpeed = 100;
+        private float cameraSpeed = 600;
 
 
         public CameraScript(GameObject gameObject) : base(gameObject)
