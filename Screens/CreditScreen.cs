@@ -67,6 +67,9 @@ namespace TowerDefense
 
         public override void OnScreenFocus()
         {
+            currentScreen = ScreenEnum.Credits;
+            screenName = ScreenEnum.Credits;
+
         }
 
         public override void SetupGameObjects()

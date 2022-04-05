@@ -81,11 +81,14 @@ namespace CrowEngine
 
             nextScreen = currentScreen.Update(gameTime);
 
+
             if (nextScreen != ScreenEnum.Quit && screens[nextScreen] != currentScreen)
             {
                 currentScreen.OnScreenDefocus();
                 newScreenFocused = true;
             }
+
+
 
             // TODO: Add your update logic here
 

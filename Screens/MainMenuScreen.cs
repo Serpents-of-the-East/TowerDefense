@@ -75,6 +75,8 @@ namespace TowerDefense
         public override void OnScreenFocus()
         {
             Debug.WriteLine("Main Menu Screen was loaded");
+            currentScreen = ScreenEnum.MainMenu;
+            screenName = ScreenEnum.MainMenu;
         }
 
         public override void SetupGameObjects()
