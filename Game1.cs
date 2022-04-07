@@ -43,7 +43,7 @@ namespace CrowEngine
             screens.Add(ScreenEnum.PauseScreen, new PauseMenu(ScreenEnum.PauseScreen));
             screens.Add(ScreenEnum.Quit, new Quit(ScreenEnum.Quit));
             screens.Add(ScreenEnum.Game, new GameplayScreen(ScreenEnum.Game));
-            currentScreen = screens[ScreenEnum.Game];
+            currentScreen = screens[ScreenEnum.MainMenu];
 
 
             ResourceManager.RegisterFont("Fonts/DefaultFont", "default");
@@ -70,7 +70,7 @@ namespace CrowEngine
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || nextScreen == ScreenEnum.Quit)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || nextScreen == ScreenEnum.Quit)
                 Exit();
 
             if (newScreenFocused)
@@ -81,11 +81,14 @@ namespace CrowEngine
 
             nextScreen = currentScreen.Update(gameTime);
 
+
             if (nextScreen != ScreenEnum.Quit && screens[nextScreen] != currentScreen)
             {
                 currentScreen.OnScreenDefocus();
                 newScreenFocused = true;
             }
+
+
 
             // TODO: Add your update logic here
 

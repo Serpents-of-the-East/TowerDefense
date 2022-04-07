@@ -75,14 +75,16 @@ namespace TowerDefense
         public override void OnScreenFocus()
         {
             Debug.WriteLine("Main Menu Screen was loaded");
+            currentScreen = ScreenEnum.MainMenu;
+            screenName = ScreenEnum.MainMenu;
         }
 
         public override void SetupGameObjects()
         {
-            systemManager.Add(Controls.CreateControls(m_window.ClientBounds.Width));
-            systemManager.Add(PlayGame.CreatePlayGame(m_window.ClientBounds.Width));
-            systemManager.Add(Credits.CreateCredits(m_window.ClientBounds.Width));
-            systemManager.Add(Exit.CreateCredits(m_window.ClientBounds.Width));
+            systemManager.Add(Controls.CreateControls());
+            systemManager.Add(PlayGame.CreatePlayGame());
+            systemManager.Add(Credits.CreateCredits());
+            systemManager.Add(Exit.CreateExit());
             systemManager.Add(Cursor.CreateCursor(SetCurrentScreen));
         }
 
