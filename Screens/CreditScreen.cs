@@ -74,8 +74,8 @@ namespace TowerDefense
 
         public override void SetupGameObjects()
         {
-            systemManager.Add(RyanAnderson.CreateRyanAnderson(m_window.ClientBounds.Width));
-            systemManager.Add(TaylorAnderson.CreateTaylorAnderson(m_window.ClientBounds.Width));
+            systemManager.Add(RyanAnderson.CreateRyanAnderson());
+            systemManager.Add(TaylorAnderson.CreateTaylorAnderson());
             systemManager.Add(CreditsKeyboard.CreateCreditsKeyboard(SetCurrentScreen));
         }
     }

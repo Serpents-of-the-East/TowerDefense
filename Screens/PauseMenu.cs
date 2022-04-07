@@ -76,9 +76,9 @@ namespace TowerDefense
 
         public override void SetupGameObjects()
         {
-            systemManager.Add(PauseTitle.CreatePauseTitle(m_window.ClientBounds.Width));
-            systemManager.Add(Resume.CreateResumeItem(m_window.ClientBounds.Width));
-            systemManager.Add(Exit.CreateCredits(m_window.ClientBounds.Width));
+            systemManager.Add(PauseTitle.CreatePauseTitle());
+            systemManager.Add(Resume.CreateResumeItem());
+            systemManager.Add(Exit.CreateExit());
         }
     }
 }

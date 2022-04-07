@@ -76,7 +76,7 @@ namespace TowerDefense
         {
 
 
-            systemManager.Add(StartNextLevel.CreateStartNextLevel("PLACEHOLDER", m_window.ClientBounds.Width));
+            systemManager.Add(StartNextLevel.CreateStartNextLevel("PLACEHOLDER"));
 
             systemManager.Add(CreditsKeyboard.CreateCreditsKeyboard(SetCurrentScreen));
         }
