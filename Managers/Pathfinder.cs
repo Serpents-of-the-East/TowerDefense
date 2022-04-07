@@ -46,6 +46,40 @@ namespace TowerDefense
             upDownPath = solvedVertical;
         }
 
+        public static bool SellTower(Vector2 sellTowerPosition)
+        {
+            bool[,] oldMap = new bool[MAP_SIZE_IN_TOWERS, MAP_SIZE_IN_TOWERS];
+            bool updatedMap = false;
+            Array.Copy(gameMap, oldMap, gameMap.Length);
+
+            Vector2 translatedPosition = sellTowerPosition / (conversionFactor);
+            translatedPosition += Vector2.One * MAP_SIZE_IN_TOWERS / 2;
+
+
+
+            if (gameMap[(int)translatedPosition.X, (int)translatedPosition.Y])
+            {
+                gameMap[(int)translatedPosition.X, (int)translatedPosition.Y] = false;
+                updatedMap = true;
+            }
+
+
+            List<Vector2> solvedHorizontal = SolveMaze(leftEntrance, rightEntrance);
+            List<Vector2> solvedVertical = SolveMaze(topEntrance, bottomEntrance);
+
+            
+            if (solvedHorizontal != null && solvedVertical != null)
+            {
+                leftRightPath = solvedHorizontal;
+                upDownPath = solvedVertical;
+            }
+
+            UpdatePathsAction.Invoke();
+
+            return (updatedMap);
+
+        }
+
         public static bool UpdatePaths(Vector2 addedTowerPosition)
         {
 
