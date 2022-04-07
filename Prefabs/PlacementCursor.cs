@@ -15,7 +15,7 @@ namespace TowerDefense
         /// <param name="systemManager"></param>
         /// <param name="camera"></param>
         /// <returns></returns>
-        public static GameObject Create(SystemManager systemManager, GameObject camera)
+        public static GameObject Create(SystemManager systemManager, GameObject camera, ControlLoaderSystem sys) // control loader should BE REMOVED LATER THIS IS FOR TESTING
         {
             GameObject cursor = new GameObject();
 
@@ -31,12 +31,13 @@ namespace TowerDefense
             KeyboardInput keyboardInput = new KeyboardInput();
             keyboardInput.actionKeyPairs.Add("SwitchUpTower", Keys.OemPeriod);
             keyboardInput.actionKeyPairs.Add("SwitchDownTower", Keys.OemComma);
+            keyboardInput.actionKeyPairs.Add("ReloadScreen", Keys.R);
 
             keyboardInput.actionKeyPairs.Add("ShakeScreen", Keys.Space);
 
             cursor.Add(keyboardInput);
 
-            cursor.Add(new PlacementCursorScript(cursor, systemManager, camera));
+            cursor.Add(new PlacementCursorScript(cursor, systemManager, camera, sys));
 
 
             return cursor;

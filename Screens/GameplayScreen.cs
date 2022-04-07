@@ -19,9 +19,9 @@ namespace TowerDefense
         private ParticleRenderer particleRenderer;
         private AudioSystem audioSystem;
         private PathSystem pathSystem;
+        private ControlLoaderSystem controlLoaderSystem;
 
         private GameObject camera;
-
 
         public GameplayScreen(ScreenEnum screenEnum) : base (screenEnum)
         {
@@ -34,13 +34,22 @@ namespace TowerDefense
             scriptSystem = new ScriptSystem(systemManager);
             inputSystem = new InputSystem(systemManager);
             pathSystem = new PathSystem(systemManager);
+            controlLoaderSystem = new ControlLoaderSystem(systemManager);
             Pathfinder.SolvePaths();
         }
 
         public override void Draw(GameTime gameTime)
         {
             m_spriteBatch.Begin(samplerState:SamplerState.PointClamp);
-            renderer.Draw(gameTime, m_spriteBatch);
+
+            if (controlLoaderSystem.controlsLoaded)
+            {
+                renderer.Draw(gameTime, m_spriteBatch);
+            }
+            else
+            {
+                m_spriteBatch.DrawString(ResourceManager.GetFont("default"), "Loading...", Vector2.One * 300, Color.White); // temporary loading screen, this should really be done better
+            }
             m_spriteBatch.End();
         }
 
@@ -70,11 +79,8 @@ namespace TowerDefense
         public override void SetupGameObjects()
         {
             systemManager.Add(BasicEnemy.CreateBasicEnemy(Vector2.Zero));
-            systemManager.Add(PlacementCursor.Create(systemManager, camera));
+            systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
             systemManager.Add(TestEnemy.Create(Vector2.Zero));
-            /*GameObject mouseDebug = new GameObject();
-            mouseDebug.Add(new MouseInput());
-            mouseDebug.Add(new Text("Position", ResourceManager.GetFont("default"), Color.White, Color.Black));*/
 
             Pathfinder.UpdatePathsAction.Invoke();
         }
