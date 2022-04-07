@@ -116,26 +116,31 @@ namespace TowerDefense
         {
             if (input > 0.5f)
             {
-                if (Pathfinder.UpdatePaths(transform.position))
+
+                GameObject newTower = null;
+
+                switch (currentSelected)
                 {
-                    switch (currentSelected)
+                    case (1):
+                        newTower = BombTower.Create();
+                        break;
+                    case (2):
+                        newTower = GuidedMissileTower.Create();
+                        break;
+                    case (3):
+                        newTower = RegularTower.Create();
+                        break;
+                }
+
+                if (newTower != null && PointsManager.GetPlayerPoints() > newTower.GetComponent<PointsComponent>().points)
+                {
+                    if (Pathfinder.UpdatePaths(transform.position))
                     {
-                        case (1):
-                            GameObject bombTower = BombTower.Create();
-                            bombTower.GetComponent<Transform>().position = transform.position;
-                            systemManager.Add(bombTower);
-                            break;
-                        case (2):
-                            GameObject guidedTower = GuidedMissileTower.Create();
-                            guidedTower.GetComponent<Transform>().position = transform.position;
-                            systemManager.Add(guidedTower);
-                            break;
-                        case (3):
-                            GameObject regularTower = RegularTower.Create();
-                            regularTower.GetComponent<Transform>().position = transform.position;
-                            systemManager.Add(regularTower);
-                            break;
+                        newTower.GetComponent<Transform>().position = transform.position;
+                        systemManager.Add(newTower);
+                        PointsManager.SubtractPlayerPoints(newTower.GetComponent<PointsComponent>().points);
                     }
+
                 }
             }
         }

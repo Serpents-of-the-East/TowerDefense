@@ -41,6 +41,7 @@ namespace TowerDefense
         {
             m_spriteBatch.Begin(samplerState:SamplerState.PointClamp);
             renderer.Draw(gameTime, m_spriteBatch);
+            fontRenderer.Draw(gameTime, m_spriteBatch);
             m_spriteBatch.End();
         }
 
@@ -72,6 +73,7 @@ namespace TowerDefense
             systemManager.Add(BasicEnemy.CreateBasicEnemy(Vector2.Zero));
             systemManager.Add(PlacementCursor.Create(systemManager, camera));
             systemManager.Add(TestEnemy.Create(Vector2.Zero));
+            systemManager.Add(PointsPrefab.CreatePointsPrefab());
             /*GameObject mouseDebug = new GameObject();
             mouseDebug.Add(new MouseInput());
             mouseDebug.Add(new Text("Position", ResourceManager.GetFont("default"), Color.White, Color.Black));*/
