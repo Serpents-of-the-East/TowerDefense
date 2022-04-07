@@ -14,6 +14,7 @@ namespace TowerDefense
             gameObject.Add(new TowerComponent());
             gameObject.Add(new Sprite(ResourceManager.GetTexture("regularTower"), Color.White, 0));
             gameObject.Add(new CircleCollider(Pathfinder.SIZE_PER_TOWER/2));
+            gameObject.Add(new PointsComponent() { points = 100 });
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One));
 

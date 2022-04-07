@@ -47,6 +47,7 @@ namespace CrowEngine
 
 
             ResourceManager.RegisterFont("Fonts/DefaultFont", "default");
+            PointsManager.AddPlayerPoints(1000);
 
             base.Initialize();
         }
