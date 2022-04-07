@@ -31,6 +31,7 @@
     <None Remove="Scripts\" />
     <None Remove="Prefabs\GeneralPrefabs\" />
     <None Remove="Prefabs\CreditsPrefabs\" />
+    <None Remove="Prefabs\ControlsPrefabs\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -61,5 +62,6 @@
     <Folder Include="Prefabs\MenuPrefabs\" />
     <Folder Include="Screens\" />
     <Folder Include="Prefabs\CreditsPrefabs\" />
+    <Folder Include="Prefabs\ControlsPrefabs\" />
   </ItemGroup>
 </Project>

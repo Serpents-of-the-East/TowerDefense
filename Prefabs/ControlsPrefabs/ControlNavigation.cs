@@ -3,12 +3,12 @@ using CrowEngineBase;
 
 namespace TowerDefense
 {
-    public class MenuNavigationScript : ScriptBase
+    public class ControlNavigation : ScriptBase
     {
         private Screen.SetCurrentScreenDelegate setCurrentScreenDelegate;
 
 
-        public MenuNavigationScript(GameObject gameObject, Screen.SetCurrentScreenDelegate setCurrentScreenDelegate) : base(gameObject)
+        public ControlNavigation(GameObject gameObject, Screen.SetCurrentScreenDelegate setCurrentScreenDelegate) : base(gameObject)
         {
             this.setCurrentScreenDelegate = setCurrentScreenDelegate;
 
@@ -21,7 +21,7 @@ namespace TowerDefense
             {
                 Console.WriteLine("OnMainMenuMove Called");
                 this.setCurrentScreenDelegate.Invoke(ScreenEnum.MainMenu);
-            }           
+            }
         }
 
 
