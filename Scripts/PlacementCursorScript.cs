@@ -132,7 +132,7 @@ namespace TowerDefense
                         break;
                 }
 
-                if (newTower != null && PointsManager.GetPlayerPoints() > newTower.GetComponent<PointsComponent>().points)
+                if (newTower != null && PointsManager.GetPlayerPoints() >= newTower.GetComponent<PointsComponent>().points)
                 {
                     if (Pathfinder.UpdatePaths(transform.position))
                     {
