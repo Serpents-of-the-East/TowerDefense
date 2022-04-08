@@ -24,11 +24,13 @@ namespace TowerDefense
         private SystemManager systemManager;
 
 
+        private ControlLoaderSystem ControlLoaderSystem; // this is just for testing it SHOULD BE REMOVED LATER
 
-        public PlacementCursorScript(GameObject gameObject, SystemManager systemManager, GameObject camera) : base(gameObject)
+        public PlacementCursorScript(GameObject gameObject, SystemManager systemManager, GameObject camera, ControlLoaderSystem controlSystem) : base(gameObject)
         {
             this.systemManager = systemManager;
             this.camera = camera;
+            this.ControlLoaderSystem = controlSystem;
         }
 
         public override void Start()
@@ -94,6 +96,14 @@ namespace TowerDefense
                 currentSelected %= numberOfTowers + 1; // To allow for the empty one
             }
             SetTowerTexture();
+        }
+
+        public void OnReloadScreen(float input)
+        {
+            if (input == 1 && ControlLoaderSystem.controlsLoaded)
+            {
+                ControlLoaderSystem.ReloadControls();
+            }
         }
 
         public void OnSwitchDownTower(float input)
