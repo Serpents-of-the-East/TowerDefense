@@ -70,6 +70,7 @@ namespace TowerDefense
 
         public override void SetupGameObjects()
         {
+            systemManager.Add(BackgroundPrefab.Create());
             systemManager.Add(BasicEnemy.CreateBasicEnemy(Vector2.Zero));
             systemManager.Add(PlacementCursor.Create(systemManager, camera));
             systemManager.Add(TestEnemy.Create(Vector2.Zero));
