@@ -45,6 +45,7 @@ namespace TowerDefense
             if (controlLoaderSystem.controlsLoaded)
             {
                 renderer.Draw(gameTime, m_spriteBatch);
+                fontRenderer.Draw(gameTime, m_spriteBatch);
             }
             else
             {
@@ -81,6 +82,7 @@ namespace TowerDefense
             systemManager.Add(BasicEnemy.CreateBasicEnemy(Vector2.Zero));
             systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
             systemManager.Add(TestEnemy.Create(Vector2.Zero));
+            systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
             Pathfinder.UpdatePathsAction.Invoke();
         }

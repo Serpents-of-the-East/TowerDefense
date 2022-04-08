@@ -16,6 +16,8 @@ namespace TowerDefense
 
         private uint currentSelected = 0;
         private uint numberOfTowers = 3;
+        private GameObject selectedTower;
+
 
         private GameObject camera;
 
@@ -36,12 +38,55 @@ namespace TowerDefense
             mouse = gameObject.GetComponent<MouseInput>();
             transform = gameObject.GetComponent<Transform>();
             sprite = gameObject.GetComponent<Sprite>();
+            selectedTower = null;
         }
 
         public void OnMouseMove(Vector2 mousePosition)
         {
             transform.position = Pathfinder.Gridify(mouse.PhysicsPositionCamera(camera.GetComponent<Transform>()));
         }
+
+        public void OnSellTower(float input)
+        {
+
+            if (input > 0f)
+            {
+                if (selectedTower != null)
+                {
+                    if (Pathfinder.SellTower(transform.position))
+                    {
+                        if (selectedTower.ContainsComponent<PointsComponent>())
+                        {
+                            PointsManager.AddPlayerPoints((int) (selectedTower.GetComponent<PointsComponent>().points * 0.8f));
+                        }
+                        systemManager.Remove(selectedTower.id);
+                        selectedTower = null;
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        public override void OnCollisionStart(GameObject other)
+        {
+            if (selectedTower == null && other.ContainsComponent<TowerComponent>())
+            {
+                selectedTower = other;
+            }
+
+        }
+
+        public override void OnCollisionEnd(GameObject other)
+        {
+            if (selectedTower == other)
+            {
+                selectedTower = null;
+            }
+        }
+
 
         public void OnSwitchUpTower(float input)
         {
@@ -81,26 +126,31 @@ namespace TowerDefense
         {
             if (input > 0.5f)
             {
-                if (Pathfinder.UpdatePaths(transform.position))
+
+                GameObject newTower = null;
+
+                switch (currentSelected)
                 {
-                    switch (currentSelected)
+                    case (1):
+                        newTower = BombTower.Create();
+                        break;
+                    case (2):
+                        newTower = GuidedMissileTower.Create();
+                        break;
+                    case (3):
+                        newTower = RegularTower.Create();
+                        break;
+                }
+
+                if (newTower != null && PointsManager.GetPlayerPoints() >= newTower.GetComponent<PointsComponent>().points)
+                {
+                    if (Pathfinder.UpdatePaths(transform.position))
                     {
-                        case (1):
-                            GameObject bombTower = BombTower.Create();
-                            bombTower.GetComponent<Transform>().position = transform.position;
-                            systemManager.Add(bombTower);
-                            break;
-                        case (2):
-                            GameObject guidedTower = GuidedMissileTower.Create();
-                            guidedTower.GetComponent<Transform>().position = transform.position;
-                            systemManager.Add(guidedTower);
-                            break;
-                        case (3):
-                            GameObject regularTower = RegularTower.Create();
-                            regularTower.GetComponent<Transform>().position = transform.position;
-                            systemManager.Add(regularTower);
-                            break;
+                        newTower.GetComponent<Transform>().position = transform.position;
+                        systemManager.Add(newTower);
+                        PointsManager.SubtractPlayerPoints(newTower.GetComponent<PointsComponent>().points);
                     }
+
                 }
             }
         }

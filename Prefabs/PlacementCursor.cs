@@ -34,6 +34,8 @@ namespace TowerDefense
             keyboardInput.actionKeyPairs.Add("ReloadScreen", Keys.R);
 
             keyboardInput.actionKeyPairs.Add("ShakeScreen", Keys.Space);
+            keyboardInput.actionKeyPairs.Add("SellTower", Keys.S);
+
 
             cursor.Add(keyboardInput);
 
