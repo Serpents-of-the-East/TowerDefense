@@ -34,6 +34,10 @@ namespace TowerDefense
             scriptSystem = new ScriptSystem(systemManager);
             inputSystem = new InputSystem(systemManager);
             pathSystem = new PathSystem(systemManager);
+            particleSystem = new ParticleSystem(systemManager);
+            particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
+            ParticleEmitter.systemManager = systemManager;
+
             Pathfinder.SolvePaths();
         }
 
