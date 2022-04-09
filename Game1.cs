@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using TowerDefense;
 
+using System.Diagnostics;
+
 using CrowEngineBase;
 
 namespace CrowEngine
@@ -25,6 +27,8 @@ namespace CrowEngine
             IsMouseVisible = true;
             ResourceManager.manager = Content;
             screens = new Dictionary<ScreenEnum, Screen>();
+
+            InputPersistence.LoadControls();
         }
 
         protected override void Initialize()

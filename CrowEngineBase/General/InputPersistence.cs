@@ -3,23 +3,70 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Diagnostics;
+
+using Microsoft.Xna.Framework.Input;
 
 namespace CrowEngineBase
 {
     public static class InputPersistence
     {
-        private static bool isLoading = false;
-        private static bool isSaving = false;
+
+        private static bool isLoadingKeyboard = false;
+        private static bool isLoadingMouse = false;
+        private static bool isLoadingController = false;
+
+        private static bool isSavingKeyboard = false;
+        private static bool isSavingMouse = false;
+        private static bool isSavingController = false;
+
         public static KeyboardInput keyboardInput = new KeyboardInput();
         public static MouseInput mouseInput = new MouseInput();
         public static ControllerInput controllerInput = new ControllerInput();
 
+        public static bool keyboardLoaded { get; private set; }
+        public static bool mouseLoaded { get; private set; }
+        public static bool controllerLoaded { get; private set; }
+
+        public static bool controlsLoaded { get
+            {
+                return keyboardLoaded && mouseLoaded && controllerLoaded;
+            } }
+
+        static InputPersistence()
+        {
+            keyboardLoaded = false;
+            mouseLoaded = false;
+            controllerLoaded = false;
+        }
+
+        public static void LoadSavedKeyboard(ref KeyboardInput keyboard)
+        {
+            if (!controlsLoaded)
+            {
+                Debug.WriteLine("Warning: Saved keyboard state has not finished loading yet...");
+                return;
+            }
+
+            foreach((string action, Keys key) in keyboardInput.actionKeyPairs)
+            {
+                if (keyboard.actionKeyPairs.ContainsKey(action))
+                {
+                    keyboard.actionKeyPairs[action] = key;
+                }
+                else
+                {
+                    Debug.WriteLine($"Action {action} could not be found in the given keyboard input. You should ensure this is not a mistake");
+                }
+            }
+        }
+
 
         public static void SaveKeyboardControls(KeyboardInput input)
         {
-            if (!isSaving)
+            if (!isSavingKeyboard)
             {
-                isSaving = true;
+                isSavingKeyboard = true;
                 FinalizeAsyncKeyboardSave(input);
             }
         }
@@ -50,16 +97,16 @@ namespace CrowEngineBase
                     }
                 }
 
-                isSaving = false;
+                isSavingKeyboard = false;
             });
         }
 
 
         public static void SaveMouseControls(MouseInput input)
         {
-            if (!isSaving)
+            if (!isSavingMouse)
             {
-                isSaving = true;
+                isSavingMouse = true;
                 FinalizeAsyncMouseSave(input);
             }
         }
@@ -90,15 +137,15 @@ namespace CrowEngineBase
                     }
                 }
 
-                isSaving = false;
+                isSavingMouse = false;
             });
         }
 
         public static void SaveControllerControls(ControllerInput input)
         {
-            if (!isSaving)
+            if (!isSavingController)
             {
-                isSaving = true;
+                isSavingController = true;
                 FinalizeAsyncControllerSave(input);
             }
         }
@@ -129,7 +176,7 @@ namespace CrowEngineBase
                     }
                 }
 
-                isSaving = false;
+                isSavingController = false;
             });
         }
 
@@ -145,9 +192,10 @@ namespace CrowEngineBase
 
         public static void LoadKeyboardControls()
         {
-            if (!isLoading)
+            if (!isLoadingKeyboard)
             {
-                isLoading = true;
+                keyboardLoaded = false;
+                isLoadingKeyboard = true;
                 FinalizeAsyncKeyboardLoad();
             }
 
@@ -180,7 +228,8 @@ namespace CrowEngineBase
                     }
                 }
 
-                isLoading = false;
+                isLoadingKeyboard = false;
+                keyboardLoaded = true;
             });
         }
 
@@ -188,9 +237,10 @@ namespace CrowEngineBase
 
         public static void LoadMouseControls()
         {
-            if (!isLoading)
+            if (!isLoadingMouse)
             {
-                isLoading = true;
+                mouseLoaded = false;
+                isLoadingMouse = true;
                 FinalizeAsyncMouseLoad();
             }
         }
@@ -221,7 +271,8 @@ namespace CrowEngineBase
                     }
                 }
 
-                isLoading = false;
+                isLoadingMouse = false;
+                mouseLoaded = true;
             });
         }
 
@@ -229,9 +280,10 @@ namespace CrowEngineBase
 
         public static void LoadControllerControls()
         {
-            if (!isLoading)
+            if (!isLoadingController)
             {
-                isLoading = true;
+                controllerLoaded = false;
+                isLoadingController = true;
                 FinalizeAsyncControllerLoad();
             }
         }
@@ -262,7 +314,8 @@ namespace CrowEngineBase
                     }
                 }
 
-                isLoading = false;
+                isLoadingController = false;
+                controllerLoaded = true;
             });
         }
 
