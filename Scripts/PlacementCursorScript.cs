@@ -58,6 +58,7 @@ namespace TowerDefense
                         if (selectedTower.ContainsComponent<PointsComponent>())
                         {
                             PointsManager.AddPlayerPoints((int) (selectedTower.GetComponent<PointsComponent>().points * 0.8f));
+                            ParticleEmitter.EmitSellParticles(selectedTower.GetComponent<Transform>().position);
                         }
                         systemManager.Remove(selectedTower.id);
                         selectedTower = null;
