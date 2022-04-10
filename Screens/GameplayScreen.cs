@@ -35,6 +35,10 @@ namespace TowerDefense
             inputSystem = new InputSystem(systemManager);
             pathSystem = new PathSystem(systemManager);
             controlLoaderSystem = new ControlLoaderSystem(systemManager);
+            TextureCreation.device = graphicsDevice;
+
+
+
             Pathfinder.SolvePaths();
         }
 
@@ -61,6 +65,11 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("fire", "guidedTower");
             ResourceManager.RegisterTexture("crow", "regularTower");
 
+
+
+
+
+
             camera = CameraPrefab.Create();
             camera.GetComponent<Transform>().position = Vector2.Zero;
             renderer = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
@@ -80,11 +89,18 @@ namespace TowerDefense
         public override void SetupGameObjects()
         {
             systemManager.Add(BackgroundPrefab.Create());
-            systemManager.Add(BasicEnemy.CreateBasicEnemy(Vector2.Zero));
-            systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
-            systemManager.Add(TestEnemy.Create(Vector2.Zero));
-            systemManager.Add(PointsPrefab.CreatePointsPrefab());
+            GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One);
+            systemManager.Add(basicEnemy);
 
+            systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
+
+            GameObject actualBasicEnemy = TestEnemy.Create(Vector2.Zero);
+
+            systemManager.Add(actualBasicEnemy);
+
+            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(actualBasicEnemy));
+
+            systemManager.Add(PointsPrefab.CreatePointsPrefab());
             Pathfinder.UpdatePathsAction.Invoke();
         }
     }
