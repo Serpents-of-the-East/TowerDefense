@@ -49,7 +49,7 @@ namespace CrowEngine
             screens.Add(ScreenEnum.Game, new GameplayScreen(ScreenEnum.Game));
             currentScreen = screens[ScreenEnum.MainMenu];
 
-
+            ResourceManager.RegisterTexture("SpriteSheets/coin", "coin");
             ResourceManager.RegisterFont("Fonts/DefaultFont", "default");
             PointsManager.AddPlayerPoints(1000);
 
