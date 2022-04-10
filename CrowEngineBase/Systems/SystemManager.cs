@@ -14,13 +14,11 @@ namespace CrowEngineBase
         public event Action<GameObject> AddGameObject;
         public event Action<uint> RemoveGameObject;
         public event Action<GameTime> UpdateSystem;
-<<<<<<< HEAD
-
         private Queue<GameObject> safeAddedObjects = new Queue<GameObject>();
 
-=======
+
         public Dictionary<uint, GameObject> gameObjectsDictionary = new Dictionary<uint, GameObject>();
->>>>>>> master
+
         /// <summary>
         /// Adds a new gameobject to all systems
         /// </summary>

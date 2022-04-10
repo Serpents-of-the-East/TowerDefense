@@ -104,7 +104,7 @@ namespace TowerDefense
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(actualBasicEnemy));
 
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
-            Pathfinder.UpdatePathsAction.Invoke();
+
         }
     }
 }
