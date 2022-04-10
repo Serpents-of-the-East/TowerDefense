@@ -14,7 +14,7 @@ namespace CrowEngineBase
         public event Action<GameObject> AddGameObject;
         public event Action<uint> RemoveGameObject;
         public event Action<GameTime> UpdateSystem;
-
+        public Dictionary<uint, GameObject> gameObjectsDictionary = new Dictionary<uint, GameObject>();
         /// <summary>
         /// Adds a new gameobject to all systems
         /// </summary>
@@ -22,6 +22,7 @@ namespace CrowEngineBase
         public void Add(GameObject gameObject)
         {
             AddGameObject?.Invoke(gameObject);
+            gameObjectsDictionary.Add(gameObject.id, gameObject);
         }
 
         public void Remove(uint id)
