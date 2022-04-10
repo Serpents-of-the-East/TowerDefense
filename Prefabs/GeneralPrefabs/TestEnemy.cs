@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using CrowEngineBase;
 
 using Microsoft.Xna.Framework;
@@ -17,6 +17,17 @@ namespace TowerDefense
             gameObject.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White));
             gameObject.Add(new Path() { goal = PathGoal.Right });
             gameObject.Add(new BasicEnemyTestScript(gameObject));
+
+            gameObject.Add(new EnemyHealth()
+            {
+                health = 100f,
+                maxHealth = 100f,
+                instantiateOnDeathObject = new List<GameObject>()
+                {
+
+
+                }
+            });
 
             return gameObject;
         }

@@ -16,44 +16,57 @@ namespace CrowEngineBase
             {
                 Particle particleGroup = m_gameObjects[id].GetComponent<Particle>();
 
-                // Update each particle of group
-                for (int i = 0; i < particleGroup.particles.Count; i++)
+                if (particleGroup.maxSystemLifetime != null)
                 {
-                    // Update time on particle
-                    particleGroup.particles[i].lifeTime -= gameTime.ElapsedGameTime;
+                    // Update each particle of group
+                    for (int i = 0; i < particleGroup.particles.Count; i++)
+                    {
+                        // Update time on particle
+                        particleGroup.particles[i].lifeTime -= gameTime.ElapsedGameTime;
 
-                    // Remove it if it has expired
-                    if (particleGroup.particles[i].lifeTime <= TimeSpan.Zero)
-                    {
-                        particleGroup.particles.RemoveAt(i);
+                        // Remove it if it has expired
+                        if (particleGroup.particles[i].lifeTime <= TimeSpan.Zero)
+                        {
+                            particleGroup.particles.RemoveAt(i);
+                        }
+                        else
+                        {
+                            particleGroup.particles[i].position += (gameTime.ElapsedGameTime.Milliseconds / 1000f) * particleGroup.particles[i].velocity;
+                            particleGroup.particles[i].rotation += (gameTime.ElapsedGameTime.Milliseconds / 1000f) * particleGroup.rotationSpeed;
+                        }
                     }
-                    else
+
+                    if (particleGroup.maxSystemLifetime > TimeSpan.Zero)
                     {
-                        particleGroup.particles[i].position += (gameTime.ElapsedGameTime.Milliseconds / 1000f) * particleGroup.particles[i].velocity;
-                        particleGroup.particles[i].rotation += (gameTime.ElapsedGameTime.Milliseconds / 1000f) * particleGroup.rotationSpeed;
+                        particleGroup.maxSystemLifetime -= gameTime.ElapsedGameTime;
+
+
+                        // Create new particles
+                        particleGroup.currentTime += gameTime.ElapsedGameTime;
+
+                        // number | time
+                        // ------ | 
+                        // second |
+                        Transform particleTransform = m_gameObjects[id].GetComponent<Transform>();
+
+                        while (particleGroup.currentTime > particleGroup.rate)
+                        {
+                            SingleParticle singleParticle = new SingleParticle();
+                            singleParticle.lifeTime = particleGroup.maxLifeTime;
+                            singleParticle.position = new Vector2((float)particleGroup.random.NextGaussian(particleTransform.position.X, particleGroup.emissionArea.X), (float)particleGroup.random.NextGaussian(particleTransform.position.Y, particleGroup.emissionArea.Y));
+                            singleParticle.rotation = particleGroup.random.NextRange(0, 360);
+                            singleParticle.scale = particleGroup.random.NextRange(particleGroup.minScale, particleGroup.maxScale);
+                            singleParticle.velocity = particleGroup.random.NextCircleVector() * particleGroup.random.NextRange(particleGroup.minSpeed, particleGroup.maxSpeed);
+                            particleGroup.currentTime -= particleGroup.rate;
+
+                            particleGroup.particles.Insert(0, singleParticle);
+                        }
                     }
+
                 }
 
-                // Create new particles
-                particleGroup.currentTime += gameTime.ElapsedGameTime;
 
-                // number | time
-                // ------ | 
-                // second |
-                Transform particleTransform = m_gameObjects[id].GetComponent<Transform>();
-
-                while (particleGroup.currentTime > particleGroup.rate)
-                {
-                    SingleParticle singleParticle = new SingleParticle();
-                    singleParticle.lifeTime = particleGroup.maxLifeTime;
-                    singleParticle.position = new Vector2((float)particleGroup.random.NextGaussian(particleTransform.position.X, particleGroup.emissionArea.X), (float)particleGroup.random.NextGaussian(particleTransform.position.Y, particleGroup.emissionArea.Y));
-                    singleParticle.rotation = particleGroup.random.NextRange(0, 360);
-                    singleParticle.scale = particleGroup.random.NextRange(particleGroup.minScale, particleGroup.maxScale);
-                    singleParticle.velocity = particleGroup.random.NextCircleVector() * particleGroup.random.NextRange(particleGroup.minSpeed, particleGroup.maxSpeed);
-                    particleGroup.currentTime -= particleGroup.rate;
-
-                    particleGroup.particles.Insert(0, singleParticle);
-                }
+                
             }
         }
     }
