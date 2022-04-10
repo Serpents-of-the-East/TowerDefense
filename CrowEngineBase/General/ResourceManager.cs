@@ -71,6 +71,15 @@ namespace CrowEngineBase
             }
         }
 
+        public static void RegisterTexture(Texture2D texture, string textureName)
+        {
+            if (!textures.ContainsKey(textureName))
+            {
+                textures.Add(textureName, texture);
+            }
+        }
+
+
         public static void RegisterSoundEffect(string soundEffect, string pathToSoundEffect)
         {
             if (!soundEffects.ContainsKey(soundEffect))

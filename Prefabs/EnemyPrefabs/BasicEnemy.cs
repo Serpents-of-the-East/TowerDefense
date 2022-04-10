@@ -7,8 +7,6 @@ namespace TowerDefense
 {
     public static class BasicEnemy
     {
-        
-
         public static GameObject CreateBasicEnemy(Vector2 position)
         {
             GameObject gameObject = new GameObject();
@@ -22,14 +20,10 @@ namespace TowerDefense
             //TODO: This is where we will declare our other prefabs like particle effects and points
 
 
-            gameObject.Add(new EnemyHealth() { health = 100f, instantiateOnDeathObject = new List<GameObject>()
-            {
+            
 
 
-            } });
-
-            // Should have a health component as well... This must be created.
-
+            
             return gameObject;
         }
     }
