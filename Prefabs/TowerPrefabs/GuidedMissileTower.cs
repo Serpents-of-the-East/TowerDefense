@@ -17,6 +17,10 @@ namespace TowerDefense
             gameObject.Add(new PointsComponent() { points = 300 });
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One));
+            gameObject.Add(new EnemyTag(EnemyType.AIR));
+
+            gameObject.Add(new TowerTargettingScript(gameObject));
+
 
             return gameObject;
         }
