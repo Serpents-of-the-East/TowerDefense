@@ -36,8 +36,8 @@ namespace TowerDefense
             pathSystem = new PathSystem(systemManager);
             controlLoaderSystem = new ControlLoaderSystem(systemManager);
             TextureCreation.device = graphicsDevice;
-
-
+            particleSystem = new ParticleSystem(systemManager);
+            ParticleEmitter.systemManager = systemManager;
 
             Pathfinder.SolvePaths();
         }
@@ -49,6 +49,7 @@ namespace TowerDefense
             if (controlLoaderSystem.controlsLoaded)
             {
                 renderer.Draw(gameTime, m_spriteBatch);
+                particleRenderer.Draw(gameTime, m_spriteBatch);
                 fontRenderer.Draw(gameTime, m_spriteBatch);
             }
             else
@@ -74,6 +75,7 @@ namespace TowerDefense
             camera.GetComponent<Transform>().position = Vector2.Zero;
             renderer = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
+            particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
 
             systemManager.Add(camera);
         }

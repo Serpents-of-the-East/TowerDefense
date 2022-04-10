@@ -44,6 +44,13 @@ namespace CrowEngineBase
         /// </summary>
         public TimeSpan currentTime { get; set; }
 
+
+        /// <summary>
+        /// The overall time that the system will emit particles. Leave null for unlimited time
+        /// </summary>
+        public TimeSpan maxSystemLifetime { get; set; }
+
+
         public float minScale { get; set; }
         public float maxScale { get; set; }
 
