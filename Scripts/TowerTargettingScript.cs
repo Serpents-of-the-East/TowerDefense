@@ -11,7 +11,7 @@ namespace TowerDefense
     {
         private GameObject currentTarget;
         private EnemyType targetableEnemy;
-        float toleranceAllowed = 0.1f;
+        float toleranceAllowed = .001f;
         private TowerComponent towerComponent;
 
         public TowerTargettingScript(GameObject gameObject) : base(gameObject)
@@ -28,7 +28,7 @@ namespace TowerDefense
 
         public override void OnCollision(GameObject other)
         {
-            if (currentTarget == null && other.ContainsComponent<Enemy>() && (other.GetComponent<EnemyTag>().enemyType == targetableEnemy || targetableEnemy == EnemyType.MIXED))
+            if (currentTarget == null && other.ContainsComponent<Enemy>())// && (other.GetComponent<EnemyTag>().enemyType == targetableEnemy || targetableEnemy == EnemyType.MIXED))
             {
                 currentTarget = other;
             }
@@ -50,12 +50,13 @@ namespace TowerDefense
 
             if (currentTarget != null)
             {
-                float angleBetween = CrowMath.AngleBetweenVectorsDegrees(transform.position, currentTarget.GetComponent<Transform>().position);
+                float angleBetween = CrowMath.AngleBetweenVectors(transform.position, currentTarget.GetComponent<Transform>().position);
 
+                if (angleBetween == -0) angleBetween = 360;
 
                 if (!CrowMath.Tolerance(angleBetween, 0.0f, toleranceAllowed))
                 {
-                    transform.rotation = CrowMath.Lerp(transform.rotation, transform.rotation + angleBetween, towerComponent.turnSpeed);
+                    transform.rotation = CrowMath.Lerp(transform.rotation, transform.rotation + angleBetween, towerComponent.turnSpeed * gameTime.ElapsedGameTime.Milliseconds / 1000f);
                 }
 
             }
