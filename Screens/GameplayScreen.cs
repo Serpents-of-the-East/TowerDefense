@@ -85,7 +85,7 @@ namespace TowerDefense
             systemManager.Add(TestEnemy.Create(Vector2.Zero));
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
-            Pathfinder.UpdatePathsAction.Invoke();
+            Pathfinder.CheckPathsFunc.Invoke();
         }
     }
 }

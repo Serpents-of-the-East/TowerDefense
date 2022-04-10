@@ -30,7 +30,8 @@ namespace TowerDefense
         public static Vector2 topEntrance = new Vector2(MathF.Floor(MAP_SIZE_IN_TOWERS / 2), 0);
         public static Vector2 bottomEntrance = new Vector2(MathF.Floor(MAP_SIZE_IN_TOWERS / 2), MAP_SIZE_IN_TOWERS - 1);
 
-        public static Action UpdatePathsAction;
+
+        public static Func<bool> CheckPathsFunc;
 
         /// <summary>
         /// Updates the path and returns if the current map is valid.
@@ -67,14 +68,13 @@ namespace TowerDefense
             List<Vector2> solvedHorizontal = SolveMaze(leftEntrance, rightEntrance);
             List<Vector2> solvedVertical = SolveMaze(topEntrance, bottomEntrance);
 
-            
+
             if (solvedHorizontal != null && solvedVertical != null)
             {
                 leftRightPath = solvedHorizontal;
                 upDownPath = solvedVertical;
             }
 
-            UpdatePathsAction.Invoke();
 
             return (updatedMap);
 
@@ -82,6 +82,8 @@ namespace TowerDefense
 
         public static bool UpdatePaths(Vector2 addedTowerPosition)
         {
+            
+
 
             bool[,] oldMap = new bool[MAP_SIZE_IN_TOWERS, MAP_SIZE_IN_TOWERS];
 
@@ -105,7 +107,19 @@ namespace TowerDefense
             List<Vector2> solvedHorizontal = SolveMaze(leftEntrance, rightEntrance);
             List<Vector2> solvedVertical = SolveMaze(topEntrance, bottomEntrance);
 
-            if (solvedHorizontal != null && solvedVertical != null)
+
+            bool allAreValid = true;
+            if (CheckPathsFunc != null)
+            {
+                allAreValid = CheckPathsFunc.Invoke();
+
+                if (!allAreValid)
+                {
+                    return false;
+                }
+            }
+
+                if (solvedHorizontal != null && solvedVertical != null && allAreValid)
             {
                 leftRightPath = solvedHorizontal;
                 upDownPath = solvedVertical;
@@ -115,7 +129,6 @@ namespace TowerDefense
                 gameMap = oldMap;
             }
 
-            UpdatePathsAction.Invoke();
 
             return (solvedVertical != null && solvedHorizontal != null);
         }
