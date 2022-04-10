@@ -13,7 +13,7 @@ namespace TowerDefense
 
         public PathSystem(SystemManager systemManager) : base(systemManager, typeof(Path), typeof(Transform))
         {
-            Pathfinder.UpdatePathsAction += UpdatePaths;
+            Pathfinder.CheckPathsFunc += CheckAndUpdateAllPaths;
         }
 
         protected override void Update(GameTime gameTime)
@@ -32,15 +32,26 @@ namespace TowerDefense
             }
         }
 
-        protected void UpdatePaths()
+        public bool CheckAndUpdateAllPaths()
         {
+
             foreach (uint id in m_gameObjects.Keys)
             {
                 Path path = m_gameObjects[id].GetComponent<Path>();
                 Transform transform = m_gameObjects[id].GetComponent<Transform>();
 
-                path.correctPath = Pathfinder.GetSolvedMazePath(transform.position, path.goal);
+                List<Vector2> correctPath = Pathfinder.GetSolvedMazePath(transform.position, path.goal);
+
+                if (correctPath == null) return false;
+                else
+                {
+                    path.correctPath = correctPath;
+                }
             }
+
+            return true;
         }
+
+
     }
 }
