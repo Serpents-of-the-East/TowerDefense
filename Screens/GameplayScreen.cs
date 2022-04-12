@@ -96,12 +96,14 @@ namespace TowerDefense
 
             systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
 
-            Pathfinder.CheckPathsFunc.Invoke();
             GameObject actualBasicEnemy = TestEnemy.Create(Vector2.Zero);
 
             systemManager.Add(actualBasicEnemy);
 
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(actualBasicEnemy));
+
+            systemManager.Add(PointsPrefab.CreatePointsPrefab());
+            Pathfinder.CheckPathsFunc.Invoke();
 
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 

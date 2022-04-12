@@ -148,7 +148,7 @@ namespace TowerDefense
                     if (Pathfinder.UpdatePaths(transform.position))
                     {
                         newTower.GetComponent<Transform>().position = transform.position;
-                        systemManager.Add(newTower);
+                        systemManager.DelayedAdd(newTower);
                         PointsManager.SubtractPlayerPoints(newTower.GetComponent<PointsComponent>().points);
                     }
 

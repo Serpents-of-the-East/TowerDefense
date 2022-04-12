@@ -17,7 +17,7 @@ namespace TowerDefense
             gameObject.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White));
             gameObject.Add(new Path() { goal = PathGoal.Right });
             gameObject.Add(new BasicEnemyTestScript(gameObject));
-
+            gameObject.Add(new Enemy());
             gameObject.Add(new EnemyHealth()
             {
                 health = 100f,
