@@ -25,7 +25,8 @@ namespace CrowEngineBase
         // Depth to render
         public int layerDepth { get; set; }
 
-        public AnimatedSprite(Texture2D spritesheet, int[] frameTiming, Vector2 singleFrameSize, int layerDepth=0)
+
+        public AnimatedSprite(Texture2D spritesheet, int[] frameTiming, Vector2 singleFrameSize, int layerDepth=0, bool HUDelement=false)
         {
             this.spritesheet = spritesheet;
             this.frameTiming = frameTiming;
@@ -33,6 +34,7 @@ namespace CrowEngineBase
             this.currentFrame = 0;
             this.currentTime = new TimeSpan();
             this.layerDepth = layerDepth;
+            this.HUDelement = HUDelement;
         }
     }
 }

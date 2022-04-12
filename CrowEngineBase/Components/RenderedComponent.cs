@@ -6,6 +6,6 @@ namespace CrowEngineBase
     /// </summary>
     public class RenderedComponent : Component
     {
-
+        public bool HUDelement { get; set; }
     }
 }
