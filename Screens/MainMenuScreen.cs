@@ -21,6 +21,8 @@ namespace TowerDefense
         private FontRenderer fontRenderer;
         private GameObject camera;
 
+        private KeyboardInput gameplayKeyboard;
+
 
         public MainMenuScreen(ScreenEnum screenEnum) : base(screenEnum)
         {
@@ -77,10 +79,14 @@ namespace TowerDefense
             Debug.WriteLine("Main Menu Screen was loaded");
             currentScreen = ScreenEnum.MainMenu;
             screenName = ScreenEnum.MainMenu;
+
+            InputPersistence.LoadSavedKeyboard(ref gameplayKeyboard);
         }
 
         public override void SetupGameObjects()
         {
+            gameplayKeyboard = GameplayKeyboardControls.Create();
+
             systemManager.Add(Controls.CreateControls());
             systemManager.Add(PlayGame.CreatePlayGame());
             systemManager.Add(Credits.CreateCredits());
