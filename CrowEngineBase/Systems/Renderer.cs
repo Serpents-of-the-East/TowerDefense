@@ -34,10 +34,22 @@ namespace CrowEngineBase
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             foreach (uint id in m_gameObjects.Keys)
-            {
-                // This is the old version using the center of the screen, the new uses the camera position
-                Vector2 distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - m_camera.GetComponent<Transform>().position;
-                //Vector2 distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
+            {                // This is the old version using the center of the screen, the new uses the camera position
+
+                RenderedComponent renderedComponent = m_gameObjects[id].GetComponent<RenderedComponent>();
+
+                Vector2 distanceFromCenter;
+
+                if (renderedComponent.HUDelement)
+                {
+                    distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - new Vector2(PhysicsEngine.PHYSICS_DIMENSION_WIDTH, PhysicsEngine.PHYSICS_DIMENSION_HEIGHT) / 2f;
+
+                }
+                else
+                {
+                    distanceFromCenter = m_gameObjects[id].GetComponent<Transform>().position - m_camera.GetComponent<Transform>().position;
+                }
+
                 Vector2 renderDistanceFromCenter = distanceFromCenter * m_scalingRatio;
                 Vector2 trueRenderPosition = renderDistanceFromCenter + m_centerOfScreen;
 
