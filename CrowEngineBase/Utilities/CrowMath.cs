@@ -16,18 +16,6 @@ namespace CrowEngineBase.Utilities
             return start + (end - start) * step;
         }
 
-        /// <summary>
-        /// This Lerp returns the about to step by, rather than the new value
-        /// </summary>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <param name="step"></param>
-        /// <returns></returns>
-        public static float LerpAmount(float start, float end, float step)
-        {
-            return (end - start) * step;
-        }
-
         public static bool Tolerance(float current, float target, float tolerance)
         {
             return MathF.Abs(current - target) < tolerance;
