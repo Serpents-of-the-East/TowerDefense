@@ -35,7 +35,7 @@ namespace TowerDefense
             currentLevelEnemiesSpawn.Add("flying", (TimeSpan.FromMilliseconds(10000), 5));
             this.systemManager = systemManager;
             currentSpawnLocation = SpawnLocation.Left;
-            spawnTransform = new Vector2(-2000, 0);
+            spawnTransform = new Vector2(1999, 0);
         }
 
         public void LevelUp()
@@ -57,11 +57,11 @@ namespace TowerDefense
                     break;
                 case (SpawnLocation.Right):
                     currentSpawnLocation = SpawnLocation.Down;
-                    spawnTransform = new Vector2(0, 2000);
+                    spawnTransform = new Vector2(0, 1999);
                     break;
                 case (SpawnLocation.Up):
                     currentSpawnLocation = SpawnLocation.Right;
-                    spawnTransform = new Vector2(2000, 0);
+                    spawnTransform = new Vector2(1999, 0);
                     break;
                 case (SpawnLocation.Down):
                     currentSpawnLocation = SpawnLocation.Left;
@@ -72,9 +72,6 @@ namespace TowerDefense
 
         public override void Update(GameTime gameTime)
         {
-
-
-
             if (currentLevelEnemiesSpawn["basic"].remainingSpawn > 0)
             {
                 if (currentLevelEnemiesSpawn["basic"].timeTillNextSpawn <= TimeSpan.Zero)
