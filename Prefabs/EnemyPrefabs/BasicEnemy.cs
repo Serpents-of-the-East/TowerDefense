@@ -13,17 +13,30 @@ namespace TowerDefense
             gameObject.Add(new Enemy());
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Transform(position, 0, Vector2.One));
-            gameObject.Add(new CircleCollider(5));
+            gameObject.Add(new CircleCollider(20));
             gameObject.Add(new EnemyTag(EnemyType.GROUND));
             gameObject.Add(new Sprite(ResourceManager.GetTexture("crow"), Color.White, 0));
+            gameObject.Add(new BasicEnemyTestScript(gameObject));
             gameObject.Add(new PointsComponent() { points = 20 });
-            //TODO: This is where we will declare our other prefabs like particle effects and points
+            gameObject.Add(new Path() { goal = PathGoal.Right });
 
 
-            
+            gameObject.Add(new EnemyHealth()
+            {
+                health = 100f,
+                maxHealth = 100f,
+                instantiateOnDeathObject = new List<GameObject>()
+                {
 
 
-            
+                }
+            });
+
+
+
+
+
+
             return gameObject;
         }
     }

@@ -23,12 +23,30 @@ namespace TowerDefense
                 Path path = m_gameObjects[id].GetComponent<Path>();
                 Transform transform = m_gameObjects[id].GetComponent<Transform>();
 
+                if (path.correctPath == null)
+                {
+                    Pathfinder.CheckPathsFunc.Invoke();
+                }
+
                 if (Vector2.DistanceSquared(transform.position, path.currentTarget) < MathF.Pow(distanceTolerance, 2) && path.correctPath.Count > 1) // we've reached our current goal
                 {
                     path.correctPath.RemoveAt(0);
                 }
                 path.currentTarget = Pathfinder.GridToTrueCoordinate(path.correctPath[0]);
 
+            }
+        }
+
+        protected override void Add(GameObject gameObject)
+        {
+            base.Add(gameObject);
+
+            if (m_gameObjects.ContainsKey(gameObject.id)) // if this was actually interested
+            {
+                Path path = gameObject.GetComponent<Path>();
+                Transform transform = gameObject.GetComponent<Transform>();
+                List<Vector2> correctPath = Pathfinder.GetSolvedMazePath(transform.position, path.goal);
+                path.correctPath = correctPath;
             }
         }
 
