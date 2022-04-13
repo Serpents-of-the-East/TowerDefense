@@ -23,6 +23,11 @@ namespace TowerDefense
                 Path path = m_gameObjects[id].GetComponent<Path>();
                 Transform transform = m_gameObjects[id].GetComponent<Transform>();
 
+                if (path.correctPath == null)
+                {
+                    Pathfinder.CheckPathsFunc.Invoke();
+                }
+
                 if (Vector2.DistanceSquared(transform.position, path.currentTarget) < MathF.Pow(distanceTolerance, 2) && path.correctPath.Count > 1) // we've reached our current goal
                 {
                     path.correctPath.RemoveAt(0);

@@ -6,7 +6,7 @@ namespace TowerDefense
 {
     public class TankyEnemy
     {
-        public static GameObject CreateTankyEnemy()
+        public static GameObject CreateTankyEnemy(Vector2 position)
         {
             GameObject gameObject = new GameObject();
             gameObject.Add(new Enemy() { speed = 0.5f } );
@@ -16,6 +16,7 @@ namespace TowerDefense
             gameObject.Add(new Sprite(ResourceManager.GetTexture("crow"), Color.White, 0));
             gameObject.Add(new EnemyHealth() { health = 200f });
             gameObject.Add(new PointsComponent() { points = 50 });
+            gameObject.Add(new Transform(position, 0, Vector2.One));
 
             // Should have a health component as well... This must be created.
 
