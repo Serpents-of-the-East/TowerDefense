@@ -133,13 +133,13 @@ namespace TowerDefense
                 switch (currentSelected)
                 {
                     case (1):
-                        newTower = BombTower.Create();
+                        newTower = BombTower.Create(systemManager);
                         break;
                     case (2):
-                        newTower = GuidedMissileTower.Create();
+                        newTower = GuidedMissileTower.Create(systemManager);
                         break;
                     case (3):
-                        newTower = RegularTower.Create();
+                        newTower = RegularTower.Create(systemManager);
                         break;
                 }
 

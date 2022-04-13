@@ -8,7 +8,7 @@ namespace TowerDefense
     {
 
 
-        public static GameObject Create()
+        public static GameObject Create(SystemManager systemManager)
         {
             GameObject gameObject = new GameObject();
 
@@ -21,7 +21,7 @@ namespace TowerDefense
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One));
             gameObject.Add(new EnemyTag(EnemyType.GROUND));
 
-            gameObject.Add(new TowerTargetingScript(gameObject));
+            gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Bomb, TimeSpan.FromMilliseconds(500), systemManager));
 
 
             return gameObject;
