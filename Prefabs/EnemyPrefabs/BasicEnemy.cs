@@ -19,7 +19,6 @@ namespace TowerDefense
             gameObject.Add(new BasicEnemyTestScript(gameObject));
             gameObject.Add(new PointsComponent() { points = 20 });
             gameObject.Add(new Path() { goal = PathGoal.Right });
-            Pathfinder.CheckPathsFunc.Invoke();
 
 
             gameObject.Add(new EnemyHealth()
