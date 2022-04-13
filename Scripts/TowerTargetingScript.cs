@@ -1,20 +1,21 @@
 ﻿using System;
 using CrowEngineBase;
 using CrowEngineBase.Utilities;
+using System.Diagnostics;
 
 
 using Microsoft.Xna.Framework;
 
 namespace TowerDefense
 {
-    public class TowerTargettingScript : ScriptBase
+    public class TowerTargetingScript : ScriptBase
     {
         private GameObject currentTarget;
         private EnemyType targetableEnemy;
         float toleranceAllowed = .001f;
         private TowerComponent towerComponent;
 
-        public TowerTargettingScript(GameObject gameObject) : base(gameObject)
+        public TowerTargetingScript(GameObject gameObject) : base(gameObject)
         {
 
         }
@@ -50,20 +51,34 @@ namespace TowerDefense
 
             if (currentTarget != null)
             {
-                float angleBetween = CrowMath.AngleBetweenVectors(transform.position, currentTarget.GetComponent<Transform>().position);
 
-                if (angleBetween == -0) angleBetween = 360;
+                
+                Vector2 targetVector = currentTarget.GetComponent<Transform>().position - transform.position;
 
-                if (!CrowMath.Tolerance(angleBetween, 0.0f, toleranceAllowed))
+                float targetAngle = MathF.Atan2(targetVector.Y, targetVector.X);
+
+                if (targetAngle < 0)
                 {
-                    transform.rotation = CrowMath.Lerp(transform.rotation, transform.rotation + angleBetween, towerComponent.turnSpeed * gameTime.ElapsedGameTime.Milliseconds / 1000f);
+                    targetAngle += 2 * MathF.PI;
                 }
 
-            }
-            // speed * elapsedTime.mill / 1000f for lerp
-            // Angle currently, angle should go to
+                if (CrowMath.Tolerance(transform.rotation, targetAngle, toleranceAllowed))
+                {
+                    return;
+                }
 
-            // transform.rotation = 
+                transform.rotation = CrowMath.Lerp(transform.rotation, targetAngle, towerComponent.turnSpeed * (gameTime.ElapsedGameTime.Milliseconds / 1000f));
+
+                if (transform.rotation < 0)
+                {
+                    transform.rotation += MathF.PI;
+                }
+
+                transform.rotation %= 2*MathF.PI;
+
+                
+
+            } 
 
 
         }
