@@ -12,7 +12,9 @@ namespace TowerDefense
         {
             speed = 1.0f;
             maxLifetime = TimeSpan.FromMilliseconds(5000);
-            damage = 1.3f;
+            damage = 0.0f;
+
+            
         }
 
     }

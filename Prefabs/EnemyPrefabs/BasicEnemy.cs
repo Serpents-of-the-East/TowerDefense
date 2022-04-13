@@ -7,7 +7,7 @@ namespace TowerDefense
 {
     public static class BasicEnemy
     {
-        public static GameObject CreateBasicEnemy(Vector2 position)
+        public static GameObject CreateBasicEnemy(Vector2 position, SystemManager systemManager)
         {
             GameObject gameObject = new GameObject();
             gameObject.Add(new Enemy()); // SPEED WAS CHANGED
@@ -18,7 +18,7 @@ namespace TowerDefense
 
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("goblin"), new int[] { 250, 250, 250, 250, 250, 250, 250, 250 }, Vector2.One * 64));
 
-            gameObject.Add(new BasicEnemyTestScript(gameObject, 200));
+            gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager, 200));
             gameObject.Add(new PointsComponent() { points = 20 });
             gameObject.Add(new Path() { goal = PathGoal.Right });
 

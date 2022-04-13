@@ -10,7 +10,6 @@ namespace TowerDefense
         {
             GameObject gameObject = new GameObject();
 
-            gameObject.Add(new Bullet());
             gameObject.Add(new TowerComponent() { turnSpeed = 3 });
             gameObject.Add(new Sprite(ResourceManager.GetTexture("regularTower"), Color.White, 0));
             gameObject.Add(new CircleCollider(Pathfinder.SIZE_PER_TOWER*2));

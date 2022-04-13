@@ -68,7 +68,7 @@ namespace TowerDefense
         {
             GameObject spawnedObject;
 
-            spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position);
+            spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject.GetComponent<TowerComponent>());
 
             Debug.WriteLine("Shooting");
 

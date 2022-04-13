@@ -10,7 +10,7 @@ namespace TowerDefense
     {
         private static float SPEED = 400;
 
-        public static GameObject Create(Vector2 position, Vector2 target)
+        public static GameObject Create(Vector2 position, Vector2 target, TowerComponent towerComponent)
         {
             GameObject gameObject = new GameObject();
 
@@ -25,11 +25,12 @@ namespace TowerDefense
 
             gameObject.Add(new CircleCollider(20));
 
-            gameObject.Add(new Bullet() { speed = SPEED });
+            gameObject.Add(new Bullet() { speed = SPEED, damage = towerComponent.damage[towerComponent.upgradeLevel] });
 
             gameObject.Add(new Sprite(ResourceManager.GetTexture("empty"), Color.Red));
 
             gameObject.Add(BombTrailParticles.Create());
+
 
             return gameObject;
         }
