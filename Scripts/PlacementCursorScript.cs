@@ -55,11 +55,12 @@ namespace TowerDefense
                 {
                     if (Pathfinder.SellTower(transform.position))
                     {
-                        if (selectedTower.ContainsComponent<PointsComponent>())
+                        if (selectedTower.GetComponent<TowerColliderComponent>().parentAttach.ContainsComponent<PointsComponent>())
                         {
-                            PointsManager.AddPlayerPoints((int) (selectedTower.GetComponent<PointsComponent>().points * 0.8f));
+                            PointsManager.AddPlayerPoints((int) (selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<PointsComponent>().points * 0.8f));
                             ParticleEmitter.EmitSellParticles(selectedTower.GetComponent<Transform>().position); // THIS IS THE ORIGINAL, CHANGE BACK AFTER
                         }
+                        systemManager.Remove(selectedTower.GetComponent<TowerColliderComponent>().parentAttach.id);
                         systemManager.Remove(selectedTower.id);
                         selectedTower = null;
                     }
@@ -70,20 +71,20 @@ namespace TowerDefense
 
         }
 
-
-        public override void OnCollisionStart(GameObject other)
+        public override void OnCollision(GameObject other)
         {
-            if (selectedTower == null && other.ContainsComponent<TowerComponent>())
+            if (selectedTower == null && other.ContainsComponent<TowerColliderComponent>())
             {
                 selectedTower = other;
+                selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<Sprite>().color = Color.Red;
             }
-
         }
 
         public override void OnCollisionEnd(GameObject other)
         {
             if (selectedTower == other)
             {
+                selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<Sprite>().color = Color.White;
                 selectedTower = null;
             }
         }
