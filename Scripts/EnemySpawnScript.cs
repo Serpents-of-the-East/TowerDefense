@@ -35,7 +35,7 @@ namespace TowerDefense
             currentLevelEnemiesSpawn.Add("flying", (TimeSpan.FromMilliseconds(10000), 5));
             this.systemManager = systemManager;
             currentSpawnLocation = SpawnLocation.Left;
-            spawnTransform = new Vector2(1999, 0);
+            spawnTransform = new Vector2(-2000, 0);
         }
 
         public void LevelUp()
