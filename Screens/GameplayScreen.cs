@@ -69,9 +69,9 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/goblin", "goblin");
             ResourceManager.RegisterTexture("Textures/orc", "orc");
             ResourceManager.RegisterTexture("Textures/enemy-death-particle", "enemy-death-particle");
-
-
-
+            ResourceManager.RegisterTexture("Textures/bomb-particle-trail", "bomb-particle-trail");
+            ResourceManager.RegisterTexture("Textures/missile-explosion-particle", "missile-explosion-particle");
+            ResourceManager.RegisterTexture("Textures/bomb-particle-explosion", "bomb-particle-explosion");
 
 
             camera = CameraPrefab.Create();
@@ -99,6 +99,8 @@ namespace TowerDefense
             systemManager.Add(BackgroundPrefab.Create());
             GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One);
             systemManager.Add(basicEnemy);
+
+            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(basicEnemy));
 
             
 

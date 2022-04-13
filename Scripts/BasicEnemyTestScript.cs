@@ -13,8 +13,9 @@ namespace TowerDefense
         private Transform transform;
         private Path path;
 
-        public BasicEnemyTestScript(GameObject gameObject) : base(gameObject)
+        public BasicEnemyTestScript(GameObject gameObject, float maxSpeed = 50) : base(gameObject)
         {
+            this.maxSpeed = maxSpeed;
         }
 
         public override void Start()
