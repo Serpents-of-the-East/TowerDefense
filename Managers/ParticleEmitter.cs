@@ -29,6 +29,15 @@ namespace TowerDefense
             systemManager.Add(SellParticles.CreateSellParticles(position));
         }
 
+        public static void EmitEnemyDeathParticles(Vector2 position)
+        {
+            if (systemManager == null)
+            {
+                throw new Exception("System Manager not set to a reference");
+            }
+            systemManager.Add(EnemyDeathParticles.Create(position));
+        }
+
         //TODO: Keep adding more as we get more particles
 
     }

@@ -68,6 +68,7 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/archer-tower0", "regularTower");
             ResourceManager.RegisterTexture("Textures/goblin", "goblin");
             ResourceManager.RegisterTexture("Textures/orc", "orc");
+            ResourceManager.RegisterTexture("Textures/enemy-death-particle", "enemy-death-particle");
 
 
 
