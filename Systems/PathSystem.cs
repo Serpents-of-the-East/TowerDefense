@@ -3,6 +3,8 @@
 using System.Collections.Generic;
 
 using CrowEngineBase;
+using CrowEngineBase.Utilities;
+
 using Microsoft.Xna.Framework;
 
 namespace TowerDefense
@@ -10,6 +12,8 @@ namespace TowerDefense
     public class PathSystem : CrowEngineBase.System
     {
         public static float distanceTolerance = 10;
+
+        public static float ENEMY_TURN_SPEED = 2;
 
         public PathSystem(SystemManager systemManager) : base(systemManager, typeof(Path), typeof(Transform))
         {
@@ -33,6 +37,9 @@ namespace TowerDefense
                     path.correctPath.RemoveAt(0);
                 }
                 path.currentTarget = Pathfinder.GridToTrueCoordinate(path.correctPath[0]);
+
+                Vector2 direction = path.currentTarget - transform.position;
+                transform.rotation = CrowMath.Lerp(transform.rotation, MathF.Atan2(direction.Y, direction.X), ENEMY_TURN_SPEED * (gameTime.ElapsedGameTime.Milliseconds / 1000f));
 
             }
         }
