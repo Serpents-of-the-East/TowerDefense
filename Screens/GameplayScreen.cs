@@ -107,13 +107,12 @@ namespace TowerDefense
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
             GameObject testHUD = new GameObject();
-            testHUD.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White));
+            testHUD.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White, HUDelement:true));
             testHUD.Add(new Transform(Vector2.One * 500, 0, Vector2.One));
-
             systemManager.Add(EnemySpawner.CreateEnemySpawner(systemManager));
 
             Pathfinder.CheckPathsFunc.Invoke();
-
+            systemManager.Add(testHUD);
         }
     }
 }
