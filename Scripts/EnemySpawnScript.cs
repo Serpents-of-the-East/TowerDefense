@@ -21,6 +21,7 @@ namespace TowerDefense
         Dictionary<string, (TimeSpan timeTillNextSpawn, int remainingSpawn)> currentLevelEnemiesSpawn;
         SystemManager systemManager;
         SpawnLocation currentSpawnLocation;
+        Vector2 spawnTransform;
 
         public EnemySpawnScript(GameObject gameObject, SystemManager systemManager) : base(gameObject)
         {
@@ -34,6 +35,7 @@ namespace TowerDefense
             currentLevelEnemiesSpawn.Add("flying", (TimeSpan.FromMilliseconds(10000), 5));
             this.systemManager = systemManager;
             currentSpawnLocation = SpawnLocation.Left;
+            spawnTransform = new Vector2(-2000, 0);
         }
 
         public void LevelUp()
@@ -45,16 +47,39 @@ namespace TowerDefense
             currentLevelEnemiesSpawn["basic"] = enemiesToSpawn["basic"];
             currentLevelEnemiesSpawn["heavy"] = enemiesToSpawn["heavy"];
             currentLevelEnemiesSpawn["flying"] = enemiesToSpawn["flying"];
+
+
+            switch (currentSpawnLocation)
+            {
+                case (SpawnLocation.Left):
+                    currentSpawnLocation = SpawnLocation.Up;
+                    spawnTransform = new Vector2(0, -2000);
+                    break;
+                case (SpawnLocation.Right):
+                    currentSpawnLocation = SpawnLocation.Down;
+                    spawnTransform = new Vector2(0, 2000);
+                    break;
+                case (SpawnLocation.Up):
+                    currentSpawnLocation = SpawnLocation.Right;
+                    spawnTransform = new Vector2(2000, 0);
+                    break;
+                case (SpawnLocation.Down):
+                    currentSpawnLocation = SpawnLocation.Left;
+                    spawnTransform = new Vector2(-2000, 0);
+                    break;
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
 
+
+
             if (currentLevelEnemiesSpawn["basic"].remainingSpawn > 0)
             {
                 if (currentLevelEnemiesSpawn["basic"].timeTillNextSpawn <= TimeSpan.Zero)
                 {
-                    systemManager.DelayedAdd(BasicEnemy.CreateBasicEnemy(Vector2.One * 100));
+                    systemManager.DelayedAdd(BasicEnemy.CreateBasicEnemy(spawnTransform));
                     currentLevelEnemiesSpawn["basic"] = (enemiesToSpawn["basic"].timeToSpawn, currentLevelEnemiesSpawn["basic"].remainingSpawn - 1);
                 }
                 else
@@ -67,7 +92,7 @@ namespace TowerDefense
             {
                 if (currentLevelEnemiesSpawn["heavy"].timeTillNextSpawn <= TimeSpan.Zero)
                 {
-                    systemManager.DelayedAdd(TankyEnemy.CreateTankyEnemy(Vector2.One));
+                    systemManager.DelayedAdd(TankyEnemy.CreateTankyEnemy(spawnTransform));
 
                     currentLevelEnemiesSpawn["heavy"] = (enemiesToSpawn["heavy"].timeToSpawn, currentLevelEnemiesSpawn["heavy"].remainingSpawn - 1);
                 }
@@ -82,7 +107,7 @@ namespace TowerDefense
             {
                 if (currentLevelEnemiesSpawn["flying"].timeTillNextSpawn <= TimeSpan.Zero)
                 {
-                    systemManager.DelayedAdd(FlyingEnemy.CreateFlyingEnemy(Vector2.One));
+                    systemManager.DelayedAdd(FlyingEnemy.CreateFlyingEnemy(spawnTransform));
                     currentLevelEnemiesSpawn["flying"] = (enemiesToSpawn["flying"].timeToSpawn, currentLevelEnemiesSpawn["flying"].remainingSpawn - 1);
                 }
                 else
