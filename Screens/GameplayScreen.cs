@@ -97,21 +97,21 @@ namespace TowerDefense
         public override void SetupGameObjects()
         {
             systemManager.Add(BackgroundPrefab.Create());
-            GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One);
+            GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One, systemManager);
             systemManager.Add(basicEnemy);
 
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(basicEnemy));
 
             
 
-            GameObject tankyEnemyTest = TankyEnemy.CreateTankyEnemy(new Vector2(-100, 0));
+            GameObject tankyEnemyTest = TankyEnemy.CreateTankyEnemy(new Vector2(-100, 0), systemManager);
             systemManager.Add(tankyEnemyTest);
 
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(tankyEnemyTest));
 
             systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
 
-            GameObject actualBasicEnemy = TestEnemy.Create(Vector2.Zero);
+            GameObject actualBasicEnemy = TestEnemy.Create(Vector2.Zero, systemManager);
 
             systemManager.Add(actualBasicEnemy);
 

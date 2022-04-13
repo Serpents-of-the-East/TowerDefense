@@ -8,7 +8,7 @@ namespace TowerDefense
 {
     public static class TestEnemy
     {
-        public static GameObject Create(Vector2 startPosition)
+        public static GameObject Create(Vector2 startPosition, SystemManager systemManager)
         {
             GameObject gameObject = new GameObject();
             gameObject.Add(new Transform(startPosition, 0, Vector2.One));
@@ -16,7 +16,7 @@ namespace TowerDefense
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White));
             gameObject.Add(new Path() { goal = PathGoal.Right });
-            gameObject.Add(new BasicEnemyTestScript(gameObject));
+            gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager));
             gameObject.Add(new Enemy());
             gameObject.Add(new EnemyHealth()
             {

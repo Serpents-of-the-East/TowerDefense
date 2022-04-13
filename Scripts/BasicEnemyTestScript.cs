@@ -12,10 +12,12 @@ namespace TowerDefense
         private float maxSpeed = 50;
         private Transform transform;
         private Path path;
+        SystemManager systemManager;
 
-        public BasicEnemyTestScript(GameObject gameObject, float maxSpeed = 50) : base(gameObject)
+        public BasicEnemyTestScript(GameObject gameObject, SystemManager systemManager, float maxSpeed = 50) : base(gameObject)
         {
             this.maxSpeed = maxSpeed;
+            this.systemManager = systemManager;
         }
 
         public override void Start()
@@ -37,5 +39,18 @@ namespace TowerDefense
 
             rb.velocity = heading * maxSpeed;
         }
+
+        public override void OnCollision(GameObject other)
+        {
+            if (other.ContainsComponent<Bullet>())
+            {
+                this.gameObject.GetComponent<EnemyHealth>().health -= other.GetComponent<Bullet>().damage;
+                systemManager.Remove(other.id);
+            }
+
+
+        }
+
+
     }
 }

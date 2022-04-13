@@ -76,7 +76,7 @@ namespace TowerDefense
             {
                 if (currentLevelEnemiesSpawn["basic"].timeTillNextSpawn <= TimeSpan.Zero)
                 {
-                    systemManager.DelayedAdd(BasicEnemy.CreateBasicEnemy(spawnTransform));
+                    systemManager.DelayedAdd(BasicEnemy.CreateBasicEnemy(spawnTransform, systemManager));
                     currentLevelEnemiesSpawn["basic"] = (enemiesToSpawn["basic"].timeToSpawn, currentLevelEnemiesSpawn["basic"].remainingSpawn - 1);
                 }
                 else
@@ -89,7 +89,7 @@ namespace TowerDefense
             {
                 if (currentLevelEnemiesSpawn["heavy"].timeTillNextSpawn <= TimeSpan.Zero)
                 {
-                    systemManager.DelayedAdd(TankyEnemy.CreateTankyEnemy(spawnTransform));
+                    systemManager.DelayedAdd(TankyEnemy.CreateTankyEnemy(spawnTransform, systemManager));
 
                     currentLevelEnemiesSpawn["heavy"] = (enemiesToSpawn["heavy"].timeToSpawn, currentLevelEnemiesSpawn["heavy"].remainingSpawn - 1);
                 }
