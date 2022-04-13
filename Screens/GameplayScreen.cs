@@ -33,6 +33,7 @@ namespace TowerDefense
             physics = new PhysicsEngine(systemManager);
             scriptSystem = new ScriptSystem(systemManager);
             inputSystem = new InputSystem(systemManager);
+            animationSystem = new AnimationSystem(systemManager);
             pathSystem = new PathSystem(systemManager);
             controlLoaderSystem = new ControlLoaderSystem(systemManager);
             TextureCreation.device = graphicsDevice;
@@ -64,8 +65,9 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/empty", "empty");
             ResourceManager.RegisterTexture("circle", "bombTower");
             ResourceManager.RegisterTexture("fire", "guidedTower");
-            ResourceManager.RegisterTexture("crow", "regularTower");
-
+            ResourceManager.RegisterTexture("Textures/archer-tower0", "regularTower");
+            ResourceManager.RegisterTexture("Textures/goblin", "goblin");
+            ResourceManager.RegisterTexture("Textures/orc", "orc");
 
 
 
@@ -74,6 +76,9 @@ namespace TowerDefense
             camera = CameraPrefab.Create();
             camera.GetComponent<Transform>().position = Vector2.Zero;
             renderer = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
+
+            renderer.debugMode = false;
+
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
 
@@ -94,6 +99,13 @@ namespace TowerDefense
             GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One);
             systemManager.Add(basicEnemy);
 
+            
+
+            GameObject tankyEnemyTest = TankyEnemy.CreateTankyEnemy(new Vector2(-100, 0));
+            systemManager.Add(tankyEnemyTest);
+
+            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(tankyEnemyTest));
+
             systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
 
             GameObject actualBasicEnemy = TestEnemy.Create(Vector2.Zero);
@@ -106,13 +118,9 @@ namespace TowerDefense
 
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
-            GameObject testHUD = new GameObject();
-            testHUD.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White, HUDelement:true));
-            testHUD.Add(new Transform(Vector2.One * 500, 0, Vector2.One));
             systemManager.Add(EnemySpawner.CreateEnemySpawner(systemManager));
 
             Pathfinder.CheckPathsFunc.Invoke();
-            systemManager.Add(testHUD);
         }
     }
 }
