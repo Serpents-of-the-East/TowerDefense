@@ -6,7 +6,7 @@ namespace TowerDefense
 {
     public static class GuidedMissileTower
     {
-        public static GameObject Create()
+        public static GameObject Create(SystemManager systemManager)
         {
             GameObject gameObject = new GameObject();
 
@@ -19,7 +19,7 @@ namespace TowerDefense
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One));
             gameObject.Add(new EnemyTag(EnemyType.AIR));
 
-            gameObject.Add(new TowerTargetingScript(gameObject));
+            gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Missile, TimeSpan.FromMilliseconds(1000), systemManager));
 
 
             return gameObject;

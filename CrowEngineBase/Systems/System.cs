@@ -81,10 +81,10 @@ namespace CrowEngineBase
         /// <param name="gameObject">The game object to add</param>
         protected virtual void Add(GameObject gameObject)
         {
-            Debug.WriteLine($"Checking object {gameObject} against system {GetType()}");
+            //Debug.WriteLine($"Checking object {gameObject} against system {GetType()}");
             if (IsInterested(gameObject))
             {
-                Debug.WriteLine($"Added gameobject {gameObject} to {GetType()}");
+                //Debug.WriteLine($"Added gameobject {gameObject} to {GetType()}");
                 m_gameObjects.Add(gameObject.id, gameObject);
             }
         }

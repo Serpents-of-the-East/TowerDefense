@@ -11,7 +11,7 @@ namespace TowerDefense
         public Bullet()
         {
             speed = 1.0f;
-            maxLifetime = new TimeSpan(0, 0, 5);
+            maxLifetime = TimeSpan.FromMilliseconds(5000);
             damage = 1.3f;
         }
 

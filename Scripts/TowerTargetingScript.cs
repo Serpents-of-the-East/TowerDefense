@@ -10,20 +10,40 @@ namespace TowerDefense
 {
     public class TowerTargetingScript : ScriptBase
     {
+        public enum BulletType
+        {
+            Basic,
+            Bomb,
+            Missile,
+        }
+
         private GameObject currentTarget;
         private EnemyType targetableEnemy;
-        float toleranceAllowed = .001f;
+        float toleranceAllowed = .1f;
         private TowerComponent towerComponent;
 
-        public TowerTargetingScript(GameObject gameObject) : base(gameObject)
-        {
+        private Transform transform;
 
+        private BulletType bulletType;
+        private TimeSpan timeBetweenShots;
+        private TimeSpan currentTime;
+
+        private SystemManager systemManager;
+        
+
+        public TowerTargetingScript(GameObject gameObject, BulletType bulletType, TimeSpan timeBetweenShots, SystemManager systemManager) : base(gameObject)
+        {
+            this.bulletType = bulletType;
+            this.timeBetweenShots = timeBetweenShots;
+            this.currentTime = new TimeSpan();
+            this.systemManager = systemManager;
         }
 
         public override void Start()
         {
             targetableEnemy = gameObject.GetComponent<EnemyTag>().enemyType;
             towerComponent = gameObject.GetComponent<TowerComponent>();
+            transform = gameObject.GetComponent<Transform>();
 
         }
 
@@ -44,8 +64,25 @@ namespace TowerDefense
             }
         }
 
+        private void Shoot()
+        {
+            GameObject spawnedObject;
+
+            spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position);
+
+            Debug.WriteLine("Shooting");
+
+            systemManager.DelayedAdd(spawnedObject);
+            
+        }
+
         public override void Update(GameTime gameTime)
         {
+
+            if (currentTime > TimeSpan.Zero)
+            {
+                currentTime -= gameTime.ElapsedGameTime;
+            }
 
             Transform transform = gameObject.GetComponent<Transform>();
 
@@ -64,6 +101,11 @@ namespace TowerDefense
 
                 if (CrowMath.Tolerance(transform.rotation, targetAngle, toleranceAllowed))
                 {
+                    if (currentTime <= TimeSpan.Zero)
+                    {
+                        Shoot();
+                        currentTime += timeBetweenShots;
+                    }
                     return;
                 }
 
