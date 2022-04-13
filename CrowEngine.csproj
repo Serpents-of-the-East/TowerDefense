@@ -62,6 +62,5 @@
     <Folder Include="Screens\" />
     <Folder Include="Prefabs\CreditsPrefabs\" />
     <Folder Include="Prefabs\ControlsPrefabs\" />
-    <Folder Include="Prefabs\ParticlePrefabs\" />
   </ItemGroup>
 </Project>

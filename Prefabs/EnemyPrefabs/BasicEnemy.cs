@@ -10,7 +10,7 @@ namespace TowerDefense
         public static GameObject CreateBasicEnemy(Vector2 position)
         {
             GameObject gameObject = new GameObject();
-            gameObject.Add(new Enemy());
+            gameObject.Add(new Enemy()); // SPEED WAS CHANGED
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Transform(position, 0, Vector2.One * 3));
             gameObject.Add(new CircleCollider(20));
@@ -18,7 +18,7 @@ namespace TowerDefense
 
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("goblin"), new int[] { 250, 250, 250, 250, 250, 250, 250, 250 }, Vector2.One * 64));
 
-            gameObject.Add(new BasicEnemyTestScript(gameObject));
+            gameObject.Add(new BasicEnemyTestScript(gameObject, 200));
             gameObject.Add(new PointsComponent() { points = 20 });
             gameObject.Add(new Path() { goal = PathGoal.Right });
 
@@ -29,14 +29,10 @@ namespace TowerDefense
                 maxHealth = 100f,
                 instantiateOnDeathObject = new List<GameObject>()
                 {
-
+                    EnemyDeathParticles.Create(Vector2.Zero),
 
                 }
-            });
-
-
-
-
+            }) ;
 
 
             return gameObject;
