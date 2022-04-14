@@ -46,6 +46,15 @@ namespace CrowEngineBase
 
 
         /// <summary>
+        /// The arc is defined in degrees with 0 being aligned with the gameobject's heading
+        /// Defaults to 0, 360, which was the old behavior
+        /// </summary>
+        public Vector2 emissionArc { get; set; }
+
+
+        public bool isEmitting { get; set; }
+
+        /// <summary>
         /// The overall time that the system will emit particles. Leave null for unlimited time
         /// </summary>
         public TimeSpan maxSystemLifetime { get; set; }
@@ -81,6 +90,8 @@ namespace CrowEngineBase
             rate = new TimeSpan();
             renderDepth = 0;
             random = new Utilities.CrowRandom();
+            emissionArc = new Vector2(0, 360);
+            isEmitting = true;
         }
     }
 

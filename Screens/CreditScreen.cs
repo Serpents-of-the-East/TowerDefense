@@ -31,7 +31,7 @@ namespace TowerDefense
             inputSystem = new InputSystem(systemManager);
             scriptSystem = new ScriptSystem(systemManager);
             camera = new GameObject();
-            camera.Add(new Transform(new Vector2(500, 500), 0, Vector2.One));
+            camera.Add(new Transform(new Vector2(0, 0), 0, Vector2.One));
             particleSystem = new ParticleSystem(systemManager);
 
 

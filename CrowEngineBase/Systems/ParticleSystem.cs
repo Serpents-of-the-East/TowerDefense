@@ -51,15 +51,33 @@ namespace CrowEngineBase
 
                         while (particleGroup.currentTime > particleGroup.rate)
                         {
-                            SingleParticle singleParticle = new SingleParticle();
-                            singleParticle.lifeTime = particleGroup.maxLifeTime;
-                            singleParticle.position = new Vector2((float)particleGroup.random.NextGaussian(particleTransform.position.X, particleGroup.emissionArea.X), (float)particleGroup.random.NextGaussian(particleTransform.position.Y, particleGroup.emissionArea.Y));
-                            singleParticle.rotation = particleGroup.random.NextRange(0, 360);
-                            singleParticle.scale = particleGroup.random.NextRange(particleGroup.minScale, particleGroup.maxScale);
-                            singleParticle.velocity = particleGroup.random.NextCircleVector() * particleGroup.random.NextRange(particleGroup.minSpeed, particleGroup.maxSpeed);
                             particleGroup.currentTime -= particleGroup.rate;
 
-                            particleGroup.particles.Insert(0, singleParticle);
+                            if (particleGroup.isEmitting)
+                            {
+                                SingleParticle singleParticle = new SingleParticle();
+                                singleParticle.lifeTime = particleGroup.maxLifeTime;
+                                singleParticle.position = new Vector2((float)particleGroup.random.NextGaussian(particleTransform.position.X, particleGroup.emissionArea.X), (float)particleGroup.random.NextGaussian(particleTransform.position.Y, particleGroup.emissionArea.Y));
+                                singleParticle.rotation = particleGroup.random.NextRange(0, 360);
+                                singleParticle.scale = particleGroup.random.NextRange(particleGroup.minScale, particleGroup.maxScale);
+
+                                float emittedRotation = particleTransform.rotation; // start with the transform's rotation
+
+                                // Next we need to modify the rotation using the bounds
+
+                                float rotationModification = particleGroup.random.NextRange(particleGroup.emissionArc.X, particleGroup.emissionArc.Y);
+
+                                emittedRotation +=  (MathF.PI / 180) * rotationModification;
+
+                                Vector2 particleDirection = new Vector2(MathF.Cos(emittedRotation), MathF.Sin(emittedRotation));
+
+                                singleParticle.velocity = particleDirection * particleGroup.random.NextRange(particleGroup.minSpeed, particleGroup.maxSpeed);
+
+
+
+
+                                particleGroup.particles.Insert(0, singleParticle);
+                            }
                         }
                     }
 
