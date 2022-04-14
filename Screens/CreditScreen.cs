@@ -79,28 +79,6 @@ namespace TowerDefense
             systemManager.Add(RyanAnderson.CreateRyanAnderson());
             systemManager.Add(TaylorAnderson.CreateTaylorAnderson());
             systemManager.Add(CreditsKeyboard.CreateCreditsKeyboard(SetCurrentScreen));
-
-
-            // Temporary
-
-            GameObject testParticles = new GameObject();
-
-            Particle particle = new Particle(ResourceManager.GetTexture("fire"));
-
-            testParticles.Add(new Sprite(ResourceManager.GetTexture("fire"), Color.White));
-
-            particle.maxLifeTime = TimeSpan.FromMilliseconds(2000);
-            particle.maxSpeed = 100;
-            particle.emissionArc = new Vector2(-45, 45);
-            particle.rate = TimeSpan.FromMilliseconds(10);
-            particle.minScale = 0.5f;
-            particle.maxScale = 1;
-            particle.maxSystemLifetime = TimeSpan.MaxValue;
-
-            testParticles.Add(particle);
-            testParticles.Add(new Transform(Vector2.Zero, 0, Vector2.One));
-
-            systemManager.Add(testParticles);
         }
     }
 }
