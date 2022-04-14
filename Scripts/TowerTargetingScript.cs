@@ -17,9 +17,9 @@ namespace TowerDefense
             Missile,
         }
 
-        private GameObject currentTarget;
+        public GameObject currentTarget;
         private EnemyType targetableEnemy;
-        float toleranceAllowed = .1f;
+        float toleranceAllowed = .3f;
         private TowerComponent towerComponent;
 
         private Transform transform;
@@ -68,16 +68,18 @@ namespace TowerDefense
         {
             GameObject spawnedObject;
 
-            spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject.GetComponent<TowerComponent>());
-
-            Debug.WriteLine("Shooting");
-
+            spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject);
             systemManager.DelayedAdd(spawnedObject);
             
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (currentTarget != null && !systemManager.gameObjectsDictionary.ContainsKey(currentTarget.id))
+            {
+                currentTarget = null;
+            }
+
 
             if (currentTime > TimeSpan.Zero)
             {
@@ -88,8 +90,6 @@ namespace TowerDefense
 
             if (currentTarget != null)
             {
-
-                
                 Vector2 targetVector = currentTarget.GetComponent<Transform>().position - transform.position;
 
                 float targetAngle = MathF.Atan2(targetVector.Y, targetVector.X);

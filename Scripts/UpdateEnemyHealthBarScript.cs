@@ -13,12 +13,13 @@ namespace TowerDefense
         Sprite sprite;
 
         GameObject parent;
-
+        SystemManager systemManager;
         float lastFrameHealth;
 
-        public UpdateEnemyHealthBarScript(GameObject gameObject, GameObject parent) : base(gameObject)
+        public UpdateEnemyHealthBarScript(GameObject gameObject, GameObject parent, SystemManager systemManager) : base(gameObject)
         {
             this.parent = parent;
+            this.systemManager = systemManager;
         }
 
         public override void Start()
@@ -38,6 +39,11 @@ namespace TowerDefense
             if (currentHealth != lastFrameHealth)
             {
                 sprite.sprite = TextureCreation.CreateTexture((int) ((currentHealth / enemyHealth.maxHealth) * enemyHealth.maxHealth), (int)(enemyHealth.maxHealth), 10, pixel => Color.Green, pixel => Color.Red);
+            }
+
+            if (currentHealth <= 0.0f)
+            {
+                systemManager.DelayedRemove(gameObject);
             }
 
 

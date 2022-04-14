@@ -15,6 +15,7 @@ namespace CrowEngineBase
         public event Action<uint> RemoveGameObject;
         public event Action<GameTime> UpdateSystem;
         private Queue<GameObject> safeAddedObjects = new Queue<GameObject>();
+        private Queue<uint> safeToRemoveObjects = new Queue<uint>();
 
 
         public Dictionary<uint, GameObject> gameObjectsDictionary = new Dictionary<uint, GameObject>();
@@ -25,13 +26,14 @@ namespace CrowEngineBase
         /// <param name="gameObject"></param>
         public void Add(GameObject gameObject)
         {
-            AddGameObject?.Invoke(gameObject);
             gameObjectsDictionary.Add(gameObject.id, gameObject);
+            AddGameObject?.Invoke(gameObject);
         }
 
         public void Remove(uint id)
         {
             RemoveGameObject?.Invoke(id);
+            gameObjectsDictionary.Remove(id);
         }
 
         public void Update(GameTime gameTime)
@@ -41,6 +43,12 @@ namespace CrowEngineBase
             while (safeAddedObjects.Count > 0)
             {
                 Add(safeAddedObjects.Dequeue());
+            }
+            while (safeToRemoveObjects.Count > 0)
+            {
+                uint idToRemove = safeToRemoveObjects.Dequeue();
+                gameObjectsDictionary.Remove(idToRemove);
+                Remove(idToRemove);
             }
         }
 
@@ -52,5 +60,14 @@ namespace CrowEngineBase
         {
             safeAddedObjects.Enqueue(gameObject);
         }
+
+        /// <summary>
+        /// Delay removes a gameobject at the END of an update frame.
+        /// </summary>
+        public void DelayedRemove(GameObject gameObject)
+        {
+            safeToRemoveObjects.Enqueue(gameObject.id);
+        }
+
     }
 }

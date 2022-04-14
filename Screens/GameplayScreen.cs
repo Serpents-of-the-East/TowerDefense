@@ -100,14 +100,14 @@ namespace TowerDefense
             GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One, systemManager);
             systemManager.Add(basicEnemy);
 
-            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(basicEnemy));
+            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(basicEnemy, systemManager));
 
             
 
             GameObject tankyEnemyTest = TankyEnemy.CreateTankyEnemy(new Vector2(-100, 0), systemManager);
             systemManager.Add(tankyEnemyTest);
 
-            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(tankyEnemyTest));
+            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(tankyEnemyTest, systemManager));
 
             systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
 
@@ -115,7 +115,7 @@ namespace TowerDefense
 
             systemManager.Add(actualBasicEnemy);
 
-            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(actualBasicEnemy));
+            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(actualBasicEnemy, systemManager));
 
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 

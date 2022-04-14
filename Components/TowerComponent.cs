@@ -23,7 +23,7 @@ namespace TowerDefense
             upgradeLevel = 0;
             turnSpeed = 1.0f;
             enemyType = EnemyType.GROUND;
-            damage = new List<float>() { 1.0f, 2.0f, 3.0f };
+            damage = new List<float>() { 10.0f, 20.0f, 30.0f };
             cooldown = new List<TimeSpan>(){ TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(1) };
         }
     }
