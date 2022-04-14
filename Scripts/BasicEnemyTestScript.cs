@@ -52,10 +52,23 @@ namespace TowerDefense
                     systemManager.DelayedRemove(gameObject);
                 }
             }
-
-
         }
 
+
+        public override void Destroyed()
+        {
+            base.Destroyed();
+            if (gameObject.ContainsComponent<EnemyHealth>())
+            {
+                foreach (var deathObject in gameObject.GetComponent<EnemyHealth>().instantiateOnDeathObject)
+                {
+                    deathObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position;
+                    systemManager.DelayedAdd(deathObject);
+                }
+                    
+
+            }
+        }
 
     }
 }

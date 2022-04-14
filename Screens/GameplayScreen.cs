@@ -78,7 +78,7 @@ namespace TowerDefense
             camera.GetComponent<Transform>().position = Vector2.Zero;
             renderer = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
 
-            renderer.debugMode = true;
+            renderer.debugMode = false;
 
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
@@ -110,14 +110,6 @@ namespace TowerDefense
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(tankyEnemyTest, systemManager));
 
             systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
-
-            GameObject actualBasicEnemy = TestEnemy.Create(Vector2.Zero, systemManager);
-
-            systemManager.Add(actualBasicEnemy);
-
-            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(actualBasicEnemy, systemManager));
-
-            systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
