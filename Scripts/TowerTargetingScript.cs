@@ -78,7 +78,7 @@ namespace TowerDefense
 
         public override void Update(GameTime gameTime)
         {
-            if (!systemManager.gameObjectsDictionary.ContainsKey(currentTarget.id))
+            if (currentTarget != null && !systemManager.gameObjectsDictionary.ContainsKey(currentTarget.id))
             {
                 currentTarget = null;
             }
