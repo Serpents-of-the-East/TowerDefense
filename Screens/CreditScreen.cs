@@ -31,7 +31,7 @@ namespace TowerDefense
             inputSystem = new InputSystem(systemManager);
             scriptSystem = new ScriptSystem(systemManager);
             camera = new GameObject();
-            camera.Add(new Transform(new Vector2(500, 500), 0, Vector2.One));
+            camera.Add(new Transform(new Vector2(0, 0), 0, Vector2.One));
             particleSystem = new ParticleSystem(systemManager);
 
 
@@ -59,6 +59,8 @@ namespace TowerDefense
             lightRenderer.globalLightLevel = 0f;
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
             renderTarget = new RenderTarget2D(m_graphicsDevice, m_graphicsDevice.PresentationParameters.BackBufferWidth, m_graphicsDevice.PresentationParameters.BackBufferHeight, false, m_graphicsDevice.PresentationParameters.BackBufferFormat, DepthFormat.Depth24);
+
+            ResourceManager.RegisterTexture("fire", "fire");
         }
 
         public override void OnScreenDefocus()
@@ -77,6 +79,28 @@ namespace TowerDefense
             systemManager.Add(RyanAnderson.CreateRyanAnderson());
             systemManager.Add(TaylorAnderson.CreateTaylorAnderson());
             systemManager.Add(CreditsKeyboard.CreateCreditsKeyboard(SetCurrentScreen));
+
+
+            // Temporary
+
+            GameObject testParticles = new GameObject();
+
+            Particle particle = new Particle(ResourceManager.GetTexture("fire"));
+
+            testParticles.Add(new Sprite(ResourceManager.GetTexture("fire"), Color.White));
+
+            particle.maxLifeTime = TimeSpan.FromMilliseconds(2000);
+            particle.maxSpeed = 100;
+            particle.emissionArc = new Vector2(-45, 45);
+            particle.rate = TimeSpan.FromMilliseconds(10);
+            particle.minScale = 0.5f;
+            particle.maxScale = 1;
+            particle.maxSystemLifetime = TimeSpan.MaxValue;
+
+            testParticles.Add(particle);
+            testParticles.Add(new Transform(Vector2.Zero, 0, Vector2.One));
+
+            systemManager.Add(testParticles);
         }
     }
 }
