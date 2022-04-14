@@ -45,7 +45,12 @@ namespace TowerDefense
             if (other.ContainsComponent<Bullet>())
             {
                 this.gameObject.GetComponent<EnemyHealth>().health -= other.GetComponent<Bullet>().damage;
-                systemManager.Remove(other.id);
+                systemManager.DelayedRemove(other);
+
+                if (this.gameObject.GetComponent<EnemyHealth>().health <= 0.0f)
+                {
+                    systemManager.DelayedRemove(gameObject);
+                }
             }
 
 
