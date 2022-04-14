@@ -33,6 +33,7 @@ namespace CrowEngineBase
         public void Remove(uint id)
         {
             RemoveGameObject?.Invoke(id);
+            gameObjectsDictionary.Remove(id);
         }
 
         public void Update(GameTime gameTime)
@@ -45,7 +46,9 @@ namespace CrowEngineBase
             }
             while (safeToRemoveObjects.Count > 0)
             {
-                Remove(safeToRemoveObjects.Dequeue());
+                uint idToRemove = safeToRemoveObjects.Dequeue();
+                gameObjectsDictionary.Remove(idToRemove);
+                Remove(idToRemove);
             }
         }
 

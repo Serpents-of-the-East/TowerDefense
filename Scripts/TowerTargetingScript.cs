@@ -69,9 +69,6 @@ namespace TowerDefense
             GameObject spawnedObject;
 
             spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject);
-
-            Debug.WriteLine("Shooting");
-
             systemManager.DelayedAdd(spawnedObject);
             
         }
@@ -93,8 +90,6 @@ namespace TowerDefense
 
             if (currentTarget != null)
             {
-
-                
                 Vector2 targetVector = currentTarget.GetComponent<Transform>().position - transform.position;
 
                 float targetAngle = MathF.Atan2(targetVector.Y, targetVector.X);
