@@ -23,6 +23,8 @@ namespace TowerDefense
             keyboard.actionKeyPairs.Add("UpgradeTower", Keys.U);
             keyboard.actionKeyPairs.Add("SellTower", Keys.S);
             keyboard.actionKeyPairs.Add("StartLevel", Keys.G);
+            keyboard.actionKeyPairs.Add("SwitchUpTower", Keys.OemPeriod);
+            keyboard.actionKeyPairs.Add("SwitchDownTower", Keys.OemComma);
 
             return keyboard;
         }
