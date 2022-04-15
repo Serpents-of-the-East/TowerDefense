@@ -22,6 +22,7 @@ namespace TowerDefense
         private ControlLoaderSystem controlLoaderSystem;
 
         private GameObject camera;
+        private KeyboardInput keyboardInput;
 
         public GameplayScreen(ScreenEnum screenEnum) : base (screenEnum)
         {
@@ -39,7 +40,7 @@ namespace TowerDefense
             TextureCreation.device = graphicsDevice;
             particleSystem = new ParticleSystem(systemManager);
             ParticleEmitter.systemManager = systemManager;
-
+            keyboardInput = GameplayKeyboardControls.Create();
             Pathfinder.SolvePaths();
         }
 
@@ -92,10 +93,13 @@ namespace TowerDefense
 
         public override void OnScreenFocus()
         {
+            InputPersistence.LoadSavedKeyboard(ref keyboardInput);
         }
 
         public override void SetupGameObjects()
         {
+
+
             systemManager.Add(BackgroundPrefab.Create());
             GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One, systemManager);
             systemManager.Add(basicEnemy);
@@ -109,7 +113,7 @@ namespace TowerDefense
 
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(tankyEnemyTest, systemManager));
 
-            systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem));
+            systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem, keyboardInput));
 
             GameObject actualBasicEnemy = TestEnemy.Create(Vector2.Zero, systemManager);
 
