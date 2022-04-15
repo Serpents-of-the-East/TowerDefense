@@ -26,7 +26,7 @@ namespace TowerDefense
             }
             else
             {
-                gameObject.GetComponent<Rigidbody>().velocity = new Vector2(0, -2);
+                gameObject.GetComponent<Rigidbody>().velocity = new Vector2(0, -100);
             }
 
         }

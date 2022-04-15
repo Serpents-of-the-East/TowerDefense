@@ -12,7 +12,7 @@ namespace TowerDefense
 
         protected override void Update(GameTime gameTime)
         {
-            foreach (uint id in m_gameObjects.Keys)
+           /* foreach (uint id in m_gameObjects.Keys)
             {
                 EnemyHealth enemyHealth = m_gameObjects[id].GetComponent<EnemyHealth>();
 
@@ -27,7 +27,17 @@ namespace TowerDefense
 
                         foreach (var deathGameObject in enemyHealth.instantiateOnDeathObject)
                         {
-                            deathGameObject.GetComponent<Transform>().position = m_gameObjects[id].GetComponent<Transform>().position;
+
+                            if (deathGameObject.ContainsComponent<PointsTextScript>())
+                            {
+                                CircleCollider collider = m_gameObjects[id].GetComponent<CircleCollider>();
+                                deathGameObject.GetComponent<Transform>().position = new Vector2(m_gameObjects[id].GetComponent<Transform>().position.X, m_gameObjects[id].GetComponent<Transform>().position.Y - collider.radius);
+
+                            }
+                            else
+                            {
+                                deathGameObject.GetComponent<Transform>().position = m_gameObjects[id].GetComponent<Transform>().position;
+                            }
                             systemManager.Add(deathGameObject);
                         }
                     }
@@ -38,7 +48,7 @@ namespace TowerDefense
 
 
 
-            }
+            }*/
 
 
 

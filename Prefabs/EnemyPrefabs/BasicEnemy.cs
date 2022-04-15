@@ -30,7 +30,7 @@ namespace TowerDefense
                 instantiateOnDeathObject = new List<GameObject>()
                 {
                     EnemyDeathParticles.Create(gameObject.GetComponent<Transform>().position),
-                    PointsTextPrefab.Create(position, systemManager),
+                    PointsTextPrefab.Create(gameObject.GetComponent<Transform>().position, systemManager, gameObject.GetComponent<PointsComponent>()),
 
                 }
             });

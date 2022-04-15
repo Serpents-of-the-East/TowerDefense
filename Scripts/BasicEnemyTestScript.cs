@@ -62,7 +62,14 @@ namespace TowerDefense
             {
                 foreach (var deathObject in gameObject.GetComponent<EnemyHealth>().instantiateOnDeathObject)
                 {
-                    deathObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position;
+                    if (deathObject.ContainsComponent<PointsTextScript>() && deathObject.ContainsComponent<CircleCollider>())
+                    {
+                        deathObject.GetComponent<Transform>().position = new Vector2(deathObject.GetComponent<Transform>().position.X, deathObject.GetComponent<Transform>().position.Y + deathObject.GetComponent<CircleCollider>().radius);
+                    }
+                    else
+                    {
+                        deathObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position;
+                    }
                     systemManager.DelayedAdd(deathObject);
                 }
                     
