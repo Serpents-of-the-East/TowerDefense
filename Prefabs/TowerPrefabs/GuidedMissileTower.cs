@@ -17,7 +17,7 @@ namespace TowerDefense
             gameObject.Add(new RectangleCollider(new Vector2(Pathfinder.SIZE_PER_TOWER, Pathfinder.SIZE_PER_TOWER)));
             gameObject.Add(new PointsComponent() { points = 300 });
             gameObject.Add(new Rigidbody());
-            gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One));
+            gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One * 2));
             gameObject.Add(new EnemyTag(EnemyType.AIR));
 
             gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Missile, TimeSpan.FromMilliseconds(1000), systemManager));
