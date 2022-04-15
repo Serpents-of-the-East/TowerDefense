@@ -163,7 +163,7 @@ namespace TowerDefense
             {
                 case (1):
                     sprite.sprite = ResourceManager.GetTexture("bombTower");
-                    transform.scale = Vector2.One / 2;
+                    transform.scale = Vector2.One * 2;
                     break;
                 case (2):
                     sprite.sprite = ResourceManager.GetTexture("guidedTower");

@@ -63,8 +63,8 @@ namespace TowerDefense
         public override void LoadContent()
         {
             ResourceManager.RegisterTexture("Textures/empty", "empty");
-            ResourceManager.RegisterTexture("circle", "bombTower");
-            ResourceManager.RegisterTexture("fire", "guidedTower");
+            ResourceManager.RegisterTexture("Textures/ballista-1", "bombTower");
+            ResourceManager.RegisterTexture("Textures/mage", "guidedTower");
             ResourceManager.RegisterTexture("Textures/archer-tower0", "regularTower");
             ResourceManager.RegisterTexture("Textures/goblin", "goblin");
             ResourceManager.RegisterTexture("Textures/orc", "orc");
@@ -78,7 +78,7 @@ namespace TowerDefense
             camera.GetComponent<Transform>().position = Vector2.Zero;
             renderer = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
 
-            renderer.debugMode = true;
+            renderer.debugMode = false;
 
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
