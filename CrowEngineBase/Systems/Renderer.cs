@@ -52,7 +52,13 @@ namespace CrowEngineBase
 
                 Vector2 renderDistanceFromCenter = distanceFromCenter * m_scalingRatio;
                 Vector2 trueRenderPosition = renderDistanceFromCenter + m_centerOfScreen;
-
+                if (m_gameObjects[id].ContainsComponent<AnimatedSprite>())
+                {
+                    AnimatedSprite animatedSprite = m_gameObjects[id].GetComponent<AnimatedSprite>();
+                    Transform transform = m_gameObjects[id].GetComponent<Transform>();
+                    int currentX = (int)(animatedSprite.currentFrame * animatedSprite.singleFrameSize.X);
+                    spriteBatch.Draw(animatedSprite.spritesheet, trueRenderPosition, new Rectangle(currentX, 0, (int)animatedSprite.singleFrameSize.X, (int)animatedSprite.singleFrameSize.Y), Color.White, transform.rotation, animatedSprite.singleFrameSize / 2, transform.scale * m_scalingRatio, SpriteEffects.None, animatedSprite.layerDepth);
+                }
                 if (m_gameObjects[id].ContainsComponent<Sprite>())
                 {
                     Sprite sprite = m_gameObjects[id].GetComponent<Sprite>();
@@ -61,13 +67,7 @@ namespace CrowEngineBase
                         sprite.center, m_gameObjects[id].GetComponent<Transform>().scale * m_scalingRatio,
                         SpriteEffects.None, sprite.renderDepth);
                 }
-                else if (m_gameObjects[id].ContainsComponent<AnimatedSprite>())
-                {
-                    AnimatedSprite animatedSprite = m_gameObjects[id].GetComponent<AnimatedSprite>();
-                    Transform transform = m_gameObjects[id].GetComponent<Transform>();
-                    int currentX = (int)(animatedSprite.currentFrame * animatedSprite.singleFrameSize.X);
-                    spriteBatch.Draw(animatedSprite.spritesheet, trueRenderPosition, new Rectangle(currentX, 0, (int)animatedSprite.singleFrameSize.X, (int)animatedSprite.singleFrameSize.Y), Color.White, transform.rotation, animatedSprite.singleFrameSize / 2, transform.scale * m_scalingRatio, SpriteEffects.None, animatedSprite.layerDepth);
-                }
+                
 
                 if (debugMode)
                 {

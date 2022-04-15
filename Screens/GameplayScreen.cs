@@ -73,6 +73,7 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/bomb-particle-trail", "bomb-particle-trail");
             ResourceManager.RegisterTexture("Textures/missile-explosion-particle", "missile-explosion-particle");
             ResourceManager.RegisterTexture("Textures/bomb-particle-explosion", "bomb-particle-explosion");
+            ResourceManager.RegisterTexture("Textures/Level0GuidedMissile", "guidedTowerBase");
 
 
             camera = CameraPrefab.Create();
