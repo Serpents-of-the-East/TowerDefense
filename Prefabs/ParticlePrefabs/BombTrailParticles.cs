@@ -15,13 +15,13 @@ namespace TowerDefense
         /// <returns></returns>
         public static Particle Create()
         {
-            Particle particle = new Particle(ResourceManager.GetTexture("bomb-particle-trail"));
+            Particle particle = new Particle(ResourceManager.GetTexture("fire-particle"));
 
-            particle.rate = TimeSpan.FromMilliseconds(100);
+            particle.rate = TimeSpan.FromMilliseconds(50);
             particle.maxSpeed = 100;
             particle.minSpeed = 50;
             particle.minScale = 0.5f;
-            particle.maxScale = 2;
+            particle.maxScale = 1;
             particle.rotationSpeed = 1;
             particle.renderDepth = 1;
             particle.maxLifeTime = TimeSpan.FromMilliseconds(600);

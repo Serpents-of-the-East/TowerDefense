@@ -13,7 +13,7 @@ namespace TowerDefense
             GameObject gameObject = new GameObject();
 
             gameObject.Add(new Bomb());
-            gameObject.Add(new TowerComponent() { turnSpeed = 3 });
+            gameObject.Add(new TowerComponent() { turnSpeed = 6 });
             gameObject.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White, 0));
             gameObject.Add(new PointsComponent() { points = 200 });
             gameObject.Add(new CircleCollider(Pathfinder.SIZE_PER_TOWER * 2));
