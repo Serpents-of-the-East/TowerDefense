@@ -28,13 +28,6 @@ namespace TowerDefense
             mouseInput.actionButtonPairs.Add("PlaceTower", MouseButton.LeftButton);
             cursor.Add(mouseInput);
 
-            //KeyboardInput keyboardInput = new KeyboardInput();
-           /* keyboardInput.actionKeyPairs.Add("SwitchUpTower", Keys.OemPeriod);
-            keyboardInput.actionKeyPairs.Add("SwitchDownTower", Keys.OemComma);
-
-            keyboardInput.actionKeyPairs.Add("SellTower", Keys.S);
-            keyboardInput.actionKeyPairs.Add("StartNextLevel")*/
-
 
             cursor.Add(keyboardInput);
 

@@ -97,9 +97,6 @@ namespace TowerDefense
             systemManager.Add(RebindMainInput.Create(menuItems.ToArray(), gameplaykeyboard, new Vector2(500, 100), SetCurrentScreen));
 
             
-
-            systemManager.Add(StartNextLevel.CreateStartNextLevel("PLACEHOLDER"));
-
         }
     }
 }
