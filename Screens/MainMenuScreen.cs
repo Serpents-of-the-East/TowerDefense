@@ -20,6 +20,7 @@ namespace TowerDefense
         private RenderTarget2D renderTarget;
         private FontRenderer fontRenderer;
         private GameObject camera;
+        private AnimationSystem animationSystem;
 
         private KeyboardInput gameplayKeyboard;
 
@@ -38,6 +39,7 @@ namespace TowerDefense
             camera = new GameObject();
             camera.Add(new Transform(new Vector2(500, 500), 0, Vector2.One));
             particleSystem = new ParticleSystem(systemManager);
+            animationSystem = new AnimationSystem(systemManager);
 
 
             systemManager.Add(camera);
@@ -61,7 +63,7 @@ namespace TowerDefense
         public override void LoadContent()
         {
             renderSystem = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
-            renderSystem.debugMode = true;
+            renderSystem.debugMode = false;
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
             lightRenderer = new LightRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), m_graphicsDevice);
             lightRenderer.globalLightLevel = 0f;
@@ -86,6 +88,11 @@ namespace TowerDefense
         public override void SetupGameObjects()
         {
             gameplayKeyboard = GameplayKeyboardControls.Create();
+
+            systemManager.Add(TitleBackground.Create());
+
+            systemManager.Add(TitleCard.Create());
+            
 
             systemManager.Add(Controls.CreateControls());
             systemManager.Add(PlayGame.CreatePlayGame());
