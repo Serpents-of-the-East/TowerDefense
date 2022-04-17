@@ -26,7 +26,15 @@ namespace TowerDefense
 
         public override void Update(GameTime gameTime)
         {
+            string oldText = text.text;
+
             text.text = $"{myAction}: {keyboardInput.actionKeyPairs[myAction]}";
+
+            if (text.text != oldText)
+            {
+                text.centerOfRotation = text.spriteFont.MeasureString(text.text) / 2;
+            }
+
             if (isSelected)
             {
                 text.color = Color.Red;

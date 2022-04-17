@@ -66,6 +66,11 @@ namespace CrowEngineBase
         {
             if (!isSavingKeyboard)
             {
+                foreach ((string action, Keys key) in input.actionKeyPairs)
+                {
+                    keyboardInput.actionKeyPairs[action] = key;
+                }
+
                 isSavingKeyboard = true;
                 FinalizeAsyncKeyboardSave(input);
             }

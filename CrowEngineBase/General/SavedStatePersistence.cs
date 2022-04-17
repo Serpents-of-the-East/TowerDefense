@@ -55,6 +55,12 @@ namespace CrowEngineBase
         {
             if (!isSaving)
             {
+
+                foreach ((string name, int score) in scores)
+                {
+                    highScores[name] = score;
+                }
+
                 highScores = scores;
                 FinalizeAsyncScoresSave(scores);
             }
