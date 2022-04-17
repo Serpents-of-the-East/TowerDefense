@@ -346,6 +346,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/magebolt.png
 
+#begin Textures/magic-knights.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/magic-knights.png
+
 #begin Textures/missile-explosion-particle.png
 /importer:TextureImporter
 /processor:TextureProcessor
