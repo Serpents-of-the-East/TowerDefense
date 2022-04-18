@@ -125,6 +125,7 @@ namespace TowerDefense
 
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(actualBasicEnemy, systemManager));
 
+            systemManager.Add(InfoBackground.Create(new Vector2(0, 50)));
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
