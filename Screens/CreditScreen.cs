@@ -31,7 +31,7 @@ namespace TowerDefense
             inputSystem = new InputSystem(systemManager);
             scriptSystem = new ScriptSystem(systemManager);
             camera = new GameObject();
-            camera.Add(new Transform(new Vector2(0, 0), 0, Vector2.One));
+            camera.Add(new Transform(Vector2.One * 500, 0, Vector2.One));
             particleSystem = new ParticleSystem(systemManager);
 
 
@@ -41,12 +41,12 @@ namespace TowerDefense
 
         public override void Draw(GameTime gameTime)
         {
-            m_spriteBatch.Begin(SpriteSortMode.BackToFront, samplerState: SamplerState.PointClamp);
+            m_spriteBatch.Begin(SpriteSortMode.Deferred, samplerState: SamplerState.PointClamp);
 
-            fontRenderer.Draw(gameTime, m_spriteBatch);
+            
             renderSystem.Draw(gameTime, m_spriteBatch);
             particleRenderer.Draw(gameTime, m_spriteBatch);
-
+            fontRenderer.Draw(gameTime, m_spriteBatch);
             m_spriteBatch.End();
         }
 
@@ -74,6 +74,7 @@ namespace TowerDefense
 
         public override void SetupGameObjects()
         {
+            systemManager.Add(AltScreenBackground.Create());
             systemManager.Add(RyanAnderson.CreateRyanAnderson());
             systemManager.Add(TaylorAnderson.CreateTaylorAnderson());
             systemManager.Add(CreditsKeyboard.CreateCreditsKeyboard(SetCurrentScreen));

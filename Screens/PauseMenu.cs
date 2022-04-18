@@ -76,6 +76,7 @@ namespace TowerDefense
 
         public override void SetupGameObjects()
         {
+            systemManager.Add(AltScreenBackground.Create());
             systemManager.Add(PauseTitle.CreatePauseTitle());
             systemManager.Add(Resume.CreateResumeItem());
             systemManager.Add(Exit.CreateExit());

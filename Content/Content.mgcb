@@ -286,6 +286,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/goblin.png
 
+#begin Textures/info-background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/info-background.png
+
 #begin Textures/Leve1GuidedMissile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -381,6 +393,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/orc.png
+
+#begin Textures/other-backgrounds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/other-backgrounds.png
 
 #begin Textures/tower-map.png
 /importer:TextureImporter
