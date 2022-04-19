@@ -18,6 +18,7 @@ namespace CrowEngineBase
         PauseScreen,
         Quit,
         CameraTest,
+        HighScore,
     }
 
     /// <summary>

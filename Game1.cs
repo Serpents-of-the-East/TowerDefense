@@ -47,6 +47,8 @@ namespace CrowEngine
             screens.Add(ScreenEnum.PauseScreen, new PauseMenu(ScreenEnum.PauseScreen));
             screens.Add(ScreenEnum.Quit, new Quit(ScreenEnum.Quit));
             screens.Add(ScreenEnum.Game, new GameplayScreen(ScreenEnum.Game));
+            screens.Add(ScreenEnum.HighScore, new HighScoreScreen(ScreenEnum.HighScore));
+
             currentScreen = screens[ScreenEnum.MainMenu];
 
             ResourceManager.RegisterTexture("SpriteSheets/coin", "coin");
