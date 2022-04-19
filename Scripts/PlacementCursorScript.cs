@@ -17,6 +17,7 @@ namespace TowerDefense
         private uint currentSelected = 0;
         private uint numberOfTowers = 3;
         private GameObject selectedTower;
+        Screen.SetCurrentScreenDelegate setCurrentScreenDelegate;
 
 
         private GameObject camera;
@@ -26,11 +27,12 @@ namespace TowerDefense
 
         private ControlLoaderSystem ControlLoaderSystem; // this is just for testing it SHOULD BE REMOVED LATER
 
-        public PlacementCursorScript(GameObject gameObject, SystemManager systemManager, GameObject camera, ControlLoaderSystem controlSystem) : base(gameObject)
+        public PlacementCursorScript(GameObject gameObject, SystemManager systemManager, GameObject camera, ControlLoaderSystem controlSystem, Screen.SetCurrentScreenDelegate setCurrentScreenDelegate) : base(gameObject)
         {
             this.systemManager = systemManager;
             this.camera = camera;
             this.ControlLoaderSystem = controlSystem;
+            this.setCurrentScreenDelegate = setCurrentScreenDelegate;
         }
 
         public override void Start()
@@ -40,6 +42,17 @@ namespace TowerDefense
             sprite = gameObject.GetComponent<Sprite>();
             selectedTower = null;
         }
+
+        public void OnPause(float buttonState)
+        {
+            if (buttonState > 0)
+            {
+                Console.WriteLine("OnPause Called");
+                this.setCurrentScreenDelegate.Invoke(ScreenEnum.PauseScreen);
+            }
+        }
+
+
 
         public void OnMouseMove(Vector2 mousePosition)
         {
@@ -70,6 +83,9 @@ namespace TowerDefense
             }
 
         }
+
+
+
 
         public override void OnCollision(GameObject other)
         {

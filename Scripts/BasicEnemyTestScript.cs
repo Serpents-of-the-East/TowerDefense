@@ -42,8 +42,9 @@ namespace TowerDefense
 
         public override void OnCollision(GameObject other)
         {
-            if (other.ContainsComponent<Bullet>())
+            if (other.ContainsComponent<Bullet>() && !other.GetComponent<Bullet>().hasDoneDamage)
             {
+                other.GetComponent<Bullet>().hasDoneDamage = true;
                 this.gameObject.GetComponent<EnemyHealth>().health -= other.GetComponent<Bullet>().damage;
                 systemManager.DelayedRemove(other);
 

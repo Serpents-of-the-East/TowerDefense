@@ -19,6 +19,7 @@ namespace CrowEngineBase
         Quit,
         CameraTest,
         HighScore,
+        GameOver,
     }
 
     /// <summary>

@@ -77,6 +77,7 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/ballista-arrow", "arrow");
             ResourceManager.RegisterTexture("Textures/fire-particle", "fire-particle");
             ResourceManager.RegisterTexture("Textures/magebolt", "magebolt");
+            ResourceManager.RegisterTexture("Textures/wyvern", "wyvern");
 
 
             camera = CameraPrefab.Create();
@@ -97,6 +98,8 @@ namespace TowerDefense
 
         public override void OnScreenFocus()
         {
+            currentScreen = ScreenEnum.Game;
+            screenName = ScreenEnum.Game;
             InputPersistence.LoadSavedKeyboard(ref keyboardInput);
         }
 
@@ -105,10 +108,10 @@ namespace TowerDefense
 
 
             systemManager.Add(BackgroundPrefab.Create());
-            GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One, systemManager);
-            systemManager.Add(basicEnemy);
+            //GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One, systemManager);
+            //systemManager.Add(basicEnemy);
 
-            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(basicEnemy, systemManager));
+            //systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(basicEnemy, systemManager));
 
             
 
@@ -117,9 +120,9 @@ namespace TowerDefense
 
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(tankyEnemyTest, systemManager));
 
-            systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem, keyboardInput));
+            systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem, keyboardInput, SetCurrentScreen));
 
-            GameObject actualBasicEnemy = TestEnemy.Create(Vector2.Zero, systemManager);
+            GameObject actualBasicEnemy = FlyingEnemy.Create(Vector2.One * 30, systemManager);
 
             systemManager.Add(actualBasicEnemy);
 

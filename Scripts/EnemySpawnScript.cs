@@ -104,7 +104,7 @@ namespace TowerDefense
             {
                 if (currentLevelEnemiesSpawn["flying"].timeTillNextSpawn <= TimeSpan.Zero)
                 {
-                    systemManager.DelayedAdd(FlyingEnemy.CreateFlyingEnemy(spawnTransform));
+                    systemManager.DelayedAdd(FlyingEnemy.Create(spawnTransform, systemManager));
                     currentLevelEnemiesSpawn["flying"] = (enemiesToSpawn["flying"].timeToSpawn, currentLevelEnemiesSpawn["flying"].remainingSpawn - 1);
                 }
                 else
