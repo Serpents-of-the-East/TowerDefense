@@ -9,6 +9,7 @@ namespace TowerDefense
         public static int totalValueOfTowers = 0;
         public static int numberWaves = 0;
         public static int numberLevels = 0;
+        public static int currentWave = 0;
 
 
         public static void DestroyedCreep()
@@ -52,6 +53,21 @@ namespace TowerDefense
             totalValueOfTowers = 0;
             numberWaves = 0;
             numberLevels = 0;
+        }
+
+        public static int GetCurrentWave()
+        {
+            return currentWave;
+        }
+
+        public static void ResetCurrentWave()
+        {
+            currentWave = 0;
+        }
+
+        public static void IncrementCurrentWave()
+        {
+            currentWave++;
         }
 
 
