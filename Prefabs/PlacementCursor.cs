@@ -15,7 +15,7 @@ namespace TowerDefense
         /// <param name="systemManager"></param>
         /// <param name="camera"></param>
         /// <returns></returns>
-        public static GameObject Create(SystemManager systemManager, GameObject camera, ControlLoaderSystem sys, KeyboardInput keyboardInput) // control loader should BE REMOVED LATER THIS IS FOR TESTING
+        public static GameObject Create(SystemManager systemManager, GameObject camera, ControlLoaderSystem sys, KeyboardInput keyboardInput, Screen.SetCurrentScreenDelegate setCurrentScreenDelegate) // control loader should BE REMOVED LATER THIS IS FOR TESTING
         {
             GameObject cursor = new GameObject();
 
@@ -27,11 +27,11 @@ namespace TowerDefense
             MouseInput mouseInput = new MouseInput();
             mouseInput.actionButtonPairs.Add("PlaceTower", MouseButton.LeftButton);
             cursor.Add(mouseInput);
-
+            keyboardInput.actionKeyPairs.Add("Pause", Keys.Escape);
 
             cursor.Add(keyboardInput);
 
-            cursor.Add(new PlacementCursorScript(cursor, systemManager, camera, sys));
+            cursor.Add(new PlacementCursorScript(cursor, systemManager, camera, sys, setCurrentScreenDelegate));
 
 
             return cursor;
