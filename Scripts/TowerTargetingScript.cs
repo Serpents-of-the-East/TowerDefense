@@ -49,7 +49,7 @@ namespace TowerDefense
 
         public override void OnCollision(GameObject other)
         {
-            if (currentTarget == null && other.ContainsComponent<Enemy>())// && (other.GetComponent<EnemyTag>().enemyType == targetableEnemy || targetableEnemy == EnemyType.MIXED))
+            if (currentTarget == null && other.ContainsComponent<Enemy>() && (other.GetComponent<EnemyTag>().enemyType == targetableEnemy || targetableEnemy == EnemyType.MIXED))
             {
                 currentTarget = other;
             }
