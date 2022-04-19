@@ -97,6 +97,8 @@ namespace TowerDefense
 
         public override void OnScreenFocus()
         {
+            currentScreen = ScreenEnum.Game;
+            screenName = ScreenEnum.Game;
             InputPersistence.LoadSavedKeyboard(ref keyboardInput);
         }
 
@@ -117,7 +119,7 @@ namespace TowerDefense
 
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(tankyEnemyTest, systemManager));
 
-            systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem, keyboardInput));
+            systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem, keyboardInput, SetCurrentScreen));
 
             GameObject actualBasicEnemy = TestEnemy.Create(Vector2.Zero, systemManager);
 
