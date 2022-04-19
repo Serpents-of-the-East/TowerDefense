@@ -15,7 +15,7 @@ namespace TowerDefense
             gameObject.Add(new Transform(new Vector2(500, 600), 0, Vector2.One));
             gameObject.Add(new Text("Exit", ResourceManager.GetFont("default"), Color.White, Color.Black, true, 0));
             gameObject.Add(new RenderedComponent());
-            gameObject.Add(new MenuItem(ScreenEnum.Quit));
+            gameObject.Add(new MenuItem(ScreenEnum.MainMenu));
 
 
             return gameObject;
