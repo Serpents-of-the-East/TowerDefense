@@ -50,6 +50,24 @@ namespace TowerDefense
 
                 if (this.gameObject.GetComponent<EnemyHealth>().health <= 0.0f)
                 {
+
+                    PointsComponent enemyPointsWorth = this.gameObject.GetComponent<PointsComponent>();
+                    PointsManager.AddPlayerPoints(enemyPointsWorth.points);
+                    GameStats.DestroyedCreep();
+                    EnemyHealth enemyHealth = this.gameObject.GetComponent<EnemyHealth>();
+
+
+                    if (enemyHealth.instantiateOnDeathObject != null)
+                    {
+
+                        foreach (var deathGameObject in enemyHealth.instantiateOnDeathObject)
+                        {
+                            deathGameObject.GetComponent<Transform>().position = this.gameObject.GetComponent<Transform>().position;
+                            systemManager.Add(deathGameObject);
+                        }
+                    }
+
+
                     systemManager.DelayedRemove(gameObject);
                 }
             }
