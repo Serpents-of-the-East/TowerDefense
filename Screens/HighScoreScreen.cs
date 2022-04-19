@@ -1,15 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using CrowEngine;
+﻿using System.Collections.Generic;
 using CrowEngineBase;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace TowerDefense
 {
-    public class MainMenuScreen : Screen
+    public class HighScoreScreen : Screen
     {
-
         private Renderer renderSystem;
         private PhysicsEngine physicsEngine;
         private ParticleRenderer particleRenderer;
@@ -20,51 +17,49 @@ namespace TowerDefense
         private RenderTarget2D renderTarget;
         private FontRenderer fontRenderer;
         private GameObject camera;
-        private AnimationSystem animationSystem;
+        List<GameObject> menuItems = new List<GameObject>();
 
-        private KeyboardInput gameplayKeyboard;
+        private Dictionary<string, int> scores;
+
+        private bool layoutLoaded = false;
 
 
-        public MainMenuScreen(ScreenEnum screenEnum) : base(screenEnum)
+        public HighScoreScreen(ScreenEnum screen) : base(screen)
         {
         }
+
 
         public override void Initialize(GraphicsDevice graphicsDevice, GraphicsDeviceManager graphics, GameWindow window)
         {
             base.Initialize(graphicsDevice, graphics, window);
-
             physicsEngine = new PhysicsEngine(systemManager);
             inputSystem = new InputSystem(systemManager);
             scriptSystem = new ScriptSystem(systemManager);
             camera = new GameObject();
             camera.Add(new Transform(new Vector2(500, 500), 0, Vector2.One));
             particleSystem = new ParticleSystem(systemManager);
-            animationSystem = new AnimationSystem(systemManager);
 
+            scores = new Dictionary<string, int>();
 
             systemManager.Add(camera);
+
         }
-        
 
         public override void Draw(GameTime gameTime)
         {
+            m_spriteBatch.Begin(SpriteSortMode.BackToFront, samplerState: SamplerState.PointClamp);
 
-            m_spriteBatch.Begin(SpriteSortMode.Deferred, samplerState: SamplerState.PointClamp);
-
-            renderSystem.Draw(gameTime, m_spriteBatch);
             fontRenderer.Draw(gameTime, m_spriteBatch);
-
+            renderSystem.Draw(gameTime, m_spriteBatch);
             particleRenderer.Draw(gameTime, m_spriteBatch);
-
             m_spriteBatch.End();
-
-
         }
+
 
         public override void LoadContent()
         {
             renderSystem = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
-            renderSystem.debugMode = false;
+            renderSystem.debugMode = true;
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
             lightRenderer = new LightRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), m_graphicsDevice);
             lightRenderer.globalLightLevel = 0f;
@@ -74,39 +69,66 @@ namespace TowerDefense
 
         public override void OnScreenDefocus()
         {
-            Debug.WriteLine("Main Menu Screen was unloaded");
+            foreach (GameObject menuItem in menuItems)
+            {
+                systemManager.Remove(menuItem.id);
+            }
+
+            menuItems.Clear();
+
         }
 
         public override void OnScreenFocus()
         {
-            Debug.WriteLine("Main Menu Screen was loaded");
-            currentScreen = ScreenEnum.MainMenu;
-            screenName = ScreenEnum.MainMenu;
+            currentScreen = ScreenEnum.HighScore;
+            screenName = ScreenEnum.HighScore;
+            SavedStatePersistence.LoadScoresIntoDictionary(ref scores);
 
-            InputPersistence.LoadSavedKeyboard(ref gameplayKeyboard);
+
+            Vector2 currentPos = new Vector2(500, 400);
+
+            if (scores.Count == 0)
+            {
+                GameObject menuItem = HighScoreItem.Create(currentPos, "No Available Scores", new Vector2(100, 50));
+                systemManager.Add(menuItem);
+                menuItems.Add(menuItem);
+            }
+
+
+
+            List<int> topScores = new List<int>();
+            foreach (string name in scores.Keys)
+            {
+                topScores.Add(scores[name]);
+            }
+
+            topScores.Sort();
+            topScores.Reverse();
+
+
+            for (int i = 0, j = 0; i < topScores.Count; i++)
+            {
+                GameObject menuItem = HighScoreItem.Create(currentPos, topScores[i].ToString(), new Vector2(100, 50));
+                systemManager.Add(menuItem);
+                currentPos = new Vector2(currentPos.X, currentPos.Y + 100);
+                menuItems.Add(menuItem);
+                j++;
+                if (j >= 5)
+                { break; }
+            }
+
+
+
         }
 
         public override void SetupGameObjects()
         {
-            gameplayKeyboard = GameplayKeyboardControls.Create();
 
-            systemManager.Add(TitleBackground.Create());
-
-            systemManager.Add(TitleCard.Create());
-
-            systemManager.Add(PlayGame.CreatePlayGame());
-            systemManager.Add(Controls.CreateControls());
-            systemManager.Add(Credits.CreateCredits());
-            systemManager.Add(HighScore.Create());
-            systemManager.Add(Exit.CreateExit());
+            systemManager.Add(CreditsKeyboard.CreateCreditsKeyboard(SetCurrentScreen));
+            systemManager.Add(HighScoresTitle.Create());
 
 
-            systemManager.Add(Cursor.CreateCursor(SetCurrentScreen));
+
         }
-
-
-
-        
-
     }
 }

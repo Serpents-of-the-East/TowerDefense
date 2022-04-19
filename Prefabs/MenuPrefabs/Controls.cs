@@ -12,7 +12,7 @@ namespace TowerDefense
 
             gameObject.Add(new Rigidbody());
             gameObject.Add(new RectangleCollider(new Vector2(500, 100)));
-            gameObject.Add(new Transform(new Vector2(500, 700), 0, Vector2.One));
+            gameObject.Add(new Transform(new Vector2(500, 650), 0, Vector2.One));
             gameObject.Add(new Text("Controls", ResourceManager.GetFont("default") , Color.White, Color.Black, true, 0f));
             gameObject.Add(new RenderedComponent());
             gameObject.Add(new MenuItem(ScreenEnum.Controls));
