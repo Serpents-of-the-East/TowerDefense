@@ -52,7 +52,33 @@ namespace TowerDefense
             {
                 Path path = gameObject.GetComponent<Path>();
                 Transform transform = gameObject.GetComponent<Transform>();
-                List<Vector2> correctPath = Pathfinder.GetSolvedMazePath(transform.position, path.goal);
+                List<Vector2> correctPath = new List<Vector2>();
+
+
+                if (gameObject.GetComponent<EnemyTag>().enemyType == EnemyType.AIR)
+                {
+                    switch(path.goal)
+                    {
+                        case PathGoal.Up:
+                            correctPath.Add(Pathfinder.topEntrance);
+                            break;
+                        case PathGoal.Down:
+                            correctPath.Add(Pathfinder.bottomEntrance);
+
+                            break;
+                        case PathGoal.Left:
+                            correctPath.Add(Pathfinder.leftEntrance);
+
+                            break;
+                        case PathGoal.Right:
+                            correctPath.Add(Pathfinder.rightEntrance);
+                            break;
+                    }
+                }
+                else
+                {
+                    correctPath = Pathfinder.GetSolvedMazePath(transform.position, path.goal);
+                }
                 path.correctPath = correctPath;
             }
         }
@@ -64,8 +90,34 @@ namespace TowerDefense
             {
                 Path path = m_gameObjects[id].GetComponent<Path>();
                 Transform transform = m_gameObjects[id].GetComponent<Transform>();
+                List<Vector2> correctPath = new List<Vector2>();
 
-                List<Vector2> correctPath = Pathfinder.GetSolvedMazePath(transform.position, path.goal);
+                if (m_gameObjects[id].GetComponent<EnemyTag>().enemyType == EnemyType.AIR)
+                {
+                    switch (path.goal)
+                    {
+                        case PathGoal.Up:
+                            correctPath.Add(Pathfinder.topEntrance);
+                            break;
+                        case PathGoal.Down:
+                            correctPath.Add(Pathfinder.bottomEntrance);
+
+                            break;
+                        case PathGoal.Left:
+                            correctPath.Add(Pathfinder.leftEntrance);
+
+                            break;
+                        case PathGoal.Right:
+                            correctPath.Add(Pathfinder.rightEntrance);
+                            break;
+                    }
+
+
+                }
+                else
+                {
+                    correctPath = Pathfinder.GetSolvedMazePath(transform.position, path.goal);
+                }
 
                 if (correctPath == null) return false;
                 else

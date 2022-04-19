@@ -73,7 +73,6 @@ namespace TowerDefense
         {
             currentScreen = ScreenEnum.PauseScreen;
             screenName = ScreenEnum.PauseScreen;
-            Debug.WriteLine("Default Screen was loaded");
         }
 
         public override void SetupGameObjects()
