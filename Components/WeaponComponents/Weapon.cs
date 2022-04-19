@@ -8,5 +8,6 @@ namespace TowerDefense
     {
         public TimeSpan maxLifetime;
         public float damage;
+        public bool hasDoneDamage = false;
     }
 }
