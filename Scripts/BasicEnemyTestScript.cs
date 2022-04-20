@@ -42,10 +42,23 @@ namespace TowerDefense
 
         public override void OnCollision(GameObject other)
         {
-            if (other.ContainsComponent<Bullet>() && !other.GetComponent<Bullet>().hasDoneDamage)
+            if (other.ContainsComponent<Bullet>() && !other.GetComponent<Bullet>().hasDoneDamage && other.GetComponent<EnemyTag>().enemyType == gameObject.GetComponent<EnemyTag>().enemyType)
             {
+
                 other.GetComponent<Bullet>().hasDoneDamage = true;
                 this.gameObject.GetComponent<EnemyHealth>().health -= other.GetComponent<Bullet>().damage;
+
+
+                if (other.ContainsComponent<Explosion>())
+                {
+                    foreach (var explosionObject in other.GetComponent<Explosion>().instantiateOnDeathObject)
+                    {
+                        explosionObject.GetComponent<Transform>().position = this.gameObject.GetComponent<Transform>().position;
+                        systemManager.DelayedAdd(explosionObject);
+                    }
+                }
+
+
                 systemManager.DelayedRemove(other);
 
                 if (this.gameObject.GetComponent<EnemyHealth>().health <= 0.0f)
@@ -80,7 +93,8 @@ namespace TowerDefense
                 }
             }
 
-
+           
+            
         }
 
 
