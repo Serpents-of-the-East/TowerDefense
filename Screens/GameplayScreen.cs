@@ -84,7 +84,7 @@ namespace TowerDefense
             camera.GetComponent<Transform>().position = Vector2.Zero;
             renderer = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
 
-            renderer.debugMode = false;
+            renderer.debugMode = true;
 
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
@@ -134,6 +134,12 @@ namespace TowerDefense
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
             systemManager.Add(EnemySpawner.CreateEnemySpawner(systemManager));
+
+            systemManager.Add(DestinationColliders.Create(Pathfinder.leftEntrance * Pathfinder.conversionFactor, PathGoal.Left));
+            systemManager.Add(DestinationColliders.Create(Pathfinder.rightEntrance * Pathfinder.conversionFactor, PathGoal.Right));
+            systemManager.Add(DestinationColliders.Create(Pathfinder.topEntrance * Pathfinder.conversionFactor, PathGoal.Up));
+            systemManager.Add(DestinationColliders.Create(Pathfinder.bottomEntrance * Pathfinder.conversionFactor, PathGoal.Down));
+
 
             Pathfinder.CheckPathsFunc.Invoke();
         }
