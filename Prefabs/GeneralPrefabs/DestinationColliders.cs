@@ -11,8 +11,17 @@ namespace TowerDefense
             GameObject gameObject = new GameObject();
 
             gameObject.Add(new DestinationGoal() { destination = pathGoal });
-            gameObject.Add(new Transform(new Vector2(position.X - 2000, position.Y - 2000), 0, Vector2.Zero));
-            gameObject.Add(new RectangleCollider(new Vector2(100, 100)));
+
+            if (pathGoal == PathGoal.Up || pathGoal == PathGoal.Down)
+            {
+                gameObject.Add(new RectangleCollider(new Vector2(300, 100)));
+            }
+            else
+            {
+                gameObject.Add(new RectangleCollider(new Vector2(100, 300)));
+            }
+
+            gameObject.Add(new Transform(new Vector2(position.X - 1900, position.Y - 1900), 0, Vector2.Zero));
             gameObject.Add(new Rigidbody());
             gameObject.Add(new RenderedComponent());
 

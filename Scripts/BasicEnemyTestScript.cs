@@ -69,6 +69,17 @@ namespace TowerDefense
                 }
             }
 
+            else if (other.ContainsComponent<DestinationGoal>())
+            {
+                if (other.GetComponent<DestinationGoal>().destination == gameObject.GetComponent<Path>().goal)
+                {
+                    // It reached its final destination
+                    this.gameObject.GetComponent<EnemyHealth>().health = 0;
+                    systemManager.DelayedRemove(gameObject);
+                    GameStats.LoseLife();
+                }
+            }
+
 
         }
 
