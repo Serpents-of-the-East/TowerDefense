@@ -50,7 +50,6 @@ namespace TowerDefense
 
                 if (this.gameObject.GetComponent<EnemyHealth>().health <= 0.0f)
                 {
-
                     PointsComponent enemyPointsWorth = this.gameObject.GetComponent<PointsComponent>();
                     PointsManager.AddPlayerPoints(enemyPointsWorth.points);
                     GameStats.DestroyedCreep();
@@ -59,7 +58,6 @@ namespace TowerDefense
 
                     if (enemyHealth.instantiateOnDeathObject != null)
                     {
-
                         foreach (var deathGameObject in enemyHealth.instantiateOnDeathObject)
                         {
                             deathGameObject.GetComponent<Transform>().position = this.gameObject.GetComponent<Transform>().position;
@@ -67,8 +65,18 @@ namespace TowerDefense
                         }
                     }
 
-
                     systemManager.DelayedRemove(gameObject);
+                }
+            }
+
+            else if (other.ContainsComponent<DestinationGoal>())
+            {
+                if (other.GetComponent<DestinationGoal>().destination == gameObject.GetComponent<Path>().goal)
+                {
+                    // It reached its final destination
+                    this.gameObject.GetComponent<EnemyHealth>().health = 0;
+                    systemManager.DelayedRemove(gameObject);
+                    GameStats.LoseLife();
                 }
             }
 

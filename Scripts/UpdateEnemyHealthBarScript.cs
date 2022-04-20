@@ -46,7 +46,6 @@ namespace TowerDefense
                 systemManager.DelayedRemove(gameObject);
             }
 
-
             transform.position = new Vector2(parentTransform.position.X, parentTransform.position.Y - 64);
             lastFrameHealth = currentHealth;
 

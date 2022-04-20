@@ -19,7 +19,7 @@ namespace TowerDefense
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("orc"), new int[] { 250, 250, 250, 250, 250, 250, 250, 250 }, Vector2.One * 64));
 
             gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager));
-            gameObject.Add(new PointsComponent() { points = 50 });
+            gameObject.Add(new PointsComponent() { points = 120 });
             gameObject.Add(new Path() { goal = PathGoal.Right });
 
 

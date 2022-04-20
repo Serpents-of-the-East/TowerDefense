@@ -135,6 +135,12 @@ namespace TowerDefense
 
             systemManager.Add(EnemySpawner.CreateEnemySpawner(systemManager));
 
+            systemManager.Add(DestinationColliders.Create(Pathfinder.leftEntrance * Pathfinder.conversionFactor, PathGoal.Left));
+            systemManager.Add(DestinationColliders.Create(Pathfinder.rightEntrance * Pathfinder.conversionFactor, PathGoal.Right));
+            systemManager.Add(DestinationColliders.Create(Pathfinder.topEntrance * Pathfinder.conversionFactor, PathGoal.Up));
+            systemManager.Add(DestinationColliders.Create(Pathfinder.bottomEntrance * Pathfinder.conversionFactor, PathGoal.Down));
+
+
             Pathfinder.CheckPathsFunc.Invoke();
         }
     }

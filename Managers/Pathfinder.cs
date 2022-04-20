@@ -19,7 +19,7 @@ namespace TowerDefense
 
         public static int SIZE_PER_TOWER = PhysicsEngine.PHYSICS_DIMENSION_HEIGHT * 4 / MAP_SIZE_IN_TOWERS; // The number of physics units each tower should take up
 
-        private static float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_HEIGHT * 4 / MAP_SIZE_IN_TOWERS;
+        public static float conversionFactor = PhysicsEngine.PHYSICS_DIMENSION_HEIGHT * 4 / MAP_SIZE_IN_TOWERS;
 
         private static bool[,] gameMap = new bool[MAP_SIZE_IN_TOWERS, MAP_SIZE_IN_TOWERS];
         public static List<Vector2> leftRightPath { get; private set; }
