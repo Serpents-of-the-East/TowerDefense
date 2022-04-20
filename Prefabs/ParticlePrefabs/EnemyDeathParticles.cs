@@ -23,7 +23,6 @@ namespace TowerDefense
             particle.renderDepth = 1;
             particle.maxLifeTime = TimeSpan.FromMilliseconds(600);
             particle.maxSystemLifetime = TimeSpan.FromMilliseconds(250);
-
             gameObject.Add(particle);
 
             return gameObject;

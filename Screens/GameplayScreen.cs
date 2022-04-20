@@ -108,12 +108,12 @@ namespace TowerDefense
 
 
             systemManager.Add(BackgroundPrefab.Create());
-            //GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One, systemManager);
-            //systemManager.Add(basicEnemy);
+            GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One, systemManager);
+            systemManager.Add(basicEnemy);
 
-            //systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(basicEnemy, systemManager));
+            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(basicEnemy, systemManager));
 
-            
+
 
             GameObject tankyEnemyTest = TankyEnemy.CreateTankyEnemy(new Vector2(-100, 0), systemManager);
             systemManager.Add(tankyEnemyTest);

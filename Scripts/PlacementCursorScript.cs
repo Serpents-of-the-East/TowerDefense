@@ -72,6 +72,7 @@ namespace TowerDefense
                         {
                             PointsManager.AddPlayerPoints((int) (selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<PointsComponent>().points * 0.8f));
                             ParticleEmitter.EmitSellParticles(selectedTower.GetComponent<Transform>().position); // THIS IS THE ORIGINAL, CHANGE BACK AFTER
+                            GameStats.RemoveTowerValue(selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<PointsComponent>().points);
                         }
                         systemManager.Remove(selectedTower.GetComponent<TowerColliderComponent>().parentAttach.id);
                         systemManager.Remove(selectedTower.id);
@@ -166,6 +167,8 @@ namespace TowerDefense
                     {
                         newTower.GetComponent<Transform>().position = transform.position;
                         systemManager.DelayedAdd(newTower);
+                        GameStats.AddTowerValue(newTower.GetComponent<PointsComponent>().points);
+
                         PointsManager.SubtractPlayerPoints(newTower.GetComponent<PointsComponent>().points);
                     }
 
