@@ -6,7 +6,7 @@ namespace TowerDefense
 {
     public class WeaponSystem : CrowEngineBase.System
     {
-        public WeaponSystem(SystemManager systemManager) : base(systemManager, typeof(Weapon), typeof(Rigidbody), typeof(Transform), typeof(Collider))
+        public WeaponSystem(SystemManager systemManager) : base(systemManager, typeof(Bullet), typeof(Rigidbody), typeof(Transform), typeof(Collider))
         {
         }
 
@@ -14,37 +14,27 @@ namespace TowerDefense
         {
             foreach (uint id in m_gameObjects.Keys)
             {
-                Weapon weapon = m_gameObjects[id].GetComponent<Weapon>();
+                GameObject weapon = m_gameObjects[id];
                 Rigidbody weaponRigidbody = m_gameObjects[id].GetComponent<Rigidbody>();
-                Transform weaponTransform = m_gameObjects[id].GetComponent<Transform>();
+                weapon.GetComponent<Bullet>().maxLifetime -= gameTime.ElapsedGameTime;
 
-
-                weapon.maxLifetime -= gameTime.ElapsedGameTime;
-
-                if (weapon.maxLifetime <= TimeSpan.Zero)
+                if (weapon.GetComponent<Bullet>().maxLifetime <= TimeSpan.Zero)
                 {
                     systemManager.Remove(id);
                 }
 
-                else if (weapon.GetType() == typeof(Bullet))
+                if (weapon.ContainsComponent<GuidedMissile>() && weapon.GetComponent<GuidedMissile>().target.position != null)
                 {
-                    
-                }
-                else if (weapon.GetType() == typeof(Bomb))
-                {
-                    
-                }
-                else if (weapon.GetType() == typeof(GuidedMissile))
-                {
-                    if (((GuidedMissile)weapon).target != null)
-                    {
-                        weaponRigidbody.velocity = (((GuidedMissile)weapon).target.target.position - weaponTransform.position);
-                        weaponRigidbody.velocity.Normalize();
-                        weaponRigidbody.velocity *= ((GuidedMissile)weapon).speed;
-                    }
-                }
-                else if (weapon.GetType() == typeof(FreezeBurst))
-                {
+                    Vector2 targetPosition = weapon.GetComponent<GuidedMissile>().target.position;
+                    Vector2 direction = (targetPosition - weapon.GetComponent<Transform>().position);
+                    direction.Normalize();
+
+                    float rotation = MathF.Atan2(direction.Y, direction.X);
+
+                    weapon.GetComponent<Transform>().rotation = rotation;
+                    weaponRigidbody.velocity = targetPosition - weapon.GetComponent<Transform>().position;
+                    weaponRigidbody.velocity.Normalize();
+                    weaponRigidbody.velocity *= 4;
 
                 }
             }

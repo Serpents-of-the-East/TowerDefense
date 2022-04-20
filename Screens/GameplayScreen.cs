@@ -20,6 +20,7 @@ namespace TowerDefense
         private AudioSystem audioSystem;
         private PathSystem pathSystem;
         private ControlLoaderSystem controlLoaderSystem;
+        private WeaponSystem weaponSystem;
 
         private GameObject camera;
         private KeyboardInput keyboardInput;
@@ -37,6 +38,7 @@ namespace TowerDefense
             animationSystem = new AnimationSystem(systemManager);
             pathSystem = new PathSystem(systemManager);
             controlLoaderSystem = new ControlLoaderSystem(systemManager);
+            weaponSystem = new WeaponSystem(systemManager);
             TextureCreation.device = graphicsDevice;
             particleSystem = new ParticleSystem(systemManager);
             ParticleEmitter.systemManager = systemManager;

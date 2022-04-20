@@ -3,18 +3,13 @@ using CrowEngineBase;
 
 namespace TowerDefense
 {
-    public class GuidedMissile : Weapon
+    public class GuidedMissile : Component
     {
-        public float speed { get; set; }
-        public float radius { get; set; }
-        public Target target { get; set; }
+        public Transform target { get; set; }
 
         public GuidedMissile()
         {
-            speed = 2.0f;
-            maxLifetime = TimeSpan.FromSeconds(5);
-            radius = 1.5f;
-            damage = 1f;
+
         }
 
     }

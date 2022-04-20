@@ -74,7 +74,7 @@ namespace TowerDefense
                     spawnedObject = BombBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject, systemManager);
                     break;
                 case (BulletType.Missile):
-                    spawnedObject = MissileBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject, systemManager);
+                    spawnedObject = MissileBullet.Create(transform.position, currentTarget.GetComponent<Transform>(), gameObject, systemManager);
                     break;
                 default:
                     spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject);
