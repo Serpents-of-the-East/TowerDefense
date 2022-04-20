@@ -71,10 +71,10 @@ namespace TowerDefense
             switch (bulletType)
             {
                 case (BulletType.Bomb):
-                    spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject);
+                    spawnedObject = BombBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject, systemManager);
                     break;
                 case (BulletType.Missile):
-                    spawnedObject = MissileBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject);
+                    spawnedObject = MissileBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject, systemManager);
                     break;
                 default:
                     spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject);
