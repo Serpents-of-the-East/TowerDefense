@@ -13,6 +13,11 @@ namespace TowerDefense
 
         private static int maxDistanceFromCursor = 450;
 
+        float minX;
+        float maxX;
+        float minY;
+        float maxY;
+
         private Vector2 currentDirection = new Vector2();
 
         private float cameraSpeed = 600;
@@ -27,10 +32,33 @@ namespace TowerDefense
             rb = gameObject.GetComponent<Rigidbody>();
             transform = gameObject.GetComponent<Transform>();
             mouse = gameObject.GetComponent<MouseInput>();
+
+            minX = Pathfinder.GridToTrueCoordinate(Pathfinder.leftEntrance).X;
+            maxX = Pathfinder.GridToTrueCoordinate(Pathfinder.rightEntrance).X;
+            minY = Pathfinder.GridToTrueCoordinate(Pathfinder.topEntrance).Y;
+            maxY = Pathfinder.GridToTrueCoordinate(Pathfinder.bottomEntrance).Y;
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (transform.position.X < minX)
+            {
+                transform.position= new Vector2(minX, transform.position.Y);
+            }
+            else if (transform.position.X > maxX)
+            {
+                transform.position = new Vector2(maxX, transform.position.Y);
+            }
+
+            if (transform.position.Y < minY)
+            {
+                transform.position = new Vector2(transform.position.X, minY);
+            }
+            else if (transform.position.Y > maxY)
+            {
+                transform.position = new Vector2(transform.position.X, maxY);
+            }
+
         }
 
         public void OnMouseMove(Vector2 mousePosition)
@@ -46,7 +74,6 @@ namespace TowerDefense
                 currentDirection = Vector2.Zero;
             }
             rb.velocity = currentDirection * cameraSpeed;
-
         }
     }
 }
