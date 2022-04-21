@@ -22,7 +22,7 @@ namespace TowerDefense
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One * 2));
             gameObject.Add(new EnemyTag(EnemyType.GROUND));
 
-            gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Bomb, TimeSpan.FromMilliseconds(500), systemManager));
+            gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Bomb, TimeSpan.FromMilliseconds(3000), systemManager));
             systemManager.Add(TowerColliderPrefab.Create(gameObject));
 
 
