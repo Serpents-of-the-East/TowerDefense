@@ -17,7 +17,7 @@ namespace TowerDefense
         AnimatedSprite animatedSprite;
 
         private uint currentSelected = 0;
-        private uint numberOfTowers = 3;
+        private uint numberOfTowers = 4;
         private GameObject selectedTower;
         Screen.SetCurrentScreenDelegate setCurrentScreenDelegate;
 
@@ -186,6 +186,9 @@ namespace TowerDefense
                     case (3):
                         newTower = RegularTower.Create(systemManager);
                         break;
+                    case (4):
+                        newTower = AirGroundTower.Create(systemManager);
+                        break;
                 }
 
                 if (newTower != null && PointsManager.GetPlayerPoints() >= newTower.GetComponent<PointsComponent>().points)
@@ -221,6 +224,10 @@ namespace TowerDefense
                     sprite.sprite = ResourceManager.GetTexture("regularTower");
                     animatedSprite.spritesheet = TextureCreation.CreateCircleWithRadius(RegularTower.TowerRadius / 2);
                     transform.scale = Vector2.One * 2;
+                    break;
+                case (4):
+                    sprite.sprite = ResourceManager.GetTexture("cloudtower1");
+                    animatedSprite.spritesheet = TextureCreation.CreateCircleWithRadius(AirGroundTower.TowerRadius / 2);
                     break;
                 default:
                     sprite.sprite = ResourceManager.GetTexture("empty");
