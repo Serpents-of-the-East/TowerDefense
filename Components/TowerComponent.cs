@@ -21,6 +21,9 @@ namespace TowerDefense
         // Texture for each level
         public List<Texture2D> towerTextureByLevel;
 
+        // This is only used for the mage
+        public bool changeAnimatedTexture;
+
         public Texture2D towerTexture { get
             {
                 if (upgradeLevel > towerTextureByLevel.Count)
@@ -39,6 +42,7 @@ namespace TowerDefense
             damage = new List<float>() { 10.0f, 20.0f, 30.0f };
             cooldown = new List<TimeSpan>(){ TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(1) };
             towerTextureByLevel = new List<Texture2D>();
+            changeAnimatedTexture = false;
         }
     }
 }

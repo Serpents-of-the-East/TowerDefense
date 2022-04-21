@@ -13,10 +13,10 @@ namespace TowerDefense
 
         static GuidedMissileTower()
         {
-            ResourceManager.RegisterTexture("Textures/ballista-1", "ballista-1");
-            ResourceManager.RegisterTexture("Textures/ballista-2", "ballista-2");
-            ResourceManager.RegisterTexture("Textures/ballista-3", "ballista-3");
-            towerTextures = new List<Texture2D>() { ResourceManager.GetTexture("ballista-1"), ResourceManager.GetTexture("ballista-2"), ResourceManager.GetTexture("ballista-3"), };
+            ResourceManager.RegisterTexture("Textures/Level0GuidedMissile", "Level0GuidedMissile");
+            ResourceManager.RegisterTexture("Textures/Leve1GuidedMissile", "Level1GuidedMissile");
+            ResourceManager.RegisterTexture("Textures/Leve2GuidedMissile", "Level2GuidedMissile");
+            towerTextures = new List<Texture2D>() { ResourceManager.GetTexture("Level0GuidedMissile"), ResourceManager.GetTexture("Level1GuidedMissile"), ResourceManager.GetTexture("Level2GuidedMissile"), };
         }
 
         public static float TowerRadius = Pathfinder.SIZE_PER_TOWER * 4;
@@ -25,9 +25,9 @@ namespace TowerDefense
             GameObject gameObject = new GameObject();
 
             gameObject.Add(new GuidedMissile());
-            gameObject.Add(new TowerComponent() { turnSpeed = 6 });
+            gameObject.Add(new TowerComponent() { turnSpeed = 6, changeAnimatedTexture = true, towerTextureByLevel = towerTextures });
             gameObject.Add(new Sprite(ResourceManager.GetTexture("guidedTower"), Color.White, 1));
-            gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("guidedTowerBase"), new int[] { 250, 250, 250, 250 }, Vector2.One * 64, layerDepth:0));
+            gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("Level0GuidedMissile"), new int[] { 250, 250, 250, 250 }, Vector2.One * 64, layerDepth:0));
             gameObject.Add(new CircleCollider(TowerRadius));
             gameObject.Add(new RectangleCollider(new Vector2(Pathfinder.SIZE_PER_TOWER, Pathfinder.SIZE_PER_TOWER)));
             gameObject.Add(new PointsComponent() { points = 300 });
