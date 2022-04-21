@@ -29,7 +29,7 @@ namespace TowerDefense
         private TimeSpan timeBetweenEnemies = TimeSpan.FromSeconds(2);
         private TimeSpan currentTimeBetweenEnemies = TimeSpan.Zero;
 
-        private static TimeSpan timeBetweenWaves = TimeSpan.FromSeconds(10);
+        private static TimeSpan timeBetweenWaves = TimeSpan.FromSeconds(4);
         private TimeSpan currentTimeBetweenWaves = TimeSpan.Zero;
 
         /// <summary>
