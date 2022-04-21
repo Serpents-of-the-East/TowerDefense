@@ -22,7 +22,7 @@ namespace TowerDefense
         private ControlLoaderSystem controlLoaderSystem;
         private WeaponSystem weaponSystem;
         private UpgradeSystem upgradeSystem;
-
+        private GameOverSystem gameOverSystem;
         private GameObject camera;
         private KeyboardInput keyboardInput;
         private KeyboardInput spawnWavesInput;
@@ -47,7 +47,9 @@ namespace TowerDefense
             ParticleEmitter.systemManager = systemManager;
             keyboardInput = GameplayKeyboardControls.Create();
             spawnWavesInput = GameplayKeyboardControls.Create();
+            gameOverSystem = new GameOverSystem(systemManager, SetCurrentScreen);
             Pathfinder.SolvePaths();
+            SavedStatePersistence.LoadScores();
         }
 
         public override void Draw(GameTime gameTime)

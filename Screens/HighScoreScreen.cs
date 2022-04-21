@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using CrowEngineBase;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,9 +19,11 @@ namespace TowerDefense
         private RenderTarget2D renderTarget;
         private FontRenderer fontRenderer;
         private GameObject camera;
+        private List<TowerDefenseHighScores> highScores;
+
         List<GameObject> menuItems = new List<GameObject>();
 
-        private Dictionary<string, int> scores;
+        private List<TowerDefenseHighScores> scores;
 
         private bool layoutLoaded = false;
 
@@ -39,7 +43,8 @@ namespace TowerDefense
             camera.Add(new Transform(new Vector2(500, 500), 0, Vector2.One));
             particleSystem = new ParticleSystem(systemManager);
 
-            scores = new Dictionary<string, int>();
+            scores = new List<TowerDefenseHighScores>();
+            highScores = new List<TowerDefenseHighScores>();
 
             systemManager.Add(camera);
 
@@ -82,38 +87,35 @@ namespace TowerDefense
         {
             currentScreen = ScreenEnum.HighScore;
             screenName = ScreenEnum.HighScore;
-            SavedStatePersistence.LoadScoresIntoDictionary(ref scores);
+            SavedStatePersistence.LoadScoresIntoDictionary(ref highScores);
 
+            Debug.WriteLine("Default Screen was loaded");
+            Vector2 currentPos = new Vector2(500, 200);
 
-            Vector2 currentPos = new Vector2(500, 400);
-
-            if (scores.Count == 0)
+            if (highScores.Count == 0)
             {
                 GameObject menuItem = HighScoreItem.Create(currentPos, "No Available Scores", new Vector2(100, 50));
                 systemManager.Add(menuItem);
                 menuItems.Add(menuItem);
             }
+            List<TowerDefenseHighScores> sortedHighScores = highScores.OrderBy(o => o.creepsKilled).ToList();
+            sortedHighScores.Reverse();
 
 
-
-            List<int> topScores = new List<int>();
-            foreach (string name in scores.Keys)
+            for (int i = 0, j = 0; i < sortedHighScores.Count; i++)
             {
-                topScores.Add(scores[name]);
-            }
-
-            topScores.Sort();
-            topScores.Reverse();
-
-
-            for (int i = 0, j = 0; i < topScores.Count; i++)
-            {
-                GameObject menuItem = HighScoreItem.Create(currentPos, topScores[i].ToString(), new Vector2(100, 50));
+                GameObject menuItem = HighScoreItem.Create(currentPos, "Creeps Killed: " + sortedHighScores[i].creepsKilled + " Levels Beaten: " + sortedHighScores[i].levelsCompleted, new Vector2(100, 50));
                 systemManager.Add(menuItem);
-                currentPos = new Vector2(currentPos.X, currentPos.Y + 100);
+                //GameObject menuItem1 = HighScoreItem.Create(new Vector2(currentPos.X, currentPos.Y + 100), "Levels Beaten: " + sortedHighScores[i].levelsCompleted, new Vector2(100, 50));
+                //systemManager.Add(menuItem1);
+                GameObject menuItem2 = HighScoreItem.Create(new Vector2(currentPos.X, currentPos.Y + 100), "Waves Complete: " + sortedHighScores[i].wavesCompleted + " Total Tower Value: " + sortedHighScores[i].totalTowerValue, new Vector2(100, 50));
+                systemManager.Add(menuItem2);
+                //GameObject menuItem3 = HighScoreItem.Create(new Vector2(currentPos.X, currentPos.Y + 300), "Total Tower Value: " + sortedHighScores[i].totalTowerValue, new Vector2(100, 50));
+                //systemManager.Add(menuItem3);
+                currentPos = new Vector2(currentPos.X, currentPos.Y + 250);
                 menuItems.Add(menuItem);
                 j++;
-                if (j >= 5)
+                if (j >= 3)
                 { break; }
             }
 
