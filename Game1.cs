@@ -48,6 +48,8 @@ namespace CrowEngine
             screens.Add(ScreenEnum.Quit, new Quit(ScreenEnum.Quit));
             screens.Add(ScreenEnum.Game, new GameplayScreen(ScreenEnum.Game));
             screens.Add(ScreenEnum.HighScore, new HighScoreScreen(ScreenEnum.HighScore));
+            screens.Add(ScreenEnum.GameOver, new GameOver(ScreenEnum.GameOver));
+
 
             currentScreen = screens[ScreenEnum.MainMenu];
 

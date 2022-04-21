@@ -19,7 +19,7 @@ namespace TowerDefense
         private GameObject camera;
         List<GameObject> menuItems = new List<GameObject>();
 
-        private Dictionary<string, int> scores;
+        private List<TowerDefenseHighScores> scores;
 
         private bool layoutLoaded = false;
 
@@ -39,7 +39,7 @@ namespace TowerDefense
             camera.Add(new Transform(new Vector2(500, 500), 0, Vector2.One));
             particleSystem = new ParticleSystem(systemManager);
 
-            scores = new Dictionary<string, int>();
+            scores = new List<TowerDefenseHighScores>();
 
             systemManager.Add(camera);
 
@@ -97,9 +97,9 @@ namespace TowerDefense
 
 
             List<int> topScores = new List<int>();
-            foreach (string name in scores.Keys)
+            foreach (TowerDefenseHighScores highScore in scores)
             {
-                topScores.Add(scores[name]);
+                topScores.Add(highScore.creepsKilled);
             }
 
             topScores.Sort();

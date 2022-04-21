@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Threading.Tasks;
-using System.Text;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -16,7 +15,7 @@ namespace CrowEngineBase
         private static bool isLoading = false;
         private static bool isSaving = false;
 
-        private static Dictionary<string, int> highScores = new Dictionary<string, int>();
+        private static List<TowerDefenseHighScores> highScores = new List<TowerDefenseHighScores>();
 
         public static bool scoresLoaded { get; private set; }
 
@@ -25,7 +24,7 @@ namespace CrowEngineBase
         /// </summary>
         /// <param name="scores"></param>
         /// <returns></returns>
-        public static bool LoadScoresIntoDictionary(ref Dictionary<string, int> scores)
+        public static bool LoadScoresIntoDictionary(ref List<TowerDefenseHighScores> scores)
         {
             if (!scoresLoaded)
             {
@@ -35,38 +34,38 @@ namespace CrowEngineBase
 
             else
             {
-                foreach ((string key, int value) in highScores)
+                foreach (TowerDefenseHighScores highScore in scores)
                 {
-                    if (scores.ContainsKey(key))
+                    if (!highScores.Contains(highScore))
                     {
-                        scores[key] = value;
-                    }
-                    else
-                    {
-                        scores.Add(key, value);
-                    }
+                        highScores.Add(highScore);
+                    }  
                 }
 
                 return true;
             }
         }
 
-        public static void SaveScores(in Dictionary<string, int> scores)
+        public static void SaveScores(in List<TowerDefenseHighScores> scores)
         {
             if (!isSaving)
             {
-
-                foreach ((string name, int score) in scores)
-                {
-                    highScores[name] = score;
-                }
 
                 highScores = scores;
                 FinalizeAsyncScoresSave(scores);
             }
         }
 
-        private static async void FinalizeAsyncScoresSave(Dictionary<string, int> scores)
+        public static void SaveNewScore(TowerDefenseHighScores score)
+        {
+            if (!isSaving)
+            {
+                highScores.Add(score);
+                FinalizeAsyncScoresSave(highScores);
+            }
+        }
+
+        private static async void FinalizeAsyncScoresSave(List<TowerDefenseHighScores> scores)
         {
             await Task.Run(() =>
             {
@@ -121,14 +120,14 @@ namespace CrowEngineBase
 
                                 using (var isoFileReader = new StreamReader(fs))
                                 {
-                                    highScores = JsonConvert.DeserializeObject<Dictionary<string, int>>(isoFileReader.ReadToEnd());
+                                    highScores = JsonConvert.DeserializeObject<List<TowerDefenseHighScores>>(isoFileReader.ReadToEnd());
                                 }
                             }
                         }
                     }
                     catch (IsolatedStorageException e)
                     {
-                        Console.WriteLine($"Failed to save file because of {e}");
+                        Console.WriteLine($"Failed to load file because of {e}");
                     }
                 }
 
