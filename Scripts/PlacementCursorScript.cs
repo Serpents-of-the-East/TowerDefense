@@ -90,6 +90,28 @@ namespace TowerDefense
 
         }
 
+        public void OnUpgradeTower(float input)
+        {
+            if (input > 0)
+            {
+                if (selectedTower != null)
+                {
+                    GameObject currentSelected = selectedTower.GetComponent<TowerColliderComponent>().parentAttach;
+                    TowerComponent towerComponent = currentSelected.GetComponent<TowerComponent>();
+                    PointsComponent pointsComponent = currentSelected.GetComponent<PointsComponent>();
+                    int currentTowerLevel = towerComponent.upgradeLevel;
+                    int priceToUpgrade = (int)(pointsComponent.points * pointsComponent.pointsPerUpgradeLevel[currentTowerLevel]);
+
+                    if (PointsManager.GetPlayerPoints() >= priceToUpgrade && towerComponent.upgradeLevel < pointsComponent.pointsPerUpgradeLevel.Length - 1)
+                    {
+                        towerComponent.upgradeLevel = currentTowerLevel + 1;
+                        PointsManager.SubtractPlayerPoints(priceToUpgrade);
+                        
+                    }
+                }
+            }
+        }
+
 
 
 

@@ -7,6 +7,8 @@ namespace TowerDefense
     {
         public int points;
 
+        public float[] pointsPerUpgradeLevel = new float[] { 1.0f, 1.5f, 2f };
+
         public PointsComponent()
         {
             points = 0;

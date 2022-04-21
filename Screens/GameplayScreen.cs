@@ -21,6 +21,7 @@ namespace TowerDefense
         private PathSystem pathSystem;
         private ControlLoaderSystem controlLoaderSystem;
         private WeaponSystem weaponSystem;
+        private UpgradeSystem upgradeSystem;
 
         private GameObject camera;
         private KeyboardInput keyboardInput;
@@ -40,6 +41,7 @@ namespace TowerDefense
             pathSystem = new PathSystem(systemManager);
             controlLoaderSystem = new ControlLoaderSystem(systemManager);
             weaponSystem = new WeaponSystem(systemManager);
+            upgradeSystem = new UpgradeSystem(systemManager);
             TextureCreation.device = graphicsDevice;
             particleSystem = new ParticleSystem(systemManager);
             ParticleEmitter.systemManager = systemManager;
