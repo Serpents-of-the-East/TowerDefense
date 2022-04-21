@@ -64,6 +64,9 @@ namespace TowerDefense
         };
 
 
+        private Transform transform;
+
+
         public WaveManager(GameObject gameObject, SystemManager systemManager) : base(gameObject)
         {
             this.systemManager = systemManager;
@@ -73,21 +76,39 @@ namespace TowerDefense
         {
             currentLevelQueue = new Queue<Queue<Enemy>>();
             currentWaveQueue = new Queue<Enemy>();
+            transform = gameObject.GetComponent<Transform>();
         }
 
         public override void Update(GameTime gameTime)
         {
+
             if (waveIsRunning && currentLevelQueue.Count == 0 && currentWaveQueue.Count == 0)
             {
                 // Level Completed
                 waveIsRunning = false;
-                if (currentGoal == PathGoal.Down)
+
+                switch (currentGoal)
                 {
-                    currentGoal = PathGoal.Left;
-                }
-                else
-                {
-                    currentGoal += 1;
+                    case (PathGoal.Left):
+                        currentGoal = PathGoal.Up;
+                        transform.position = new Vector2(500, 50);
+                        transform.rotation = MathF.PI * 0.5f;
+                        break;
+                    case (PathGoal.Up):
+                        currentGoal = PathGoal.Right;
+                        transform.position = new Vector2(950, 500);
+                        transform.rotation = 0;
+                        break;
+                    case (PathGoal.Right):
+                        currentGoal = PathGoal.Down;
+                        transform.position = new Vector2(0, 950);
+                        transform.rotation = MathF.PI * 1.5f;
+                        break;
+                    case (PathGoal.Down):
+                        currentGoal = PathGoal.Left;
+                        transform.position = new Vector2(50, 500);
+                        transform.rotation = MathF.PI;
+                        break;
                 }
 
                 GameStats.AddLevel();
