@@ -11,7 +11,7 @@ namespace TowerDefense
             GameObject gameObject = new GameObject();
 
             gameObject.Add(new GuidedMissile());
-            gameObject.Add(new TowerComponent() { turnSpeed = 3 });
+            gameObject.Add(new TowerComponent() { turnSpeed = 6 });
             gameObject.Add(new Sprite(ResourceManager.GetTexture("guidedTower"), Color.White, 1));
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("guidedTowerBase"), new int[] { 250, 250, 250, 250 }, Vector2.One * 64, layerDepth:0));
             gameObject.Add(new CircleCollider(Pathfinder.SIZE_PER_TOWER*4));
@@ -21,7 +21,7 @@ namespace TowerDefense
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One * 2));
             gameObject.Add(new EnemyTag(EnemyType.AIR));
 
-            gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Missile, TimeSpan.FromMilliseconds(1000), systemManager));
+            gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Missile, TimeSpan.FromMilliseconds(2000), systemManager));
 
             systemManager.Add(TowerColliderPrefab.Create(gameObject));
 
