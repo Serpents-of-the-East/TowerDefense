@@ -7,18 +7,18 @@ namespace TowerDefense
 {
     public static class FlyingEnemy
     {
-        public static GameObject Create(Vector2 position, SystemManager systemManager)
+        public static GameObject Create(Vector2 position, SystemManager systemManager, PathGoal pathGoal)
         {
             GameObject gameObject = new GameObject();
             gameObject.Add(new Enemy());
             gameObject.Add(new Rigidbody());
-            gameObject.Add(new CircleCollider(5));
+            gameObject.Add(new CircleCollider(25));
             gameObject.Add(new EnemyTag(EnemyType.AIR));
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("wyvern"), new int[] { 125, 125, 125, 125, 125, 125 }, Vector2.One * 64));
             gameObject.Add(new PointsComponent() { points = 50 });
             gameObject.Add(new Transform(position, 0, Vector2.One * 3));
             gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager, 100));
-            gameObject.Add(new Path() { goal = PathGoal.Right });
+            gameObject.Add(new Path() { goal = pathGoal });
 
             gameObject.Add(new EnemyHealth()
             {
@@ -30,6 +30,8 @@ namespace TowerDefense
 
                 }
             });
+
+            systemManager.DelayedAdd(EnemyHealthBar.CreateEnemyHealthBar(gameObject, systemManager));
 
             // Should have a health component as well... This must be created.
 

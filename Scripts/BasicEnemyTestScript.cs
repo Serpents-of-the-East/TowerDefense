@@ -42,10 +42,23 @@ namespace TowerDefense
 
         public override void OnCollision(GameObject other)
         {
-            if (other.ContainsComponent<Bullet>() && !other.GetComponent<Bullet>().hasDoneDamage)
+            if (other.ContainsComponent<Bullet>() && !other.GetComponent<Bullet>().hasDoneDamage && other.GetComponent<EnemyTag>().enemyType == gameObject.GetComponent<EnemyTag>().enemyType)
             {
+
                 other.GetComponent<Bullet>().hasDoneDamage = true;
                 this.gameObject.GetComponent<EnemyHealth>().health -= other.GetComponent<Bullet>().damage;
+
+
+                if (other.ContainsComponent<Explosion>())
+                {
+                    foreach (var explosionObject in other.GetComponent<Explosion>().instantiateOnDeathObject)
+                    {
+                        explosionObject.GetComponent<Transform>().position = this.gameObject.GetComponent<Transform>().position;
+                        systemManager.DelayedAdd(explosionObject);
+                    }
+                }
+
+
                 systemManager.DelayedRemove(other);
 
                 if (this.gameObject.GetComponent<EnemyHealth>().health <= 0.0f)
@@ -68,7 +81,6 @@ namespace TowerDefense
                     systemManager.DelayedRemove(gameObject);
                 }
             }
-        }
 
             else if (other.ContainsComponent<DestinationGoal>())
             {
@@ -82,27 +94,9 @@ namespace TowerDefense
             }
 
 
-        public override void Destroyed()
-        {
-            base.Destroyed();
-            if (gameObject.ContainsComponent<EnemyHealth>())
-            {
-                foreach (var deathObject in gameObject.GetComponent<EnemyHealth>().instantiateOnDeathObject)
-                {
-                    if (deathObject.ContainsComponent<PointsTextScript>() && deathObject.ContainsComponent<CircleCollider>())
-                    {
-                        deathObject.GetComponent<Transform>().position = new Vector2(deathObject.GetComponent<Transform>().position.X, deathObject.GetComponent<Transform>().position.Y + deathObject.GetComponent<CircleCollider>().radius);
-                    }
-                    else
-                    {
-                        deathObject.GetComponent<Transform>().position = gameObject.GetComponent<Transform>().position;
-                    }
-                    systemManager.DelayedAdd(deathObject);
-                }
-                    
 
-            }
         }
+
 
     }
 }

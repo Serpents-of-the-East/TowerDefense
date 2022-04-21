@@ -7,7 +7,7 @@ namespace TowerDefense
 {
     public static class BasicEnemy
     {
-        public static GameObject CreateBasicEnemy(Vector2 position, SystemManager systemManager)
+        public static GameObject CreateBasicEnemy(Vector2 position, SystemManager systemManager, PathGoal pathGoal)
         {
             GameObject gameObject = new GameObject();
             gameObject.Add(new Enemy()); // SPEED WAS CHANGED
@@ -20,8 +20,9 @@ namespace TowerDefense
             gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager, 100));
             gameObject.Add(new PointsComponent() { points = 30 });
 
-            gameObject.Add(new Path() { goal = PathGoal.Right });
+            gameObject.Add(new Path() { goal = pathGoal });
 
+            
 
             gameObject.Add(new EnemyHealth()
             {
@@ -35,6 +36,7 @@ namespace TowerDefense
                 }
             });
 
+            systemManager.DelayedAdd(EnemyHealthBar.CreateEnemyHealthBar(gameObject, systemManager));
 
             return gameObject;
         }

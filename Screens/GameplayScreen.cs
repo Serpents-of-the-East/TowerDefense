@@ -20,9 +20,11 @@ namespace TowerDefense
         private AudioSystem audioSystem;
         private PathSystem pathSystem;
         private ControlLoaderSystem controlLoaderSystem;
+        private WeaponSystem weaponSystem;
 
         private GameObject camera;
         private KeyboardInput keyboardInput;
+        private KeyboardInput spawnWavesInput;
 
         public GameplayScreen(ScreenEnum screenEnum) : base (screenEnum)
         {
@@ -37,10 +39,12 @@ namespace TowerDefense
             animationSystem = new AnimationSystem(systemManager);
             pathSystem = new PathSystem(systemManager);
             controlLoaderSystem = new ControlLoaderSystem(systemManager);
+            weaponSystem = new WeaponSystem(systemManager);
             TextureCreation.device = graphicsDevice;
             particleSystem = new ParticleSystem(systemManager);
             ParticleEmitter.systemManager = systemManager;
             keyboardInput = GameplayKeyboardControls.Create();
+            spawnWavesInput = GameplayKeyboardControls.Create();
             Pathfinder.SolvePaths();
         }
 
@@ -84,7 +88,7 @@ namespace TowerDefense
             camera.GetComponent<Transform>().position = Vector2.Zero;
             renderer = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
 
-            renderer.debugMode = false;
+            renderer.debugMode = true;
 
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
@@ -101,6 +105,7 @@ namespace TowerDefense
             currentScreen = ScreenEnum.Game;
             screenName = ScreenEnum.Game;
             InputPersistence.LoadSavedKeyboard(ref keyboardInput);
+            InputPersistence.LoadSavedKeyboard(ref spawnWavesInput);
         }
 
         public override void SetupGameObjects()
@@ -108,31 +113,18 @@ namespace TowerDefense
 
 
             systemManager.Add(BackgroundPrefab.Create());
-            GameObject basicEnemy = BasicEnemy.CreateBasicEnemy(Vector2.One, systemManager);
-            systemManager.Add(basicEnemy);
-
-            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(basicEnemy, systemManager));
 
 
-
-            GameObject tankyEnemyTest = TankyEnemy.CreateTankyEnemy(new Vector2(-100, 0), systemManager);
-            systemManager.Add(tankyEnemyTest);
-
-            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(tankyEnemyTest, systemManager));
 
             systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem, keyboardInput, SetCurrentScreen));
 
 
-            GameObject actualBasicEnemy = FlyingEnemy.Create(Vector2.One * 30, systemManager);
-
-            systemManager.Add(actualBasicEnemy);
-
-            systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(actualBasicEnemy, systemManager));
-
             systemManager.Add(InfoBackground.Create(new Vector2(0, 50)));
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
-            systemManager.Add(EnemySpawner.CreateEnemySpawner(systemManager));
+
+
+            systemManager.Add(WaveController.Create(systemManager, spawnWavesInput, camera.GetComponent<Transform>()));
 
             systemManager.Add(DestinationColliders.Create(Pathfinder.leftEntrance * Pathfinder.conversionFactor, PathGoal.Left));
             systemManager.Add(DestinationColliders.Create(Pathfinder.rightEntrance * Pathfinder.conversionFactor, PathGoal.Right));

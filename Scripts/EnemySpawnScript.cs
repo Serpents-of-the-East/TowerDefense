@@ -1,4 +1,7 @@
-﻿using System;
+﻿// This file is a lesson in communication. Ryan wrote this whole thing and I didn't realize, so I wrote pretty much the same thing in another file...
+// He told me about it, I just had forgotten :(
+
+/*using System;
 using System.Collections.Generic;
 using CrowEngineBase;
 using Microsoft.Xna.Framework;
@@ -118,3 +121,4 @@ namespace TowerDefense
 
     }
 }
+*/
