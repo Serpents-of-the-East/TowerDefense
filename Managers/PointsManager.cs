@@ -26,7 +26,7 @@ namespace TowerDefense
 
         public static void ResetPoints()
         {
-            playerPoints = 0;
+            playerPoints = 1000;
         }
     }
 }

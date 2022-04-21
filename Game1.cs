@@ -97,11 +97,13 @@ namespace CrowEngine
                 newScreenFocused = true;
             }
 
-            if (currentScreen == screens[ScreenEnum.MainMenu])
+            if (nextScreen == ScreenEnum.MainMenu && newScreenFocused)
             {
                 screens[ScreenEnum.Game].Initialize(GraphicsDevice, _graphics, Window);
                 screens[ScreenEnum.Game].LoadContent();
                 screens[ScreenEnum.Game].SetupGameObjects();
+                GameStats.ResetStats();
+                PointsManager.ResetPoints();
             }
 
 
