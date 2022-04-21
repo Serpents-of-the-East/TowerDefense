@@ -13,6 +13,9 @@ namespace CrowEngineBase
         public static int PHYSICS_DIMENSION_HEIGHT = 1000;
         public static float GRAVITY_CONSTANT = -9.81f;
 
+        public static int QUADTREE_SIZE = PHYSICS_DIMENSION_HEIGHT * 10;
+        public static int QUADTREE_MIDPOINT = QUADTREE_SIZE / 2;
+
         private Quadtree quadtree;
 
         public PhysicsEngine(SystemManager systemManager) : base(systemManager, typeof(Transform), typeof(Rigidbody), typeof(Collider))
@@ -25,7 +28,7 @@ namespace CrowEngineBase
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
-            quadtree = new Quadtree(PHYSICS_DIMENSION_WIDTH, PHYSICS_DIMENSION_HEIGHT);
+            quadtree = new Quadtree(QUADTREE_SIZE, QUADTREE_SIZE);
 
             foreach (uint id in m_gameObjects.Keys)
             {
