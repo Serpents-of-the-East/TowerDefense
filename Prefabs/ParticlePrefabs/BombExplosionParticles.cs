@@ -12,7 +12,7 @@ namespace TowerDefense
             GameObject gameObject = new GameObject();
             gameObject.Add(new Transform(position, 0, Vector2.One));
 
-            Particle particle = new Particle(ResourceManager.GetTexture("bomb-particle-explosion"));
+            Particle particle = new Particle(ResourceManager.GetTexture("fire-particle"));
 
             particle.rate = TimeSpan.FromMilliseconds(2);
             particle.maxSpeed = 300;
