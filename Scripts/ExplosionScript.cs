@@ -39,7 +39,7 @@ namespace TowerDefense
                         foreach (var deathGameObject in enemyHealth.instantiateOnDeathObject)
                         {
                             deathGameObject.GetComponent<Transform>().position = this.gameObject.GetComponent<Transform>().position;
-                            systemManager.Add(deathGameObject);
+                            systemManager.DelayedAdd(deathGameObject);
                         }
                     }
 

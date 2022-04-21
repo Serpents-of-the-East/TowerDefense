@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 using Microsoft.Xna.Framework;
@@ -26,8 +27,12 @@ namespace CrowEngineBase
         /// <param name="gameObject"></param>
         public void Add(GameObject gameObject)
         {
-            gameObjectsDictionary.Add(gameObject.id, gameObject);
-            AddGameObject?.Invoke(gameObject);
+            if (!gameObjectsDictionary.ContainsKey(gameObject.id))
+            {
+                Debug.WriteLine("Contained duplicate in system manager");
+                gameObjectsDictionary.Add(gameObject.id, gameObject);
+                AddGameObject?.Invoke(gameObject);
+            }
         }
 
         public void Remove(uint id)
