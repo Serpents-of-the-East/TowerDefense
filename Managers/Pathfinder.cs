@@ -30,6 +30,16 @@ namespace TowerDefense
         public static Vector2 topEntrance = new Vector2(MathF.Floor(MAP_SIZE_IN_TOWERS / 2), 0);
         public static Vector2 bottomEntrance = new Vector2(MathF.Floor(MAP_SIZE_IN_TOWERS / 2), MAP_SIZE_IN_TOWERS - 1);
 
+        /// <summary>
+        /// Can be used to lookup where to spawn an enemy, e.g. if the enemy's goal is right, it should spawn left
+        /// </summary>
+        public static Dictionary<PathGoal, Vector2> spawnPointLookup = new Dictionary<PathGoal, Vector2>()
+        {
+            {PathGoal.Right, leftEntrance },
+            {PathGoal.Down, topEntrance },
+            {PathGoal.Left, rightEntrance },
+            {PathGoal.Up, bottomEntrance }
+        };
 
         public static Func<bool> CheckPathsFunc;
 

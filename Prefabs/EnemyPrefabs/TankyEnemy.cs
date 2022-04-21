@@ -7,7 +7,7 @@ namespace TowerDefense
 {
     public class TankyEnemy
     {
-        public static GameObject CreateTankyEnemy(Vector2 position, SystemManager systemManager)
+        public static GameObject CreateTankyEnemy(Vector2 position, SystemManager systemManager, PathGoal pathGoal)
         {
             GameObject gameObject = new GameObject();
             gameObject.Add(new Enemy());
@@ -20,7 +20,7 @@ namespace TowerDefense
 
             gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager));
             gameObject.Add(new PointsComponent() { points = 120 });
-            gameObject.Add(new Path() { goal = PathGoal.Right });
+            gameObject.Add(new Path() { goal = pathGoal });
 
 
             gameObject.Add(new EnemyHealth()
