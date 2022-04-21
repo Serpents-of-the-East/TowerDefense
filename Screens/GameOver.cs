@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using CrowEngineBase;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +19,8 @@ namespace TowerDefense
         private LightRenderer lightRenderer;
         private RenderTarget2D renderTarget;
         private FontRenderer fontRenderer;
+        List<GameObject> menuItems = new List<GameObject>();
+
 
 
         private GameObject camera;
@@ -36,7 +40,6 @@ namespace TowerDefense
             camera = new GameObject();
             camera.Add(new Transform(new Vector2(500, 500), 0, Vector2.One));
             particleSystem = new ParticleSystem(systemManager);
-
 
             systemManager.Add(camera);
         }
@@ -67,13 +70,22 @@ namespace TowerDefense
         public override void OnScreenDefocus()
         {
             Debug.WriteLine("Default Screen was unloaded");
+
+            foreach (GameObject menuItem in menuItems)
+            {
+                systemManager.Remove(menuItem.id);
+            }
+
+            menuItems.Clear();
         }
 
         public override void OnScreenFocus()
         {
             currentScreen = ScreenEnum.GameOver;
             screenName = ScreenEnum.GameOver;
-            Debug.WriteLine("Default Screen was loaded");
+
+
+
 
         }
 

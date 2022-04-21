@@ -15,7 +15,7 @@ namespace CrowEngineBase
         private static bool isLoading = false;
         private static bool isSaving = false;
 
-        private static List<TowerDefenseHighScores> highScores = new List<TowerDefenseHighScores>();
+        public static List<TowerDefenseHighScores> highScores = new List<TowerDefenseHighScores>();
 
         public static bool scoresLoaded { get; private set; }
 
@@ -41,6 +41,7 @@ namespace CrowEngineBase
                         highScores.Add(highScore);
                     }  
                 }
+                scores = highScores;
 
                 return true;
             }
