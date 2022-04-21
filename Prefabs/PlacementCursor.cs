@@ -20,6 +20,7 @@ namespace TowerDefense
             GameObject cursor = new GameObject();
 
             cursor.Add(new Sprite(ResourceManager.GetTexture("empty"), Color.White, 0));
+            cursor.Add(new AnimatedSprite(ResourceManager.GetTexture("empty"), new int[] { 1 }, Vector2.One * ResourceManager.GetTexture("empty").Height));
             cursor.Add(new Transform(Vector2.Zero, 0, Vector2.One));
             cursor.Add(new Rigidbody());
             cursor.Add(new CircleCollider(1));
