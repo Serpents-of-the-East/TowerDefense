@@ -17,6 +17,7 @@ namespace CrowEngineBase
             this.m_centerOfScreen = screenSize / 2;
 
             systemManager.UpdateSystem -= Update;
+            this.m_camera = m_camera;
         }
 
         private void DrawBackground(Text text, Transform transform, Vector2 trueRenderPosition, SpriteBatch spriteBatch)

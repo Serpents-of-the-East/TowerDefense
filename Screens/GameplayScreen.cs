@@ -122,6 +122,7 @@ namespace TowerDefense
 
             systemManager.Add(PlacementCursor.Create(systemManager, camera, controlLoaderSystem, keyboardInput, SetCurrentScreen));
 
+
             GameObject actualBasicEnemy = FlyingEnemy.Create(Vector2.One * 30, systemManager);
 
             systemManager.Add(actualBasicEnemy);
@@ -129,8 +130,6 @@ namespace TowerDefense
             systemManager.Add(EnemyHealthBar.CreateEnemyHealthBar(actualBasicEnemy, systemManager));
 
             systemManager.Add(InfoBackground.Create(new Vector2(0, 50)));
-            systemManager.Add(PointsPrefab.CreatePointsPrefab());
-
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
             systemManager.Add(EnemySpawner.CreateEnemySpawner(systemManager));
