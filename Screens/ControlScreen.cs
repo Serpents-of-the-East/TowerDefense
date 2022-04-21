@@ -59,7 +59,7 @@ namespace TowerDefense
         public override void LoadContent()
         {
             renderSystem = new Renderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
-            renderSystem.debugMode = true;
+            renderSystem.debugMode = false;
             particleRenderer = new ParticleRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height));
             lightRenderer = new LightRenderer(systemManager, m_window.ClientBounds.Height, camera, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), m_graphicsDevice);
             lightRenderer.globalLightLevel = 0f;
@@ -90,13 +90,13 @@ namespace TowerDefense
             List<GameObject> menuItems = new List<GameObject>();
             foreach (string action in gameplaykeyboard.actionKeyPairs.Keys)
             {
-                GameObject menuItem = ControlItem.Create(currentPos, action, new Vector2(100, 50), gameplaykeyboard);
+                GameObject menuItem = ControlItem.Create(currentPos, action, new Vector2(300, 50), gameplaykeyboard);
                 systemManager.Add(menuItem);
                 currentPos = new Vector2(currentPos.X, currentPos.Y + 100);
                 menuItems.Add(menuItem);
             }
 
-            systemManager.Add(RebindMainInput.Create(menuItems.ToArray(), gameplaykeyboard, new Vector2(500, 100), SetCurrentScreen));
+            systemManager.Add(RebindMainInput.Create(menuItems.ToArray(), gameplaykeyboard, new Vector2(500, 100), camera.GetComponent<Transform>(), SetCurrentScreen));
 
             
         }
