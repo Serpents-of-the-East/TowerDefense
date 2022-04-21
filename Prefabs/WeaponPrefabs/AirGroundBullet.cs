@@ -6,9 +6,14 @@ using Microsoft.Xna.Framework;
 
 namespace TowerDefense
 {
-    public static class BasicBullet
+    public static class AirGroundBullet
     {
-        private static float SPEED = 500;
+        private static float SPEED = 750;
+
+        static AirGroundBullet()
+        {
+            ResourceManager.RegisterTexture("Textures/lightningbolt", "lightningbolt");
+        }
 
         public static GameObject Create(Vector2 position, Vector2 target, GameObject tower)
         {
@@ -24,9 +29,9 @@ namespace TowerDefense
             gameObject.Add(new Bullet() { speed = SPEED, damage = tower.GetComponent<TowerComponent>().damage[tower.GetComponent<TowerComponent>().upgradeLevel] });
             gameObject.Add(new EnemyTag(EnemyType.GROUND));
 
-            gameObject.Add(new Sprite(ResourceManager.GetTexture("arrow"), Color.White));
+            gameObject.Add(new Sprite(ResourceManager.GetTexture("lightningbolt"), Color.White));
 
-            gameObject.Add(BasicTrailParticles.Create());
+            gameObject.Add(LightningTrailParticles.Create());
 
 
             return gameObject;
