@@ -3,6 +3,7 @@
 using CrowEngineBase;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TowerDefense
 {
@@ -13,11 +14,14 @@ namespace TowerDefense
         Transform transform;
 
         Sprite sprite; // TODO: This should probably switch to an animated sprite
+        AnimatedSprite animatedSprite;
 
         private uint currentSelected = 0;
         private uint numberOfTowers = 3;
         private GameObject selectedTower;
         Screen.SetCurrentScreenDelegate setCurrentScreenDelegate;
+
+
 
 
         private GameObject camera;
@@ -40,6 +44,7 @@ namespace TowerDefense
             mouse = gameObject.GetComponent<MouseInput>();
             transform = gameObject.GetComponent<Transform>();
             sprite = gameObject.GetComponent<Sprite>();
+            animatedSprite = gameObject.GetComponent<AnimatedSprite>();
             selectedTower = null;
         }
 
@@ -182,21 +187,26 @@ namespace TowerDefense
             {
                 case (1):
                     sprite.sprite = ResourceManager.GetTexture("bombTower");
+                    animatedSprite.spritesheet = TextureCreation.CreateCircleWithRadius(BombTower.TowerRadius / 2);
                     transform.scale = Vector2.One * 2;
                     break;
                 case (2):
                     sprite.sprite = ResourceManager.GetTexture("guidedTower");
+                    animatedSprite.spritesheet = TextureCreation.CreateCircleWithRadius(GuidedMissileTower.TowerRadius / 2);
                     transform.scale = Vector2.One * 2;
                     break;
                 case (3):
                     sprite.sprite = ResourceManager.GetTexture("regularTower");
+                    animatedSprite.spritesheet = TextureCreation.CreateCircleWithRadius(RegularTower.TowerRadius / 2);
                     transform.scale = Vector2.One * 2;
                     break;
                 default:
                     sprite.sprite = ResourceManager.GetTexture("empty");
+                    animatedSprite.spritesheet = ResourceManager.GetTexture("empty");
                     break;
             }
             sprite.center = new Vector2(sprite.sprite.Width, sprite.sprite.Height) / 2;
+            animatedSprite.singleFrameSize = Vector2.One * animatedSprite.spritesheet.Height;
 
         }
     }
