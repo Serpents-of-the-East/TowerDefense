@@ -95,6 +95,13 @@ namespace CrowEngine
                 newScreenFocused = true;
             }
 
+            if (currentScreen == screens[ScreenEnum.MainMenu])
+            {
+                screens[ScreenEnum.Game].Initialize(GraphicsDevice, _graphics, Window);
+                screens[ScreenEnum.Game].LoadContent();
+                screens[ScreenEnum.Game].SetupGameObjects();
+            }
+
 
 
             // TODO: Add your update logic here
