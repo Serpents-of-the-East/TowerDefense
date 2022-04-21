@@ -22,6 +22,7 @@ namespace TowerDefense
             gameObject.Add(new PointsComponent() { points = 30 });
             gameObject.Add(new Path() { goal = pathGoal });
 
+            
 
             gameObject.Add(new EnemyHealth()
             {
@@ -34,6 +35,7 @@ namespace TowerDefense
                 }
             }) ;
 
+            systemManager.DelayedAdd(EnemyHealthBar.CreateEnemyHealthBar(gameObject, systemManager));
 
             return gameObject;
         }

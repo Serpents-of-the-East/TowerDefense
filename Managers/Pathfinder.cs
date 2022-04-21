@@ -33,13 +33,19 @@ namespace TowerDefense
         /// <summary>
         /// Can be used to lookup where to spawn an enemy, e.g. if the enemy's goal is right, it should spawn left
         /// </summary>
-        public static Dictionary<PathGoal, Vector2> spawnPointLookup = new Dictionary<PathGoal, Vector2>()
+        private static Dictionary<PathGoal, Vector2> spawnPointLookup = new Dictionary<PathGoal, Vector2>()
         {
             {PathGoal.Right, leftEntrance },
             {PathGoal.Down, topEntrance },
             {PathGoal.Left, rightEntrance },
             {PathGoal.Up, bottomEntrance }
         };
+
+        public static Vector2 SpawnPointLookup(PathGoal goal)
+        {
+            Vector2 position = GridToTrueCoordinate(spawnPointLookup[goal]);
+            return position;
+        }
 
         public static Func<bool> CheckPathsFunc;
 

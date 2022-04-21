@@ -26,10 +26,10 @@ namespace TowerDefense
         /// <summary>
         /// Enemy spawn timing criterea
         /// </summary>
-        private TimeSpan timeBetweenEnemies = TimeSpan.FromSeconds(0.5);
+        private TimeSpan timeBetweenEnemies = TimeSpan.FromSeconds(2);
         private TimeSpan currentTimeBetweenEnemies = TimeSpan.Zero;
 
-        private static TimeSpan timeBetweenWaves = TimeSpan.FromSeconds(2);
+        private static TimeSpan timeBetweenWaves = TimeSpan.FromSeconds(10);
         private TimeSpan currentTimeBetweenWaves = TimeSpan.Zero;
 
         /// <summary>
@@ -66,10 +66,14 @@ namespace TowerDefense
 
         private Transform transform;
 
+        private Vector2 currentSpawnTruePosition;
+        private Transform cameraTransform;
 
-        public WaveManager(GameObject gameObject, SystemManager systemManager) : base(gameObject)
+
+        public WaveManager(GameObject gameObject, SystemManager systemManager, Transform cameraTranform) : base(gameObject)
         {
             this.systemManager = systemManager;
+            this.cameraTransform = cameraTranform;
         }
 
         public override void Start()
@@ -77,10 +81,19 @@ namespace TowerDefense
             currentLevelQueue = new Queue<Queue<Enemy>>();
             currentWaveQueue = new Queue<Enemy>();
             transform = gameObject.GetComponent<Transform>();
+
+            currentSpawnTruePosition = Pathfinder.SpawnPointLookup(currentGoal);
         }
 
         public override void Update(GameTime gameTime)
         {
+            Vector2 foundPosition = cameraTransform.position + transform.position - (Vector2.One * 500); // convert our HUD position to the actual position
+
+            Vector2 direction = currentSpawnTruePosition - foundPosition;
+            direction.Normalize();
+
+            transform.rotation = MathF.Atan2(direction.Y, direction.X);
+
 
             if (waveIsRunning && currentLevelQueue.Count == 0 && currentWaveQueue.Count == 0)
             {
@@ -91,25 +104,22 @@ namespace TowerDefense
                 {
                     case (PathGoal.Left):
                         currentGoal = PathGoal.Up;
-                        transform.position = new Vector2(500, 50);
-                        transform.rotation = MathF.PI * 0.5f;
+                        transform.position = new Vector2(500, 950);
                         break;
                     case (PathGoal.Up):
                         currentGoal = PathGoal.Right;
-                        transform.position = new Vector2(950, 500);
-                        transform.rotation = 0;
+                        transform.position = new Vector2(50, 500);
                         break;
                     case (PathGoal.Right):
                         currentGoal = PathGoal.Down;
-                        transform.position = new Vector2(0, 950);
-                        transform.rotation = MathF.PI * 1.5f;
+                        transform.position = new Vector2(500, 50);
                         break;
                     case (PathGoal.Down):
                         currentGoal = PathGoal.Left;
-                        transform.position = new Vector2(50, 500);
-                        transform.rotation = MathF.PI;
+                        transform.position = new Vector2(950, 500);
                         break;
                 }
+                currentSpawnTruePosition = Pathfinder.SpawnPointLookup(currentGoal);
 
                 GameStats.AddLevel();
             }
@@ -133,13 +143,13 @@ namespace TowerDefense
                         switch (currentEnemy)
                         {
                             case (Enemy.Flying):
-                                systemManager.Add(FlyingEnemy.Create(Pathfinder.spawnPointLookup[currentGoal], systemManager, currentGoal));
+                                systemManager.DelayedAdd(FlyingEnemy.Create(Pathfinder.SpawnPointLookup(currentGoal), systemManager, currentGoal));
                                 break;
                             case (Enemy.Normal):
-                                systemManager.Add(BasicEnemy.CreateBasicEnemy(Pathfinder.spawnPointLookup[currentGoal], systemManager, currentGoal));
+                                systemManager.DelayedAdd(BasicEnemy.CreateBasicEnemy(Pathfinder.SpawnPointLookup(currentGoal), systemManager, currentGoal));
                                 break;
                             case (Enemy.Tank):
-                                systemManager.Add(TankyEnemy.CreateTankyEnemy(Pathfinder.spawnPointLookup[currentGoal], systemManager, currentGoal));
+                                systemManager.DelayedAdd(TankyEnemy.CreateTankyEnemy(Pathfinder.SpawnPointLookup(currentGoal), systemManager, currentGoal));
                                 break;
                         }
 
@@ -165,6 +175,7 @@ namespace TowerDefense
             {
                 waveIsRunning = true;
                 currentLevelQueue = GenerateLevel();
+                currentWaveQueue = currentLevelQueue.Dequeue();
                 currentTimeBetweenEnemies = TimeSpan.Zero;
                 currentTimeBetweenWaves = TimeSpan.Zero;
             }
@@ -174,7 +185,7 @@ namespace TowerDefense
         {
             Queue<Queue<Enemy>> queue = new Queue<Queue<Enemy>>();
 
-            for (int i = 0; i < GameStats.numberLevels + 1; i++)
+            for (int i = 0; i < GameStats.numberLevels + 2; i++)
             {
                 queue.Enqueue(GenerateWaveEnemies());
             }
@@ -198,7 +209,14 @@ namespace TowerDefense
                 float randomValue = random.NextRange(0, 1);
                 if (randomValue < chancePerEnemy[Enemy.Flying])
                 {
-                    enemyTypes[i] = (Enemy.Flying);
+                    if (GameStats.numberLevels < 2)
+                    {
+                        enemyTypes[i] = Enemy.Normal;
+                    }
+                    else
+                    {
+                        enemyTypes[i] = (Enemy.Flying);
+                    }
                 }
                 else if (randomValue < chancePerEnemy[Enemy.Flying] + chancePerEnemy[Enemy.Normal])
                 {

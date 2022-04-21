@@ -31,6 +31,8 @@ namespace TowerDefense
                 }
             });
 
+            systemManager.DelayedAdd(EnemyHealthBar.CreateEnemyHealthBar(gameObject, systemManager));
+
             // Should have a health component as well... This must be created.
 
             return gameObject;

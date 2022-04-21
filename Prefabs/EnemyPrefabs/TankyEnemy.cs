@@ -34,6 +34,8 @@ namespace TowerDefense
                 }
             });
 
+            systemManager.DelayedAdd(EnemyHealthBar.CreateEnemyHealthBar(gameObject, systemManager));
+
             return gameObject;
         }
     }
