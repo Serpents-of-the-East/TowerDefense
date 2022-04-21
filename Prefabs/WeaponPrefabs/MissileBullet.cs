@@ -10,10 +10,11 @@ namespace TowerDefense
     {
         private static float SPEED = 500;
 
-        public static GameObject Create(Vector2 position, Vector2 target, GameObject tower, SystemManager systemManager)
+        public static GameObject Create(Vector2 position, Transform target, GameObject tower, SystemManager systemManager)
         {
             GameObject gameObject = new GameObject();
-            Vector2 direction = (target - position);
+            Vector2 targetPosition = target.position;
+            Vector2 direction = (targetPosition - position);
             direction.Normalize();
 
             float rotation = MathF.Atan2(direction.Y, direction.X);
@@ -23,7 +24,7 @@ namespace TowerDefense
             gameObject.Add(new CircleCollider(20));
             gameObject.Add(new Bullet() { speed = SPEED, damage = tower.GetComponent<TowerComponent>().damage[tower.GetComponent<TowerComponent>().upgradeLevel] });
             gameObject.Add(new EnemyTag(EnemyType.AIR));
-
+            gameObject.Add(new GuidedMissile() { target = target });
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("magebolt"), new int[] { 100, 100, 100, 100 }, Vector2.One * 64));
 
             gameObject.Add(MissileTrailParticles.Create());
