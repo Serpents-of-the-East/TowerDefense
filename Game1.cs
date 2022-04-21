@@ -53,7 +53,7 @@ namespace CrowEngine
 
             ResourceManager.RegisterTexture("SpriteSheets/coin", "coin");
             ResourceManager.RegisterFont("Fonts/DefaultFont", "default");
-            PointsManager.AddPlayerPoints(1000);
+            PointsManager.AddPlayerPoints(100000);
 
             base.Initialize();
         }
