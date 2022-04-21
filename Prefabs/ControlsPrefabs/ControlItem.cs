@@ -26,6 +26,7 @@ namespace TowerDefense
             gameObject.Add(new Transform(position, 0, Vector2.One));
             gameObject.Add(new Rigidbody());
             gameObject.Add(new RectangleCollider(collisionSize));
+            gameObject.Add(new RenderedComponent());
             gameObject.Add(new Text($"{actionName}", ResourceManager.GetFont("default"), Color.White, Color.Black, drawOutline: true));
             gameObject.Add(new RebindControlScript(gameObject, gameplayInput, actionName));
 

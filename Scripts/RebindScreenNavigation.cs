@@ -21,19 +21,28 @@ namespace TowerDefense
 
         private Text rebindingText;
 
+        private MouseInput mouse;
+
+        private Transform transform;
+
+        private Transform cameraTransform;
+
         private Screen.SetCurrentScreenDelegate setCurrentScreenDelegate;
 
-        public RebindScreenNavigation(GameObject gameObject, GameObject[] menuItems, KeyboardInput rebindKeyboard, Screen.SetCurrentScreenDelegate setCurrentScreenDelegate) : base(gameObject)
+        public RebindScreenNavigation(GameObject gameObject, GameObject[] menuItems, KeyboardInput rebindKeyboard, Screen.SetCurrentScreenDelegate setCurrentScreenDelegate, Transform cameraTransform) : base(gameObject)
         {
             this.menuItems = menuItems;
             this.rebindKeyboard = rebindKeyboard;
             this.setCurrentScreenDelegate = setCurrentScreenDelegate;
+            this.cameraTransform = cameraTransform;
         }
 
 
         public override void Start()
         {
             rebindingText = gameObject.GetComponent<Text>();
+            mouse = gameObject.GetComponent<MouseInput>();
+            transform = gameObject.GetComponent<Transform>();
         }
         /// <summary>
         /// Used by mouse to set the selected object
@@ -45,22 +54,33 @@ namespace TowerDefense
             {
                 currentSelectedObject.GetComponent<RebindControlScript>().isSelected = false;
             }
-            currentSelectedObject = gameObject;
-            currentSelected = gameObject.GetComponent<RebindControlScript>().myAction;
-            for (int i = 0; i < menuItems.Length; i++)
+
+            if (gameObject != null)
             {
-                if (menuItems[i] == gameObject)
+                currentSelectedObject = gameObject;
+                currentSelected = gameObject.GetComponent<RebindControlScript>().myAction;
+                for (int i = 0; i < menuItems.Length; i++)
                 {
-                    this.currentSelectedIdx = i;
-                    break;
+                    if (menuItems[i] == gameObject)
+                    {
+                        this.currentSelectedIdx = i;
+                        break;
+                    }
                 }
+                gameObject.GetComponent<RebindControlScript>().isSelected = true;
             }
-            gameObject.GetComponent<RebindControlScript>().isSelected = true;
+            else
+            {
+                currentSelectedObject = null;
+                currentSelected = "";
+                currentSelectedIdx = -1;
+            }
+            
         }
 
         public override void OnCollisionStart(GameObject other)
         {
-            if (this.currentSelected == null && !rebindMode && other.ContainsComponent<RebindControlScript>())
+            if (!rebindMode && other.ContainsComponent<RebindControlScript>())
             {
                 SetSelected(other);
             }
@@ -71,9 +91,8 @@ namespace TowerDefense
             if (other == currentSelectedObject && !rebindMode)
             {
                 other.GetComponent<RebindControlScript>().isSelected = false;
-                currentSelected = "";
-                currentSelectedIdx = -1;
-                currentSelectedObject = null;
+
+                SetSelected(null);
             }
         }
 
@@ -107,6 +126,14 @@ namespace TowerDefense
             {
                 rebindMode = true;
             }
+        }
+
+        public void OnMouseMove(Vector2 value)
+        {
+            Vector2 currentMousePosition = mouse.PhysicsPositionCamera(cameraTransform);
+
+            transform.position = currentMousePosition;
+
         }
 
 
