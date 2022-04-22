@@ -27,10 +27,10 @@ namespace TowerDefense
         {
             GameObject gameObject = new GameObject();
 
-            gameObject.Add(new TowerComponent() { turnSpeed = 6, towerTextureByLevel = towerTextures });
+            gameObject.Add(new TowerComponent() { turnSpeed = 6, towerTextureByLevel = towerTextures, damage = new List<float>() { 10, 20, 30 } });
             gameObject.Add(new Sprite(ResourceManager.GetTexture("cloudtower1"), Color.White, 0));
             gameObject.Add(new CircleCollider(TowerRadius));
-            gameObject.Add(new PointsComponent() { points = 100 });
+            gameObject.Add(new PointsComponent() { points = 500 });
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One * 2));
             gameObject.Add(new EnemyTag(EnemyType.MIXED));

@@ -17,7 +17,7 @@ namespace TowerDefense
             gameObject.Add(new EnemyTag(EnemyType.GROUND));
 
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("goblin"), new int[] { 250, 250, 250, 250, 250, 250, 250, 250 }, Vector2.One * 64));
-            gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager, 100));
+            gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager, MathF.Min(100 + 10 * GameStats.numberLevels, 150)));
             gameObject.Add(new PointsComponent() { points = 30 });
 
             gameObject.Add(new Path() { goal = pathGoal });
@@ -26,8 +26,8 @@ namespace TowerDefense
 
             gameObject.Add(new EnemyHealth()
             {
-                health = 100f,
-                maxHealth = 100f,
+                health = MathF.Min(100 + 10 * GameStats.numberLevels, 400),
+                maxHealth = MathF.Min(100 + 10 * GameStats.numberLevels, 400),
                 instantiateOnDeathObject = new List<GameObject>()
                 {
                     EnemyDeathParticles.Create(gameObject.GetComponent<Transform>().position),

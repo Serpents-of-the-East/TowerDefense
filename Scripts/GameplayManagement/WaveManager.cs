@@ -26,7 +26,7 @@ namespace TowerDefense
         /// <summary>
         /// Enemy spawn timing criterea
         /// </summary>
-        private TimeSpan timeBetweenEnemies = TimeSpan.FromSeconds(2);
+        private TimeSpan timeBetweenEnemies = TimeSpan.FromSeconds(1);
         private TimeSpan currentTimeBetweenEnemies = TimeSpan.Zero;
 
         private static TimeSpan timeBetweenWaves = TimeSpan.FromSeconds(4);

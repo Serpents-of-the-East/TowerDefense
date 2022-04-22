@@ -27,9 +27,9 @@ namespace TowerDefense
             GameObject gameObject = new GameObject();
 
             gameObject.Add(new Bomb());
-            gameObject.Add(new TowerComponent() { turnSpeed = 6, towerTextureByLevel = towerTextures });
+            gameObject.Add(new TowerComponent() { turnSpeed = 6, towerTextureByLevel = towerTextures, damage = new List<float>() { 15, 30, 45 } });
             gameObject.Add(new Sprite(ResourceManager.GetTexture("bombTower"), Color.White, 0));
-            gameObject.Add(new PointsComponent() { points = 200 });
+            gameObject.Add(new PointsComponent() { points = 300 });
             gameObject.Add(new CircleCollider(TowerRadius));
             gameObject.Add(new RectangleCollider(new Vector2(Pathfinder.SIZE_PER_TOWER, Pathfinder.SIZE_PER_TOWER)));
             gameObject.Add(new Rigidbody());

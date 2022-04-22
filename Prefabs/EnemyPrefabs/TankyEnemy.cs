@@ -25,8 +25,8 @@ namespace TowerDefense
 
             gameObject.Add(new EnemyHealth()
             {
-                health = 100f,
-                maxHealth = 100f,
+                health = MathF.Min(200 + 30 * GameStats.numberLevels, 1000),
+                maxHealth = MathF.Min(200 + 30 * GameStats.numberLevels, 1000),
                 instantiateOnDeathObject = new List<GameObject>()
                 {
                     EnemyDeathParticles.Create(gameObject.GetComponent<Transform>().position),

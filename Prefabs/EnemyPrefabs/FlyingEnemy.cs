@@ -17,13 +17,13 @@ namespace TowerDefense
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("wyvern"), new int[] { 125, 125, 125, 125, 125, 125 }, Vector2.One * 64));
             gameObject.Add(new PointsComponent() { points = 50 });
             gameObject.Add(new Transform(position, 0, Vector2.One * 3));
-            gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager, 100));
+            gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager, MathF.Min(100 + 5 * GameStats.numberLevels, 150)));
             gameObject.Add(new Path() { goal = pathGoal });
 
             gameObject.Add(new EnemyHealth()
             {
-                health = 100f,
-                maxHealth = 100f,
+                health = MathF.Min(100 + 20 * GameStats.numberLevels, 500),
+                maxHealth = MathF.Min(100 + 20 * GameStats.numberLevels, 500),
                 instantiateOnDeathObject = new List<GameObject>()
                 {
                     EnemyDeathParticles.Create(gameObject.GetComponent<Transform>().position),

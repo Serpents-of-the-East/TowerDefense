@@ -32,7 +32,7 @@ namespace TowerDefense
             {
                 instantiateOnDeathObject = new List<GameObject>()
                 {
-                    ExplosionPrefab.Create(position, 40, systemManager, tower.GetComponent<TowerComponent>().damage[tower.GetComponent<TowerComponent>().upgradeLevel], EnemyType.GROUND),
+                    ExplosionPrefab.Create(position, 100, systemManager, tower.GetComponent<TowerComponent>().damage[tower.GetComponent<TowerComponent>().upgradeLevel], EnemyType.GROUND),
                     BombExplosionParticles.Create(position)
         
                 }

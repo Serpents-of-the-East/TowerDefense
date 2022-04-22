@@ -27,7 +27,7 @@ namespace TowerDefense
         {
             GameObject gameObject = new GameObject();
 
-            gameObject.Add(new TowerComponent() { turnSpeed = 6, towerTextureByLevel = towerTextures });
+            gameObject.Add(new TowerComponent() { turnSpeed = 6, towerTextureByLevel = towerTextures, damage = new List<float>() { 10, 20, 30 } });
             gameObject.Add(new Sprite(ResourceManager.GetTexture("regularTower"), Color.White, 0));
             gameObject.Add(new CircleCollider(TowerRadius));
             gameObject.Add(new PointsComponent() { points = 100 });
