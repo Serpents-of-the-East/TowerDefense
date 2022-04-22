@@ -88,6 +88,7 @@ namespace TowerDefense
             currentScreen = ScreenEnum.GameOver;
             screenName = ScreenEnum.GameOver;
 
+            AudioManager.SetVolume(1);
             AudioManager.PlaySong("A-Lonely-Cherry-Tree");
 
         }

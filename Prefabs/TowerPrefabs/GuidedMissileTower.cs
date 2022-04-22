@@ -26,7 +26,7 @@ namespace TowerDefense
             GameObject gameObject = new GameObject();
 
             gameObject.Add(new GuidedMissile());
-            gameObject.Add(new TowerComponent() { turnSpeed = 6, changeAnimatedTexture = true, towerTextureByLevel = towerTextures, damage = new List<float>() { 20, 30, 40 } });
+            gameObject.Add(new TowerComponent() { turnSpeed = 6, changeAnimatedTexture = true, towerTextureByLevel = towerTextures, damage = new List<float>() { 10, 20, 30 } });
             gameObject.Add(new Sprite(ResourceManager.GetTexture("guidedTower"), Color.White, 1));
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("Level0GuidedMissile"), new int[] { 250, 250, 250, 250 }, Vector2.One * 64, layerDepth:0));
             gameObject.Add(new CircleCollider(TowerRadius));

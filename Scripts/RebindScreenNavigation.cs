@@ -148,6 +148,7 @@ namespace TowerDefense
                 else
                 {
                     setCurrentScreenDelegate(ScreenEnum.MainMenu);
+                    SetSelected(null);
                 }
             }
         }
@@ -158,6 +159,12 @@ namespace TowerDefense
             rebindingText.text = "";
             if (!rebindMode) // this logic should ONLY happen if we are rebinding. This is where we actually read a key
             {
+                return;
+            }
+
+            if (currentSelectedObject == null)
+            {
+                rebindMode = false;
                 return;
             }
 

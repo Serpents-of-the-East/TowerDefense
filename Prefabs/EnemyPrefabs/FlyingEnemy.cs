@@ -15,7 +15,7 @@ namespace TowerDefense
             gameObject.Add(new CircleCollider(25));
             gameObject.Add(new EnemyTag(EnemyType.AIR));
             gameObject.Add(new AnimatedSprite(ResourceManager.GetTexture("wyvern"), new int[] { 125, 125, 125, 125, 125, 125 }, Vector2.One * 64));
-            gameObject.Add(new PointsComponent() { points = 50 });
+            gameObject.Add(new PointsComponent() { points = 70 });
             gameObject.Add(new Transform(position, 0, Vector2.One * 3));
             gameObject.Add(new BasicEnemyTestScript(gameObject, systemManager, MathF.Min(100 + 5 * GameStats.numberLevels, 150)));
             gameObject.Add(new Path() { goal = pathGoal });

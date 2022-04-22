@@ -26,7 +26,9 @@ namespace TowerDefense
         /// <summary>
         /// Enemy spawn timing criterea
         /// </summary>
-        private TimeSpan timeBetweenEnemies = TimeSpan.FromSeconds(1);
+        private TimeSpan timeBetweenEnemies = TimeSpan.FromMilliseconds(1000);
+        private TimeSpan minTimeBetweenEnemies = TimeSpan.FromMilliseconds(100);
+        private TimeSpan timeRemovedPerWave = TimeSpan.FromMilliseconds(100);
         private TimeSpan currentTimeBetweenEnemies = TimeSpan.Zero;
 
         private static TimeSpan timeBetweenWaves = TimeSpan.FromSeconds(4);
@@ -154,6 +156,12 @@ namespace TowerDefense
                         }
 
                         currentTimeBetweenEnemies += timeBetweenEnemies;
+                        currentTimeBetweenEnemies -= timeRemovedPerWave * GameStats.numberLevels;
+                        if (currentTimeBetweenEnemies < minTimeBetweenEnemies)
+                        {
+                            currentTimeBetweenEnemies = minTimeBetweenEnemies;
+                        }
+
 
                     }
                     else
