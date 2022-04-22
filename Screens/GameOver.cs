@@ -21,6 +21,7 @@ namespace TowerDefense
         private FontRenderer fontRenderer;
 
         List<GameObject> menuItems = new List<GameObject>();
+        List<GameObject> highScoreItems = new List<GameObject>();
 
 
 
@@ -80,7 +81,13 @@ namespace TowerDefense
                 systemManager.Remove(menuItem.id);
             }
 
+            foreach (GameObject highScore in highScoreItems)
+            {
+                systemManager.Remove(highScore.id);
+            }
+
             menuItems.Clear();
+            highScoreItems.Clear();
         }
 
         public override void OnScreenFocus()
@@ -91,13 +98,24 @@ namespace TowerDefense
             AudioManager.SetVolume(1);
             AudioManager.PlaySong("A-Lonely-Cherry-Tree");
 
+            GameObject highscore1 = HighScoreItem.Create(new Vector2(500, 300), "Creeps Killed: " + GameStats.GetCreepsDestroyed() + " Levels Beaten: " + GameStats.numberLevels, new Vector2(100, 50));
+            GameObject highscore2 = HighScoreItem.Create(new Vector2(500, 500), "Waves Complete: " + GameStats.numberWaves + " Total Tower Value: " + GameStats.GetTowerValue(), new Vector2(100, 50));
+
+            highScoreItems.Add(highscore1);
+            highScoreItems.Add(highscore2);
+
+            systemManager.Add(highscore1);
+            systemManager.Add(highscore2);
+
         }
 
         public override void SetupGameObjects()
         {
-            systemManager.Add(LargeAltScreenBackground.Create());
+            systemManager.Add(LargeAltScreenBackground.Create()); 
             systemManager.Add(GameOverTitle.Create(SetCurrentScreen));
             systemManager.Add(Cursor.CreateCursor(SetCurrentScreen));
+
+
             systemManager.Add(GameOverExit.Create());
         }
     }

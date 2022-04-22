@@ -98,7 +98,7 @@ namespace TowerDefense
                         if (selectedTower.GetComponent<TowerColliderComponent>().parentAttach.ContainsComponent<PointsComponent>())
                         {
                             PointsManager.AddPlayerPoints((int) (selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<PointsComponent>().points * 0.8f));
-                            ParticleEmitter.EmitSellParticles(selectedTower.GetComponent<Transform>().position); // THIS IS THE ORIGINAL, CHANGE BACK AFTER
+                            ParticleEmitter.EmitSellParticles(selectedTower.GetComponent<Transform>().position);
                             GameStats.RemoveTowerValue(selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<PointsComponent>().points);
                         }
                         systemManager.Remove(selectedTower.GetComponent<TowerColliderComponent>().parentAttach.id);
@@ -128,7 +128,7 @@ namespace TowerDefense
                     {
                         towerComponent.upgradeLevel = currentTowerLevel + 1;
                         PointsManager.SubtractPlayerPoints(priceToUpgrade);
-                        
+                        GameStats.AddTowerValue(priceToUpgrade);
                     }
                 }
             }

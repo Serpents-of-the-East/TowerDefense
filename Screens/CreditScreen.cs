@@ -77,6 +77,7 @@ namespace TowerDefense
             systemManager.Add(AltScreenBackground.Create());
             systemManager.Add(RyanAnderson.CreateRyanAnderson());
             systemManager.Add(TaylorAnderson.CreateTaylorAnderson());
+            systemManager.Add(DeanMathias.Create());
             systemManager.Add(CreditsKeyboard.CreateCreditsKeyboard(SetCurrentScreen));
         }
     }

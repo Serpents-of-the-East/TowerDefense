@@ -23,7 +23,6 @@ namespace TowerDefense
             {
                 // Save all your stats and reset
                 SavedStatePersistence.SaveNewScore(new TowerDefenseHighScores() { creepsKilled = GameStats.GetCreepsDestroyed(), levelsCompleted = GameStats.numberLevels, totalTowerValue = GameStats.GetTowerValue(), wavesCompleted = GameStats.numberWaves });
-                Debug.WriteLine(SavedStatePersistence.highScores);
                 this.setCurrentScreenDelegate.Invoke(ScreenEnum.GameOver);
             }
         }

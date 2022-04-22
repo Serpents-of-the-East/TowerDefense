@@ -56,7 +56,6 @@
     <Folder Include="Prefabs\EnemyPrefabs\" />
     <Folder Include="Prefabs\MenuPrefabs\" />
     <Folder Include="Screens\" />
-    <Folder Include="Prefabs\CreditsPrefabs\" />
     <Folder Include="Prefabs\ControlsPrefabs\" />
   </ItemGroup>
 </Project>

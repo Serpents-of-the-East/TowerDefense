@@ -19,7 +19,7 @@ namespace TowerDefense
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            gameObject.GetComponent<Text>().text = "Kills: " + GameStats.creepsDestroyed;
+            gameObject.GetComponent<Text>().text = "Kills: " + GameStats.GetCreepsDestroyed();
 
         }
 

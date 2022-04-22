@@ -5,7 +5,7 @@ namespace TowerDefense
 {
     public static class GameStats
     {
-        public static int creepsDestroyed = 0;
+        private static int creepsDestroyed = 0;
         public static int totalValueOfTowers = 0;
         public static int numberWaves = 0;
         public static int numberLevels = 0;
@@ -54,6 +54,7 @@ namespace TowerDefense
             totalValueOfTowers = 0;
             numberWaves = 0;
             numberLevels = 0;
+            ResetLives();
         }
 
         public static int GetCurrentWave()
