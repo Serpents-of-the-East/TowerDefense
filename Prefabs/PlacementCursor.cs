@@ -23,7 +23,7 @@ namespace TowerDefense
             cursor.Add(new AnimatedSprite(ResourceManager.GetTexture("empty"), new int[] { 1 }, Vector2.One * ResourceManager.GetTexture("empty").Height));
             cursor.Add(new Transform(Vector2.Zero, 0, Vector2.One));
             cursor.Add(new Rigidbody());
-            cursor.Add(new CircleCollider(1));
+            cursor.Add(new CircleCollider(10));
 
             MouseInput mouseInput = new MouseInput();
             mouseInput.actionButtonPairs.Add("PlaceTower", MouseButton.LeftButton);

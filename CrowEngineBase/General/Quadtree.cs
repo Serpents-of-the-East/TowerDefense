@@ -69,26 +69,26 @@ namespace CrowEngineBase.General
                 // Circle check
                 if (rectangleCollider == null)
                 {
-                    Vector2 testLocation = transform.position;
-                    if (transform.position.X < children[i].position.X)
+                    Vector2 testLocation = transform.position + Vector2.One * PhysicsEngine.QUADTREE_MIDPOINT;
+                    if (transform.position.X + PhysicsEngine.QUADTREE_MIDPOINT < children[i].position.X)
                     {
                         testLocation.X = children[i].position.X;
                     }
-                    else if (transform.position.X > children[i].position.X + children[i].size.X)
+                    else if (transform.position.X + PhysicsEngine.QUADTREE_MIDPOINT > children[i].position.X + children[i].size.X)
                     {
                         testLocation.X = children[i].position.X + children[i].size.X;
                     }
 
-                    if (transform.position.Y < children[i].position.Y)
+                    if (transform.position.Y + PhysicsEngine.QUADTREE_MIDPOINT < children[i].position.Y)
                     {
                         testLocation.Y = children[i].position.Y;
                     }
-                    else if (transform.position.Y > children[i].position.Y + children[i].size.Y)
+                    else if (transform.position.Y + PhysicsEngine.QUADTREE_MIDPOINT > children[i].position.Y + children[i].size.Y)
                     {
                         testLocation.Y = children[i].position.Y + children[i].size.Y;
                     }
 
-                    float squaredDistance = Vector2.DistanceSquared(transform.position, testLocation);
+                    float squaredDistance = Vector2.DistanceSquared(transform.position + Vector2.One * PhysicsEngine.QUADTREE_MIDPOINT, testLocation);
 
                     if (squaredDistance <= MathF.Pow(circleCollider.radius, 2))
                     {
@@ -100,10 +100,10 @@ namespace CrowEngineBase.General
                 {
                     // Adapted from Dr. Mathias' lecture slides
                     if (!(
-                        transform.position.X - rectangleCollider.size.X / 2f > children[i].position.X + children[i].size.X ||
-                        transform.position.X + rectangleCollider.size.X / 2f < children[i].position.X ||
-                        transform.position.Y - rectangleCollider.size.Y / 2f > children[i].position.Y + children[i].size.Y ||
-                        transform.position.Y + rectangleCollider.size.Y / 2f < children[i].position.Y
+                        transform.position.X + PhysicsEngine.QUADTREE_MIDPOINT - rectangleCollider.size.X / 2f > children[i].position.X + children[i].size.X ||
+                        transform.position.X + PhysicsEngine.QUADTREE_MIDPOINT + rectangleCollider.size.X / 2f < children[i].position.X ||
+                        transform.position.Y + PhysicsEngine.QUADTREE_MIDPOINT - rectangleCollider.size.Y / 2f > children[i].position.Y + children[i].size.Y ||
+                        transform.position.Y + PhysicsEngine.QUADTREE_MIDPOINT + rectangleCollider.size.Y / 2f < children[i].position.Y
                         ))
                     {
                         quadrants[i] = true;

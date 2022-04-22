@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using CrowEngineBase;
 
 using Microsoft.Xna.Framework;
@@ -21,6 +21,10 @@ namespace TowerDefense
         private GameObject selectedTower;
         Screen.SetCurrentScreenDelegate setCurrentScreenDelegate;
 
+        // This is janky, but it may fix it. The plan is, to allow a queue of 2, which will be dequeued each frame.
+        // It will only allow the tower to be unselected for at most 2 frames
+        // I don't like this, but it is a temporary (and probably permanent) solution to it
+        Queue<bool> isCollidingTarget = new Queue<bool>();
 
 
 
@@ -62,6 +66,24 @@ namespace TowerDefense
         public void OnMouseMove(Vector2 mousePosition)
         {
             transform.position = Pathfinder.Gridify(mouse.PhysicsPositionCamera(camera.GetComponent<Transform>()));
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (isCollidingTarget.Count == 0)
+            {
+                if (selectedTower != null)
+                {
+                    isCollidingTarget.Clear();
+                    selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<Sprite>().color = Color.White;
+                    selectedTower = null;
+                }
+            }
+
+            else
+            {
+                isCollidingTarget.Dequeue();
+            }
         }
 
         public void OnSellTower(float input)
@@ -119,8 +141,13 @@ namespace TowerDefense
         {
             if (selectedTower == null && other.ContainsComponent<TowerColliderComponent>())
             {
+                isCollidingTarget.Enqueue(true);
                 selectedTower = other;
                 selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<Sprite>().color = Color.Red;
+            }
+            if (selectedTower == other)
+            {
+                isCollidingTarget.Enqueue(true);
             }
         }
 
@@ -128,6 +155,7 @@ namespace TowerDefense
         {
             if (selectedTower == other)
             {
+                isCollidingTarget.Clear();
                 selectedTower.GetComponent<TowerColliderComponent>().parentAttach.GetComponent<Sprite>().color = Color.White;
                 selectedTower = null;
             }
