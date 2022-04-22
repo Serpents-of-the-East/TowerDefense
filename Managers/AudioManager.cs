@@ -29,6 +29,11 @@ namespace TowerDefense
             currentSong = songName;
         }
 
+        public static void SetVolume(float volume)
+        {
+            MediaPlayer.Volume = volume;
+        }
+
         public static void Stop()
         {
             MediaPlayer.Stop();

@@ -544,6 +544,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/other-backgrounds.png
 
+#begin Textures/other-backgrounds-large.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/other-backgrounds-large.png
+
 #begin Textures/tower-map.png
 /importer:TextureImporter
 /processor:TextureProcessor

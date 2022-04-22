@@ -35,7 +35,7 @@ namespace TowerDefense
 
         public override void OnCollision(GameObject other)
         {
-            if (currentlyCollidingWith == null)
+            if (currentlyCollidingWith == null && other.ContainsComponent<Text>())
             {
                 other.GetComponent<Text>().color = Color.Red;
                 currentlyCollidingWith = other;

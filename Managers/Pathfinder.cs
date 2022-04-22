@@ -41,6 +41,11 @@ namespace TowerDefense
             {PathGoal.Up, bottomEntrance }
         };
 
+        public static void ResetMap()
+        {
+            gameMap = new bool[MAP_SIZE_IN_TOWERS, MAP_SIZE_IN_TOWERS];
+        }
+
         public static Vector2 SpawnPointLookup(PathGoal goal)
         {
             Vector2 position = GridToTrueCoordinate(spawnPointLookup[goal]);

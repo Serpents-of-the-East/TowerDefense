@@ -52,11 +52,12 @@ namespace TowerDefense
 
         public override void Draw(GameTime gameTime)
         {
-            m_spriteBatch.Begin(SpriteSortMode.BackToFront, samplerState: SamplerState.PointClamp);
+            m_spriteBatch.Begin(SpriteSortMode.Deferred, samplerState: SamplerState.PointClamp);
 
-            fontRenderer.Draw(gameTime, m_spriteBatch);
             renderSystem.Draw(gameTime, m_spriteBatch);
             particleRenderer.Draw(gameTime, m_spriteBatch);
+            fontRenderer.Draw(gameTime, m_spriteBatch);
+
             m_spriteBatch.End();
         }
 
@@ -87,6 +88,7 @@ namespace TowerDefense
         {
             currentScreen = ScreenEnum.HighScore;
             screenName = ScreenEnum.HighScore;
+            highScores.Clear();
             SavedStatePersistence.LoadScoresIntoDictionary(ref highScores);
 
             Debug.WriteLine("Default Screen was loaded");
@@ -125,7 +127,7 @@ namespace TowerDefense
 
         public override void SetupGameObjects()
         {
-
+            systemManager.Add(LargeAltScreenBackground.Create());
             systemManager.Add(CreditsKeyboard.CreateCreditsKeyboard(SetCurrentScreen));
             systemManager.Add(HighScoresTitle.Create());
 

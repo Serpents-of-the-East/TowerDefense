@@ -47,11 +47,12 @@ namespace TowerDefense
 
         public override void Draw(GameTime gameTime)
         {
-            m_spriteBatch.Begin(SpriteSortMode.BackToFront, samplerState: SamplerState.PointClamp);
+            m_spriteBatch.Begin(SpriteSortMode.Deferred, samplerState: SamplerState.PointClamp);
 
-            fontRenderer.Draw(gameTime, m_spriteBatch);
             renderSystem.Draw(gameTime, m_spriteBatch);
             particleRenderer.Draw(gameTime, m_spriteBatch);
+            fontRenderer.Draw(gameTime, m_spriteBatch);
+
 
             m_spriteBatch.End();
         }
@@ -93,6 +94,7 @@ namespace TowerDefense
 
         public override void SetupGameObjects()
         {
+            systemManager.Add(LargeAltScreenBackground.Create());
             systemManager.Add(GameOverTitle.Create(SetCurrentScreen));
             systemManager.Add(Cursor.CreateCursor(SetCurrentScreen));
             systemManager.Add(GameOverExit.Create());

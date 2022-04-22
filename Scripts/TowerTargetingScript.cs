@@ -49,6 +49,8 @@ namespace TowerDefense
             transform = gameObject.GetComponent<Transform>();
             audioSource = gameObject.GetComponent<AudioSource>();
 
+            AudioManager.PlaySoundEffect("build", 1);
+
         }
 
         public override void OnCollision(GameObject other)

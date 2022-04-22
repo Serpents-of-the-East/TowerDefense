@@ -100,6 +100,7 @@ namespace CrowEngine
 
             if (nextScreen == ScreenEnum.MainMenu && newScreenFocused)
             {
+                Pathfinder.ResetMap();
                 screens[ScreenEnum.Game].Initialize(GraphicsDevice, _graphics, Window);
                 screens[ScreenEnum.Game].LoadContent();
                 screens[ScreenEnum.Game].SetupGameObjects();

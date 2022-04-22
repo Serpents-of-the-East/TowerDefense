@@ -93,6 +93,7 @@ namespace TowerDefense
 
             ResourceManager.RegisterSoundEffect("sell", "SoundEffects/sell");
             ResourceManager.RegisterSoundEffect("death", "SoundEffects/death");
+            ResourceManager.RegisterSoundEffect("build", "SoundEffects/build");
 
             camera = CameraPrefab.Create();
             camera.GetComponent<Transform>().position = Vector2.Zero;
@@ -118,6 +119,8 @@ namespace TowerDefense
             InputPersistence.LoadSavedKeyboard(ref spawnWavesInput);
 
             AudioManager.PlaySong("Hellish-Revenge");
+
+            AudioManager.SetVolume(0.5f);
         }
 
         public override void SetupGameObjects()
