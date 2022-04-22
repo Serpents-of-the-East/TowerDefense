@@ -42,7 +42,7 @@ namespace TowerDefense
 
         public override void OnCollision(GameObject other)
         {
-            if (other.ContainsComponent<Bullet>() && !other.GetComponent<Bullet>().hasDoneDamage && other.GetComponent<EnemyTag>().enemyType == gameObject.GetComponent<EnemyTag>().enemyType)
+            if (other.ContainsComponent<Bullet>() && !other.GetComponent<Bullet>().hasDoneDamage && (other.GetComponent<EnemyTag>().enemyType == gameObject.GetComponent<EnemyTag>().enemyType || other.GetComponent<EnemyTag>().enemyType == EnemyType.MIXED))
             {
 
                 other.GetComponent<Bullet>().hasDoneDamage = true;

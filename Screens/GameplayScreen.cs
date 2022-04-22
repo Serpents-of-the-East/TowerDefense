@@ -127,6 +127,12 @@ namespace TowerDefense
             systemManager.Add(InfoBackground.Create(new Vector2(0, 50)));
             systemManager.Add(PointsPrefab.CreatePointsPrefab());
 
+            systemManager.Add(InfoBackground.Create(new Vector2(1000, 50)));
+            systemManager.Add(LivesPrefab.Create());
+            systemManager.Add(InfoBackground.Create(new Vector2(1000, 950)));
+            systemManager.Add(CurrentLevelPrefab.Create());
+            systemManager.Add(InfoBackground.Create(new Vector2(0, 950)));
+            systemManager.Add(CreepsKilledPrefab.Create());
 
 
             systemManager.Add(WaveController.Create(systemManager, spawnWavesInput, camera.GetComponent<Transform>()));
