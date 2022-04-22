@@ -30,6 +30,8 @@ namespace TowerDefense
         private TimeSpan currentTime;
 
         private SystemManager systemManager;
+
+        private AudioSource audioSource;
         
 
         public TowerTargetingScript(GameObject gameObject, BulletType bulletType, TimeSpan timeBetweenShots, SystemManager systemManager) : base(gameObject)
@@ -45,6 +47,7 @@ namespace TowerDefense
             targetableEnemy = gameObject.GetComponent<EnemyTag>().enemyType;
             towerComponent = gameObject.GetComponent<TowerComponent>();
             transform = gameObject.GetComponent<Transform>();
+            audioSource = gameObject.GetComponent<AudioSource>();
 
         }
 
@@ -55,6 +58,11 @@ namespace TowerDefense
                 currentTarget = other;
             }
 
+        }
+
+        public override void Destroyed()
+        {
+            AudioManager.PlaySoundEffect("sell", 1);
         }
 
         public override void OnCollisionEnd(GameObject other)
@@ -73,14 +81,18 @@ namespace TowerDefense
             {
                 case (BulletType.Bomb):
                     spawnedObject = BombBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject, systemManager);
+                    audioSource.soundEffectsToPlay.Enqueue("ballista");
                     break;
                 case (BulletType.Missile):
                     spawnedObject = MissileBullet.Create(transform.position, currentTarget.GetComponent<Transform>(), gameObject, systemManager);
+                    audioSource.soundEffectsToPlay.Enqueue("fireball");
                     break;
                 case (BulletType.AirGround):
+                    audioSource.soundEffectsToPlay.Enqueue("lightning");
                     spawnedObject = AirGroundBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject);
                     break;
                 default:
+                    audioSource.soundEffectsToPlay.Enqueue("archer");
                     spawnedObject = BasicBullet.Create(transform.position, currentTarget.GetComponent<Transform>().position, gameObject);
                     break;
             }

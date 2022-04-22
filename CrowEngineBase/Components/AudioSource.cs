@@ -21,6 +21,8 @@ namespace CrowEngineBase
         public bool repeatSong { get; set; }
         public Queue<string> soundEffectsToPlay { get; set; }
 
+        public float volume { get; set; }
+
         public AudioSource()
         {
             currentState = SongState.Stopped;
@@ -29,6 +31,7 @@ namespace CrowEngineBase
             previousSong = "";
             repeatSong = false;
             soundEffectsToPlay = new Queue<string>();
+            volume = 1f;
         }
 
 

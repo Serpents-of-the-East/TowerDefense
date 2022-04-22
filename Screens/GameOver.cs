@@ -19,6 +19,7 @@ namespace TowerDefense
         private LightRenderer lightRenderer;
         private RenderTarget2D renderTarget;
         private FontRenderer fontRenderer;
+
         List<GameObject> menuItems = new List<GameObject>();
 
 
@@ -65,6 +66,8 @@ namespace TowerDefense
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
 
             renderTarget = new RenderTarget2D(m_graphicsDevice, m_graphicsDevice.PresentationParameters.BackBufferWidth, m_graphicsDevice.PresentationParameters.BackBufferHeight, false, m_graphicsDevice.PresentationParameters.BackBufferFormat, DepthFormat.Depth24);
+
+            ResourceManager.RegisterSong("A-Lonely-Cherry-Tree", "Music/A-Lonely-Cherry-Tree");
         }
 
         public override void OnScreenDefocus()
@@ -84,8 +87,7 @@ namespace TowerDefense
             currentScreen = ScreenEnum.GameOver;
             screenName = ScreenEnum.GameOver;
 
-
-
+            AudioManager.PlaySong("A-Lonely-Cherry-Tree");
 
         }
 

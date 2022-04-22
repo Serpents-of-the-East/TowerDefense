@@ -51,6 +51,11 @@ namespace TowerDefense
             collisionsHappened = true;
         }
 
+        public override void Destroyed()
+        {
+            AudioManager.PlaySoundEffect("explode", 0.7f);
+        }
+
         public override void Update(GameTime gameTime)
         {
 

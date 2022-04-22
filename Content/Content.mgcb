@@ -106,6 +106,72 @@
 /processorParam:TextureFormat=Color
 /build:light.png
 
+#begin Music/A-Lonely-Cherry-Tree.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/A-Lonely-Cherry-Tree.mp3
+
+#begin Music/Dungeon-Level.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Dungeon-Level.mp3
+
+#begin Music/Hellish-Revenge.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/Hellish-Revenge.mp3
+
+#begin SoundEffects/archer.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/archer.wav
+
+#begin SoundEffects/ballista.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/ballista.wav
+
+#begin SoundEffects/build.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/build.wav
+
+#begin SoundEffects/death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/death.wav
+
+#begin SoundEffects/explode.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/explode.wav
+
+#begin SoundEffects/fireball.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/fireball.wav
+
+#begin SoundEffects/lightning.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/lightning.wav
+
+#begin SoundEffects/sell.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/sell.wav
+
 #begin SpriteSheets/coin.png
 /importer:TextureImporter
 /processor:TextureProcessor

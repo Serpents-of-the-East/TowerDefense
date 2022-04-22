@@ -16,6 +16,7 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/Level0GuidedMissile", "Level0GuidedMissile");
             ResourceManager.RegisterTexture("Textures/Leve1GuidedMissile", "Level1GuidedMissile");
             ResourceManager.RegisterTexture("Textures/Leve2GuidedMissile", "Level2GuidedMissile");
+            ResourceManager.RegisterSoundEffect("fireball", "SoundEffects/fireball");
             towerTextures = new List<Texture2D>() { ResourceManager.GetTexture("Level0GuidedMissile"), ResourceManager.GetTexture("Level1GuidedMissile"), ResourceManager.GetTexture("Level2GuidedMissile"), };
         }
 
@@ -34,7 +35,7 @@ namespace TowerDefense
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One * 2));
             gameObject.Add(new EnemyTag(EnemyType.AIR));
-
+            gameObject.Add(new AudioSource());
             gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Missile, TimeSpan.FromMilliseconds(2000), systemManager));
 
             systemManager.Add(TowerColliderPrefab.Create(gameObject));

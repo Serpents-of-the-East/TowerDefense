@@ -25,7 +25,7 @@ namespace CrowEngineBase
                     string effectName = audioSource.soundEffectsToPlay.Dequeue();
                     SoundEffect effect = ResourceManager.GetSoundEffect(effectName);
 
-                    effect.Play();
+                    effect.Play(audioSource.volume, 0, 0);
                 }
 
                 if (audioSource.previousState == SongState.Stopped && audioSource.currentState == SongState.Playing)

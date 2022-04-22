@@ -36,11 +36,13 @@ namespace TowerDefense
                 {
                     path.correctPath.RemoveAt(0);
                 }
-                path.currentTarget = Pathfinder.GridToTrueCoordinate(path.correctPath[0]);
+                if (path.correctPath != null)
+                {
+                    path.currentTarget = Pathfinder.GridToTrueCoordinate(path.correctPath[0]);
 
-                Vector2 direction = path.currentTarget - transform.position;
-                transform.rotation = CrowMath.Lerp(transform.rotation, MathF.Atan2(direction.Y, direction.X), ENEMY_TURN_SPEED * (gameTime.ElapsedGameTime.Milliseconds / 1000f));
-
+                    Vector2 direction = path.currentTarget - transform.position;
+                    transform.rotation = CrowMath.Lerp(transform.rotation, MathF.Atan2(direction.Y, direction.X), ENEMY_TURN_SPEED * (gameTime.ElapsedGameTime.Milliseconds / 1000f));
+                }
             }
         }
 

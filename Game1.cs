@@ -75,6 +75,7 @@ namespace CrowEngine
                 screens[screen].SetupGameObjects();
             }
 
+            AudioManager.PlaySong("Dungeon-Level");
         }
 
         protected override void Update(GameTime gameTime)

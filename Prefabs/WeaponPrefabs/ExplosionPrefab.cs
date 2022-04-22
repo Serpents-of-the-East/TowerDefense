@@ -8,6 +8,10 @@ namespace TowerDefense
 {
     public static class ExplosionPrefab
     {
+        static ExplosionPrefab()
+        {
+            ResourceManager.RegisterSoundEffect("explode", "SoundEffects/explode");
+        }
         public static GameObject Create(Vector2 position, float radius, SystemManager systemManager, float damage, EnemyType enemyType)
         {
             GameObject gameObject = new GameObject();

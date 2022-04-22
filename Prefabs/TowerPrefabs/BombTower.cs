@@ -17,6 +17,7 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/ballista-1", "ballista-1");
             ResourceManager.RegisterTexture("Textures/ballista-2", "ballista-2");
             ResourceManager.RegisterTexture("Textures/ballista-3", "ballista-3");
+            ResourceManager.RegisterSoundEffect("ballista", "SoundEffects/ballista");
             towerTextures = new List<Texture2D>() { ResourceManager.GetTexture("ballista-1"), ResourceManager.GetTexture("ballista-2"), ResourceManager.GetTexture("ballista-3"), };
         }
 
@@ -34,7 +35,7 @@ namespace TowerDefense
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One * 2));
             gameObject.Add(new EnemyTag(EnemyType.GROUND));
-
+            gameObject.Add(new AudioSource());
             gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Bomb, TimeSpan.FromMilliseconds(3000), systemManager));
             systemManager.Add(TowerColliderPrefab.Create(gameObject));
 

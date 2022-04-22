@@ -18,6 +18,7 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/archer-tower0", "archer-tower0");
             ResourceManager.RegisterTexture("Textures/archer-tower1", "archer-tower1");
             ResourceManager.RegisterTexture("Textures/archer-tower2", "archer-tower2");
+            ResourceManager.RegisterSoundEffect("archer", "SoundEffects/archer");
             towerTextures = new List<Texture2D>() { ResourceManager.GetTexture("archer-tower0"), ResourceManager.GetTexture("archer-tower1"), ResourceManager.GetTexture("archer-tower2"), };
         }
 
@@ -33,6 +34,8 @@ namespace TowerDefense
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One * 2));
             gameObject.Add(new EnemyTag(EnemyType.GROUND));
+
+            gameObject.Add(new AudioSource() { volume = 0.7f });
 
 
             gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.Basic, TimeSpan.FromMilliseconds(500), systemManager));

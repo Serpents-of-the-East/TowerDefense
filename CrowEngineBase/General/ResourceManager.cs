@@ -48,7 +48,7 @@ namespace CrowEngineBase
 
         public static SoundEffect GetSoundEffect(string soundEffectName)
         {
-            if (!music.ContainsKey(soundEffectName))
+            if (!soundEffects.ContainsKey(soundEffectName))
             {
                 throw new Exception($"{soundEffectName} doesn't exist in the current resource manager");
             }

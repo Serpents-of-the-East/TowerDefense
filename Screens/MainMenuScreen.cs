@@ -70,6 +70,8 @@ namespace TowerDefense
             lightRenderer.globalLightLevel = 0f;
             fontRenderer = new FontRenderer(systemManager, m_window.ClientBounds.Height, new Vector2(m_window.ClientBounds.Width, m_window.ClientBounds.Height), camera);
             renderTarget = new RenderTarget2D(m_graphicsDevice, m_graphicsDevice.PresentationParameters.BackBufferWidth, m_graphicsDevice.PresentationParameters.BackBufferHeight, false, m_graphicsDevice.PresentationParameters.BackBufferFormat, DepthFormat.Depth24);
+
+            ResourceManager.RegisterSong("Dungeon-Level", "Music/Dungeon-Level");
         }
 
         public override void OnScreenDefocus()
@@ -84,6 +86,8 @@ namespace TowerDefense
             screenName = ScreenEnum.MainMenu;
 
             InputPersistence.LoadSavedKeyboard(ref gameplayKeyboard);
+
+            AudioManager.PlaySong("Dungeon-Level");
         }
 
         public override void SetupGameObjects()

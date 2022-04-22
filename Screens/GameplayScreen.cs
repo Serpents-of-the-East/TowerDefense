@@ -42,6 +42,7 @@ namespace TowerDefense
             controlLoaderSystem = new ControlLoaderSystem(systemManager);
             weaponSystem = new WeaponSystem(systemManager);
             upgradeSystem = new UpgradeSystem(systemManager);
+            audioSystem = new AudioSystem(systemManager);
             TextureCreation.device = graphicsDevice;
             particleSystem = new ParticleSystem(systemManager);
             ParticleEmitter.systemManager = systemManager;
@@ -88,6 +89,10 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/magebolt", "magebolt");
             ResourceManager.RegisterTexture("Textures/wyvern", "wyvern");
 
+            ResourceManager.RegisterSong("Hellish-Revenge", "Music/Hellish-Revenge");
+
+            ResourceManager.RegisterSoundEffect("sell", "SoundEffects/sell");
+            ResourceManager.RegisterSoundEffect("death", "SoundEffects/death");
 
             camera = CameraPrefab.Create();
             camera.GetComponent<Transform>().position = Vector2.Zero;
@@ -111,6 +116,8 @@ namespace TowerDefense
             screenName = ScreenEnum.Game;
             InputPersistence.LoadSavedKeyboard(ref keyboardInput);
             InputPersistence.LoadSavedKeyboard(ref spawnWavesInput);
+
+            AudioManager.PlaySong("Hellish-Revenge");
         }
 
         public override void SetupGameObjects()

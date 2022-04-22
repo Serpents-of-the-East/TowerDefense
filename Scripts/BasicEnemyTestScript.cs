@@ -113,7 +113,7 @@ namespace TowerDefense
                     systemManager.DelayedAdd(deathObject);
                 }
 
-
+                AudioManager.PlaySoundEffect("death", 0.5f);
             }
 
         }

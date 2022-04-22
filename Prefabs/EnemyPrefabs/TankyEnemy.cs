@@ -29,7 +29,8 @@ namespace TowerDefense
                 maxHealth = 100f,
                 instantiateOnDeathObject = new List<GameObject>()
                 {
-
+                    EnemyDeathParticles.Create(gameObject.GetComponent<Transform>().position),
+                    PointsTextPrefab.Create(gameObject.GetComponent<Transform>().position, systemManager, gameObject.GetComponent<PointsComponent>()),
 
                 }
             });

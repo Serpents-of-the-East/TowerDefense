@@ -18,6 +18,7 @@ namespace TowerDefense
             ResourceManager.RegisterTexture("Textures/cloudtower1", "cloudtower1");
             ResourceManager.RegisterTexture("Textures/cloudtower2", "cloudtower2");
             ResourceManager.RegisterTexture("Textures/cloudtower3", "cloudtower3");
+            ResourceManager.RegisterSoundEffect("lightning", "SoundEffects/lightning");
             towerTextures = new List<Texture2D>() { ResourceManager.GetTexture("cloudtower1"), ResourceManager.GetTexture("cloudtower2"), ResourceManager.GetTexture("cloudtower3"), };
         }
 
@@ -33,7 +34,7 @@ namespace TowerDefense
             gameObject.Add(new Rigidbody());
             gameObject.Add(new Transform(Vector2.Zero, 0, Vector2.One * 2));
             gameObject.Add(new EnemyTag(EnemyType.MIXED));
-
+            gameObject.Add(new AudioSource() { volume = 0.3f });
 
             gameObject.Add(new TowerTargetingScript(gameObject, TowerTargetingScript.BulletType.AirGround, TimeSpan.FromMilliseconds(500), systemManager));
 
