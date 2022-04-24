@@ -152,6 +152,7 @@ namespace TowerDefense
             systemManager.Add(DestinationColliders.Create(Pathfinder.topEntrance * Pathfinder.conversionFactor, PathGoal.Up));
             systemManager.Add(DestinationColliders.Create(Pathfinder.bottomEntrance * Pathfinder.conversionFactor, PathGoal.Down));
 
+            
 
             Pathfinder.CheckPathsFunc.Invoke();
         }

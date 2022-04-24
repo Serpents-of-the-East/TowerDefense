@@ -11,6 +11,25 @@ namespace TowerDefense
     {
         private static string currentSong = "";
 
+        public static bool muted { get
+            {
+                return !canPlayMusic;
+            }
+            set
+            {
+                if (value == true)
+                {
+                    canPlayMusic = false;
+                    Stop();
+                }
+                else
+                {
+                    canPlayMusic = true;
+                }
+            }
+        }
+        private static bool canPlayMusic = true;
+
         public static void PlaySoundEffect(string soundEffect, float volume)
         {
             SoundEffect sound = ResourceManager.GetSoundEffect(soundEffect);
@@ -20,13 +39,16 @@ namespace TowerDefense
 
         public static void PlaySong(string songName)
         {
-            if (songName != currentSong || MediaPlayer.State == MediaState.Stopped)
+            if (canPlayMusic)
             {
-                MediaPlayer.Play(ResourceManager.GetSong(songName));
-                MediaPlayer.IsRepeating = true;
-            }
+                if (songName != currentSong || MediaPlayer.State == MediaState.Stopped)
+                {
+                    MediaPlayer.Play(ResourceManager.GetSong(songName));
+                    MediaPlayer.IsRepeating = true;
+                }
 
-            currentSong = songName;
+                currentSong = songName;
+            }
         }
 
         public static void SetVolume(float volume)

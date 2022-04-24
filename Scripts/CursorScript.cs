@@ -52,7 +52,11 @@ namespace TowerDefense
 
         public void OnSelect(float buttonState)
         {
-            if (buttonState > 0.5f && currentlyCollidingWith != null)
+            if (currentlyCollidingWith != null && currentlyCollidingWith.ContainsComponent<MusicToggle>() && buttonState > 0.5f)
+            {
+                AudioManager.muted = !AudioManager.muted;
+            }
+            else if (buttonState > 0.5f && currentlyCollidingWith != null && currentlyCollidingWith.ContainsComponent<MenuItem>())
             {
                 this.setCurrentScreenDelegate.Invoke(currentlyCollidingWith.GetComponent<MenuItem>().screenEnum);
             }

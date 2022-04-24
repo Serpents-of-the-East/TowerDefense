@@ -103,7 +103,7 @@ namespace TowerDefense
             systemManager.Add(Credits.CreateCredits());
             systemManager.Add(HighScore.Create());
             systemManager.Add(Exit.CreateExit());
-
+            systemManager.Add(MuteMusicPrefab.Create());
 
             systemManager.Add(Cursor.CreateCursor(SetCurrentScreen));
         }
